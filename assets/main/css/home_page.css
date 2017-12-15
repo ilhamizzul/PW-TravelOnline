@@ -1,0 +1,264 @@
+body{
+  font-family:Helvetica, Arial, sans-serif;
+  background-color: #4FC3F7;
+}
+
+.site-section {
+    background-color: #00BCD4;
+    height: 220px;
+}
+
+#wallpaper{
+	margin-top: 40px;
+
+}
+
+#note {
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #03A9F4;
+    text-align: center;
+    line-height: 4.5;
+    margin-top: 65px;
+    color: white;
+    font-weight: bold;
+    overflow: hidden; 
+    font-size: 18px;
+    font-family: helvetica;
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow:    0 0 5px black;
+    box-shadow:         0 0 5px black;
+}
+
+#note:hover{
+	background-color: #0288D1;
+}
+
+#note.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.modal-dialog{
+	width: 750px;
+}
+
+.search-form {
+    background-color: white;
+    height: 150px;
+    margin-top: -75px;
+    padding-top: 8px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.label {
+	font-size: 15px;
+}
+
+.form-group{
+	padding-left: 0%;
+	margin-bottom: 5px;
+}
+
+.time{
+	font-size: 22px;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.minus , .plus {
+	
+	color: white;
+	margin-top: 8px;
+	border-radius: 555px;
+	height: 25px;
+	padding-left: 6px;
+
+}
+
+.minus > button , .plus > button {
+    background  : none;
+    border  : none;
+    margin: 0px auto;
+}
+
+.car-image {
+	width:40%; /* you can use % */
+    height: auto;
+}
+
+.seat{
+	color:  #29B6F6;
+	font-family: caviar dreams;
+	font-size: 75px;
+	padding-left: 74px;
+}
+
+.merk{
+	color:  #29B6F6;
+	font-family: caviar dreams;
+	font-size: 55px;
+	padding-left: 14px;
+}
+
+.btn-choose{
+	background-color: #29B6F6;
+	color: white;
+	width: 100%;
+}
+
+.price {
+	font-size: 25px;
+	color: #29B6F6;
+	font-family: helvetica;
+}
+
+.price2 {
+	margin-top: 15px;
+	font-size: 28px;
+	color: #29B6F6;
+	font-family: helvetica;
+}
+
+label{
+	font-family: helvetica;
+}
+.see {
+	text-decoration: none;
+	color: #29B6F6;
+	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+.row {
+	margin-right: 0;
+}
+
+.head-content {
+	height: 50px;
+	margin-bottom: 8px;
+	padding-top: 15px;
+	margin-top: 15px;
+	background-color: white;
+	border-radius: 3px;
+	font-family: helvetica;
+}
+
+.search {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.content {
+	font-family: Century Gothic;
+	background-color: white;
+	border-bottom: 2px solid #EEEEEE;
+	padding-top: 35px;
+	padding-bottom: 25px;
+	
+}
+
+.agent-travel {
+	margin-top: 12px;
+	color: black;
+}
+
+.depart-arrive, .destination {
+	display: none;
+}
+
+.modal-seat{
+	height: 355px;
+
+}
+
+
+@media (max-width:768px) {
+	li > a {
+		font-size: 14px;
+	}
+	.body {
+		padding-top: 10px;
+	}
+	.content {
+		
+		padding-top: 25px;
+		padding-bottom: 15px;
+	}
+
+	.seat {
+		font-size: 68px;
+	}
+
+	.merk {
+		font-size: 48px;
+	}
+
+	.search-form {
+		height: 175px;
+	}
+
+	#wallpaper{
+		width:100%; /* you can use % */
+    	height: auto;
+	}
+
+	.head-content, .depart, .arrive {
+		display: none;
+	}
+
+	.search {
+		margin-top: 32px;
+	}
+
+	.depart-arrive, .destination {
+		display: inline;
+		font-size: 14px;
+		margin-top: 8px;
+	}
+
+	.price {
+		font-size: 18px;
+		padding-top: 22px;
+		
+	}
+
+	.agent-travel {
+		margin-top: 10px;
+	}
+
+	.see {
+		margin-top: 0;
+		font-size: 16px;
+		margin-left: 5px;
+	}
+}

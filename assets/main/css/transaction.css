@@ -1,0 +1,41 @@
+body{
+  font-family:Helvetica, Arial, sans-serif;
+  background-color: #4FC3F7;
+}
+
+.transaction-box {
+	background-color: white;
+	border-radius: 5px;
+	margin-top: 75px;
+	margin-bottom: 10px;
+}
+
+.rekening {
+	color: white;
+	background-color: #29B6F6;
+	font-size: 25px;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	font-family: arial black;
+	text-align: center;
+}
+
+.detail {
+	color: #757575;
+	font-size: 15px;
+	font-family: helvetica;
+	padding-top: 10px;
+}
+
+.detail-text > p {
+	margin-bottom: 8px;
+}
+
+.detail-text-2 > p {
+	margin-bottom: 8px;
+	color: #424242;
+	font-weight: bold;
+}
+

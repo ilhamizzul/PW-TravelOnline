@@ -1,0 +1,59 @@
+body{
+  font-family:Helvetica, Arial, sans-serif;
+
+  background-color: #4FC3F7;
+  
+}
+
+.register{
+  background-color: rgba(255, 255, 255, 0.85);
+  font-family: helvetica;
+  border-radius: 5px;
+  height: 575px;
+  margin-bottom: 15px;
+  margin-top: 75px;
+}
+
+.regist{
+    background-image:url('http://localhost/Project-Work/assets/img/pexels-photo-280310.jpg');
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.btn-block {
+  margin-top: 12px;
+}
+
+.jumbotron {
+  margin-top: 75px;
+  padding-top: 15px;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.text{
+  padding: 0;
+}
+
+.text > p{
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 55px;
+  background-color: #29B6F6;
+  text-align: center;
+  padding: 15px;
+  border-radius: 95px;
+  color: white;
+}
+
+  
+
+.header{
+  border-bottom: 2px solid #757575;
+}
