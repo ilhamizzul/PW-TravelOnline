@@ -29,6 +29,16 @@
                   <h4 class="modal-title">Login</h4>
                </div>
                <div class="modal-body">
+                  <?php 
+                    $failed = $this->session->flashdata('failed');
+                    if(!empty($failed)){
+                      echo '<div class="alert alert-danger alert-dismissable">';
+                      echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                      echo '<i class="icon fa fa-warning"></i>';
+                      echo $failed;
+                      echo '</div>';
+                    }
+                  ?>
                   <form action="<?php echo base_url(); ?>index.php/login/masuk" method="post">
                      <div class="form-group">
                         <label>Username</label>
@@ -38,7 +48,7 @@
                         <label>Password</label>
                         <input type="password" class="form-control" name="password" required>
                      </div>
-                     <input type="submit" value="submit" onclick="notice()" style="width: 100%; background-color:#29B6F6; " class=" btn btn-sm btn-primary">
+                     <input type="submit" id="login" value="submit" onclick="notice()" style="width: 100%; background-color:#29B6F6; " class=" btn btn-sm btn-primary">
                   </form>
                </div>
             </div>
@@ -92,8 +102,14 @@
              });
          });
 
+         $(document).ready(function(){
+             $('#close').click(function(){
+                 $(this).fadeOut();
+             });
+         });
+        
           $(document).ready(function(){
-              $('#BtnLogin').click(function(){
+              $('#login').click(function(){
                   $('#choose').modal('hide');
               });
           });

@@ -3,7 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home_model extends CI_Model {
 
-	public function get_data_travel()
+
+	public function total_record_travel()
+	{
+		return $this->db->from('jadwal_trevel', 'kendaraan_travel', 'travel', 'jenis_kendaraan')
+						->count_all_results();
+	}
+
+	public function get_data_travel($limit, $offset)
 	{
 		$this->db->select('*')->from('jadwal_trevel')
 							  ->join('kendaraan_travel', 'kendaraan_travel.ID_JENIS_KENDARAAN=jadwal_trevel.ID_JENIS_KENDARAAN')
@@ -11,11 +18,20 @@ class Home_model extends CI_Model {
 							  ->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN=kendaraan_travel.ID_JENIS_KENDARAAN')
 							  ;
 
-		return $this->db->get()->result();
+		// $query = $this->db->get($limit, $offset);
+		// return $query->result();
+
+		$this->db->order_by('ID_JADWAL_TRAVEL','ASC');
+		$this->db->limit($limit, $offset);
+		$query = $this->db->get()->result();
+		return $query;
 		/*return $this->db->order_by('ID_JADWAL_TRAVEL', 'ASC')
 						->get('jadwal_trevel')
 						->result();*/
 	}
+
+	
+
 
 	public function get_id_detail_desa_travel()
 	{		

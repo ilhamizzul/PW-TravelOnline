@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		if ($this->login_model->cek_user() == TRUE) {
 			redirect('index.php/home');
 		} else {
-			$this->session->set_flashdata('notif', 'failed');
+			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
 			redirect('index.php/home');
 		}
 		

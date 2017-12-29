@@ -23,7 +23,7 @@
             <?php 
                         $notif = $this->session->flashdata('notif');
                         if (!empty($notif)) {
-                            echo ' <div class="alert alert-success"> ';
+                            echo ' <div style="margin-top:75px;" class="alert alert-success"> ';
                             echo $notif;
                             echo '</div>';
                         }
@@ -62,22 +62,22 @@
          <div class="col-md-4 register">
             <h3 class="header">Pendaftaran User Baru</h3>
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
-                <input type="text" hidden="true" name="id_member" value="56346">
+                <input type="text" hidden="true" name="id_member" value="546">
               <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control form-control-sm" name="name" required>
+                  <input type="text" class="form-control form-control-sm" name="name">
                </div>
                <div class="form-group">
                   <label>Username</label>
-                  <input type="text" class="form-control form-control-sm" name="username" required>
+                  <input type="text" class="form-control form-control-sm" name="username">
                </div>
                <div class="form-group">
                   <label>Password</label>
-                  <input type="Password" class="form-control form-control-sm" name="password" required>
+                  <input type="Password" class="form-control form-control-sm" name="password">
                </div>
                <div class="form-group">
                  <label>Jenis Identitas</label>
-                  <select class="form-control" name="jenis_identitas" required>
+                  <select class="form-control" name="jenis_identitas">
                     <option>KTP</option>
                     <option>SIM</option>
                     <option>Kartu Pelajar/KTM</option>
@@ -85,11 +85,11 @@
                </div>
                <div class="form-group">
                   <label>Nomor Identitas</label>
-                  <input type="number" value="Submit" class="form-control form-control-sm" name="no_identitas" required>
+                  <input type="number" value="Submit" class="form-control form-control-sm" name="no_identitas">
                </div>
                <div class="form-group">
                   <label>Alamat</label>
-                  <textarea class="form-control" name="alamat" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 55px;" required></textarea>
+                  <textarea class="form-control" name="alamat" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 55px;"></textarea>
                </div>
                <input type="submit" class="btn btn-block btn-primary" value="Submit" name="submit">
             </form>
