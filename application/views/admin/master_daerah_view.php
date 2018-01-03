@@ -1,11 +1,14 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/admin_master_daerah.css">
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/admin_master_daerah.js"></script>
+
+<!-- Header -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Daerah</h1>
     </div>
 </div>
 
+<!-- header button and filter -->
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-4 pull-right">
@@ -23,11 +26,12 @@
 	</div>
 </div>
 
+<!-- grid -->
 <div class="row">
     <div class="col-md-12" >
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active tab1"><a href="#Provinsi" aria-controls="Provinsi" role="tab" data-toggle="tab" onclick="master_daerah.changeDaerah('Provinsi')">Provinsi</a></li>
-            <li role="presentation"><a href="#Kota" class="tabTitle" aria-controls="Kota" role="tab" data-toggle="tab" onclick="master_daerah.changeDaerah('Kota')">Kota</a></li>
+            <li role="presentation"><a href="#Kota" class="tabTitle" aria-controls="Kota" role="tab" data-toggle="tab" onclick="master_daerah.changeDaerah('Kota/Kab')">Kota/Kab</a></li>
             <li role="presentation"><a href="#Desa" class="tabTitle" aria-controls="Desa" role="tab" data-toggle="tab" onclick="master_daerah.changeDaerah('Desa')">Desa</a></li>
         </ul>
         <div class="tab-content">
@@ -37,6 +41,9 @@
                         <div class="col-md-12" data-bind="visible: !model.Processing()">
                             <div id="gridProvinsi"></div>
                         </div>
+                        <?php 
+                            $this->load->view($loader);
+                         ?>
                     </div>
                 </div>
             </div>
@@ -46,6 +53,9 @@
                         <div class="col-md-12" data-bind="visible: !model.Processing()">
                             <div id="gridKota"></div>
                         </div>
+                        <?php 
+                            $this->load->view($loader);
+                         ?>
                     </div>
                 </div>
             </div>
@@ -55,6 +65,9 @@
                         <div class="col-md-12" data-bind="visible: !model.Processing()">
                             <div id="gridDesa"></div>
                         </div>
+                        <?php 
+                            $this->load->view($loader);
+                         ?>
                     </div>
                 </div>
             </div>
@@ -79,11 +92,17 @@
             </select>
         </div>
 
+        <div class="form-group" data-bind="visible: master_daerah.showInAddKota">
+            <label>Keterangan</label><br>
+            <label class="radio-inline"><input type="radio" value="Kota" name="keteranganKotKab">Kota</label>
+            <label class="radio-inline"><input type="radio" value="Kabupaten" name="keteranganKotKab">Kabupten</label>
+        </div>
+
         <div class="form-group" data-bind="visible: master_daerah.showInAddDesa">
             <label>Pilih Kota/Kabupaten</label><br>
             <select class="form-control select-form" onchange="master_daerah.changeKeterangan()" id="dropdownKota" data-bind="kendoDropDownList: { data: master_daerah.dataMasterKota, dataValueField: 'ID_KOTA', dataTextField: 'NAMA_KOTA',optionLabel:'Select one',filter: 'contains'}, value: master_daerah.recordDesa.ID_KOTA">
             </select>
-            <span data-bind="text: master_daerah.keteranganKotKab"></span>
+            <span id="keteranganKotKab" data-bind="text: master_daerah.keteranganKotKab"></span>
         </div>
 
         <div class="form-group" data-bind="visible: master_daerah.showInAddProvinsi">
@@ -100,11 +119,16 @@
             <label>Nama Desa</label>
             <input class="form-control input-form" data-bind="value: master_daerah.recordDesa.NAMA_DESA">
         </div>
+
+        <div class="form-group" data-bind="visible: master_daerah.showInAddDesa">
+            <label>Kode Pos</label>
+            <input class="form-control input-form" data-bind="value: master_daerah.recordDesa.KODE_POS">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success" data-bind="visible: master_daerah.showAdd">Submit</button>
-        <button type="button" class="btn btn-success" data-bind="visible: master_daerah.showEdit">Change</button>
+        <button type="button" class="btn btn-success" onclick="master_daerah.saveData()" data-bind="visible: master_daerah.showAdd">Submit</button>
+        <button type="button" class="btn btn-warning" onclick="master_daerah.updateData()" data-bind="visible: master_daerah.showEdit">Change</button>
       </div>
     </div>
 

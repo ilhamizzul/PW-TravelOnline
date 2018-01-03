@@ -13,54 +13,6 @@ body{
 
 }
 
-
-
-#note {
-    position: absolute;
-    z-index: 81;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    line-height: 3.5;
-    margin-top: 65px;
-    color: white;
-    font-weight: bold;
-    overflow: hidden; 
-    font-size: 18px;
-    font-family: helvetica;
-    -webkit-box-shadow: 0 0 5px black;
-    -moz-box-shadow:    0 0 5px black;
-    box-shadow:         0 0 5px black;
-}
-
-
-#note.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
-}
-
-@keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-}
-
 .modal-dialog{
 	width: 750px;
 }
@@ -116,13 +68,6 @@ body{
 	font-family: caviar dreams;
 	font-size: 75px;
 	padding-left: 74px;
-}
-
-.merk{
-	color:  #29B6F6;
-	font-family: caviar dreams;
-	font-size: 55px;
-	padding-left: 14px;
 }
 
 .btn-choose{
@@ -215,10 +160,6 @@ label{
 
 	.seat {
 		font-size: 68px;
-	}
-
-	.merk {
-		font-size: 48px;
 	}
 
 	.search-form {

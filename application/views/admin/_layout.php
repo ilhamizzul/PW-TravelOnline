@@ -35,9 +35,12 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/lodash.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/knockout-kendo.min.js"></script>
 
-    <!-- <script src="<?php echo base_url(); ?>assets/dist/js/app.js"></script> -->
+    <!-- SWAL -->
+    <script src="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.css">
+
     <script src="<?php echo base_url(); ?>assets/dist/js/common.js"></script>
-    <!-- <script src="<?php echo base_url(); ?>assets/dist/js/helper.js"></script> -->
     
 </head>
 
@@ -109,10 +112,10 @@
                                     <a href="<?php echo base_url(); ?>index.php/admin_master_daerah">Daerah</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Jenis Mobil</a>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_master_jenis_mobil">Jenis Mobil</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Pelanggan</a>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_master_pelanggan">Pelanggan</a>
                                 </li>
                             </ul>
                         </li>

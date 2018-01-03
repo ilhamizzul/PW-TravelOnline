@@ -9,11 +9,11 @@ if ( ! function_exists('squenceSetter'))
 
 		$result = $CI->admin_squence_model->getLastSquence($nama_kolom, $bulan, $tahun);
 			
-		// if ($result[1]++ == 0) {
-		// 	$CI->admin_squence_model->setNewSquence($nama_kolom, $bulan, $tahun, 1);
-		// }else{
-		// 	$CI->admin_squence_model->updateSquence($result[0], $result[1]);
-		// }
+		if ($result[1]++ == 0) {
+			$CI->admin_squence_model->setNewSquence($nama_kolom, $bulan, $tahun, 1);
+		}else{
+			$CI->admin_squence_model->updateSquence($result[0], $result[1]);
+		}
 
 		return $result[1];
 	}
@@ -46,6 +46,15 @@ if (! function_exists('setSquenceAndGenerateID')) {
 	{
 		$numb = squenceSetter($nama_kolom, $bulan, $tahun);
 		$result = idGenerator($nama_kolom,$bulan, $tahun, $digit, $numb );
+
+		return $result;
+	}
+}
+
+if (! function_exists('setResultInfo')) {
+	function setResultInfo($isError,$message, $data)
+	{
+		$result = (object) ['isError' => $isError, 'message' => $message, 'data' => $data];
 
 		return $result;
 	}
