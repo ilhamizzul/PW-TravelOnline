@@ -114,9 +114,6 @@
               });
           });
 
-          function showDetail(data) {
-             console.log(data)
-          }
 
 
 

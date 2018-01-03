@@ -28,15 +28,15 @@ class Register extends CI_Controller {
 			if ($this->form_validation->run() == TRUE) {
 				if ($this->register_model->insert()==TRUE) {
 					$this->session->set_flashdata('notif', 'success');
-					redirect('index.php/register');
+					redirect('register');
 				} else {
 					$this->session->set_flashdata('notif', 'failed');
-					redirect('index.php/register');
+					redirect('register');
 				}
 				
 			} else {
 				$data['notif'] = validation_errors();
-				redirect('index.php/register');
+				redirect('register');
 			}
 			
 		}

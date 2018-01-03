@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
    <div class="container-fluid">
-      <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home"><strong>Travel</strong></a>
+      <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
          <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
       <div class="collapse navbar-collapse" id="navcol-1">
@@ -46,7 +46,7 @@
             <h4 class="modal-title">Search Travel</h4>
          </div>
          <div class="modal-body" style="height:255px;">
-            <form>
+            <form method="post" action="<?php echo base_url(); ?>index.php/home/get_data">
                <div class="col-md-12 col-sm-12">
                   <div class="form-group col-md-6 col-sm-6">
                      <label class="control-label">From:</label>
@@ -55,13 +55,13 @@
                            <div class="input-group-addon">
                               <img src="<?php echo base_url(); ?>assets/img/car(1).png" alt="">
                            </div>
-                           <input type="text" class="form-control">
+                           <input type="text" name="depart" class="form-control">
                         </div>
                      </div>
                   </div>
                   <div class="col-md-6 col-sm-6 form-group">
                      <label class="col-form-label col-form-label-sm">To:</label>
-                     <input type="text" class="form-control form-control-sm" name="">
+                     <input type="text" class="form-control form-control-sm" name="to">
                   </div>
                </div>
                <div class="col-md-12 col-sm-7">
@@ -70,15 +70,15 @@
                      <div class="form-group">
                         <div class="input-group">
                            <div class="input-group-addon">
-                              <img src="<?php echo base_url(); ?>assets/img/clock(1).png" alt="">
+                              <img src="<?php echo base_url(); ?>assets/img/clock(1).png" alt="depart">
                            </div>
-                           <input type="date" class="form-control">
+                           <input type="date" name="date" class="form-control">
                         </div>
                      </div>
                   </div>
                </div>
                <div class="col-md-12 col-sm-5">
-                  <button class="btn btn-sm btn-primary search">Search</button>
+                  <input type="submit" class="btn btn-block btn-primary" value="Search" name="submit">
                </div>
             </form>
          </div>
@@ -156,7 +156,7 @@
               Rp.'.$data->TARIF.',-
             </b>
           </p>
-          <a href="" onClick="showDetail('.$data->ID_JADWAL_TRAVEL.')" data-toggle="modal" data-target="#choose'.$data->ID_JADWAL_TRAVEL.'"  class="btn btn-choose btn-sm">Choose</a>
+          <a href="'.base_url().'index.php/home/showDetail/'.$data->ID_JADWAL_TRAVEL.'/'.$data->KOTAT_ASAL.'/'.$data->KOTA_TUJUAN.'" data-toggle="modal" data-target="#chooseTujuan"  class="btn btn-choose btn-sm">Choose</a>
         </div>
 
         <div class="col-md-12 col-sm-12 see">
@@ -180,55 +180,7 @@
         </div>
       </div>
 
-      <div id="choose'.$data->ID_JADWAL_TRAVEL.'" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">3Lex Travel</h4>
-         </div>
-         <div class="modal-body modal-seat">
-            <form>
-               <div class="col-md-5 col-sm-5">
-                  <img class="img img-responsive" src="'.base_url().'assets/img/3lex.png" alt="">  
-               </div>
-               <div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                     <label>Desa Penjemputan</label>
-                     <select class="form-control" name="ID_DETAIL_DESA_TRAVEL">
-                        <option>Jakarta Utara</option>
-                     </select>
-                  </div>
-                  <div class="form-group">
-                     <label>Desa Tujuan</label>
-                     <select class="form-control" >
-                        <option>Denpasar</option>
-                        <option>Bali Timur</option>
-                     </select>
-                  </div>
-                  <div class="form-group">
-                     <label>Jumlah</label>
-                     <input type="number" class="form-control" value="1" name="">   
-                  </div>
-                  <div class="col-md-12 col-sm-12">
-                     <center>
-                        <p class="price2">
-                           <b>
-                           Rp.125.000.00,-
-                           </b>
-                        </p>
-                     </center>
-                  </div>
-                  <div class="col-md-12 col-sm-12">
-                     <button class="btn btn-sm btn-primary search">Purchase</button>
-                  </div>
-               </div>
-            </form>
-         </div>
-          </div>
-        </div>
-      </div>
+      
 
     ';
       $no++;
@@ -287,7 +239,81 @@
         </div>
       </div>
 
-      <div id="choose" class="modal fade" role="dialog">
+      
+    ';
+      $no++;
+    }
+
+  }
+
+    ?>
+
+
+    <?php 
+      if ($this->session->logged_in == true) {
+        $asaltext = "";
+        foreach ($desaasal as $data) {
+          $asaltext .= '<option value="'.$data->ID_DESA.'">'.$data->NAMA_DESA.'</option>';
+        }
+
+
+        $tujuantext = "";
+        foreach ($desatujuan as $data) {
+          $tujuantext .= '<option value="'.$data->ID_DESA.'">'.$data->NAMA_DESA.'</option>';
+        }
+        echo '
+        <div id="chooseTujuan" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">3Lex Travel</h4>
+         </div>
+         <div class="modal-body modal-seat">
+            <form>
+               <div class="col-md-5 col-sm-5">
+                  <img class="img img-responsive" src="'.base_url().'assets/img/3lex.png" alt="">  
+               </div>
+               <div class="col-md-7 col-sm-7">
+                  <div class="form-group">
+                     <label>Desa Penjemputan</label>
+                     <select class="form-control" name="desa_asal">
+                      '.$asaltext.'
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label>Desa Tujuan</label>
+                     <select class="form-control" name="desa_tujuan" >
+                      '.$tujuantext.'
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label>Jumlah</label>
+                     <input type="number" class="form-control" value="1" name="">   
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                     <center>
+                        <p class="price2">
+                           <b>
+                           Rp.125.000.00,-
+                           </b>
+                        </p>
+                     </center>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                     <button class="btn btn-sm btn-primary search">Purchase</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+          </div>
+        </div>
+      </div>
+        ';
+      } else {
+        echo '
+          <div id="choose" class="modal fade" role="dialog">
          <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -304,18 +330,12 @@
             </div>
          </div>
          </div>
-    ';
-      $no++;
-    }
-
-  }
-
+        ';
+      }
+      
     ?>
-    <?php if(isset($msg_error))
-        {
-            echo '<div style="color:red;">' . $msg_error.'</div>';
-        }
-    ?>
+
+
    <div>
       <center>
         <?php echo $pagination;  ?>

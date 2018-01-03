@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home"><strong>Travel</strong></a>
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -62,7 +62,7 @@
          <div class="col-md-4 register">
             <h3 class="header">Pendaftaran User Baru</h3>
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
-                <input type="text" hidden="true" name="id_member" value="546">
+                <input type="text" hidden="true" name="id_member" value="5435326">
               <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control form-control-sm" name="name">
