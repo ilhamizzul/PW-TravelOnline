@@ -9,20 +9,10 @@ class Admin_auth extends CI_Controller {
 		$this->load->model('auth_model');
 	}
 
-	public function index()
-	{
-		if ($this->session->userdata('logged_in') == TRUE) {
-			redirect(base_url('admin_dashboard'));
-		} else {
-			redirect('admin/login_admin_view');
-		}
-		
-	}
-
 	public function login_admin_submit()
 	{
 		if($this->auth_model->login() == TRUE){
-			redirect(base_url('admin_dashboard'));
+			redirect(base_url('index.php/admin_dashboard'));
 		} else {
 			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
 			redirect('admin_auth/login_admin');
@@ -37,7 +27,7 @@ class Admin_auth extends CI_Controller {
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		redirect('admin_auth');
+		redirect('admin_auth/login_admin');
 	}
 
 }

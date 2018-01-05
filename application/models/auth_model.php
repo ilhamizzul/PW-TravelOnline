@@ -19,8 +19,12 @@ class Auth_model extends CI_Model {
 					      ->get('user');
 
 		if ($query->num_rows() > 0) {
+			$result = $query->result_array();
+
+			$role = array_shift($result);
 			$data = array('USERNAME_ADMIN' => $username,
-						'logged_in' => TRUE );
+						'logged_in' => TRUE,
+						'LEVEL' => $role['LEVEL']);
 			$this->session->userdata($data);
 			return TRUE;
 		} else {
