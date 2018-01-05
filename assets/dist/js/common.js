@@ -63,3 +63,12 @@ function squenceSetter(column_name, month, year, digit_of_number) {
 
     return squence;
 }
+
+function firstLetterUpparcase(str) {
+    // var str = "test AAALL data NGwir AVLE";
+    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    return letter.toUpperCase();
+    });
+
+    return str;
+}

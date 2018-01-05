@@ -8,10 +8,11 @@
     </div>
 </div>
 
+<!-- nav -->
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-2 pull-right">
-			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addJenisMobilModal" id="addButton" type="button" onclick="">Tambah Jenis Mobil <i class="fa fa-plus"></i></button>
+			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addJenisMobilModal" id="addButton" type="button" onclick="jenismobil.showAddModal()">Tambah Jenis Mobil <i class="fa fa-plus"></i></button>
 		</div>
 		<div class="col-md-3 pull-right">
 			<div class="form-group input-group">
@@ -24,6 +25,18 @@
 	</div>
 </div>
 
+<!-- Grid -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-12" data-bind="visible: !model.Processing()">
+        <div id="gridJenisMobil"></div>
+    </div>
+    <?php 
+        $this->load->view($loader);
+     ?>
+  </div>
+</div>
+
 <!-- Modal -->
 <div id="addJenisMobilModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -32,7 +45,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Jenis Mobil</h4>
+        <h4 class="modal-title"><span data-bind="text: jenismobil.HeaderText"></span> Jenis Mobil</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -47,7 +60,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success" onclick="jenismobil.saveData()" data-bind="">Submit</button>
+        <button type="button" class="btn btn-success" onclick="jenismobil.saveData()" data-bind="visible: jenismobil.showAdd">Submit</button>
+        <button type="button" class="btn btn-warning" onclick="jenismobil.editData()" data-bind="visible: jenismobil.showEdit">Change</button>
       </div>
     </div>
 
