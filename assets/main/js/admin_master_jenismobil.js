@@ -19,11 +19,10 @@ jenismobil.record = ko.mapping.fromJS(jenismobil.newRecord())
 
 jenismobil.search = function () {
 	jenismobil.renderGridJenisMobil(jenismobil.textSearch())
-    // if (true) {}
 }
 
-jenismobil.textSearch.subscribe(function(e) {
-    if (e == "") {
+jenismobil.textSearch.subscribe(function(data) {
+    if (data == "") {
         jenismobil.renderGridJenisMobil("")
     }
 })
@@ -240,7 +239,7 @@ jenismobil.renderGridJenisMobil = function(textSearch){
             data: data,
         },
         sortable: true,
-        height: 350,
+        height: 400,
         width: 140,
         filterable: false,
         scrollable: true,
