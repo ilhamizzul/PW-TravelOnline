@@ -18,8 +18,15 @@ jenismobil.newRecord = function(){
 jenismobil.record = ko.mapping.fromJS(jenismobil.newRecord())
 
 jenismobil.search = function () {
-	console.log(jenismobil.textSearch())
+	jenismobil.renderGridJenisMobil(jenismobil.textSearch())
+    // if (true) {}
 }
+
+jenismobil.textSearch.subscribe(function(e) {
+    if (e == "") {
+        jenismobil.renderGridJenisMobil("")
+    }
+})
 
 jenismobil.saveData = function () {
 	data = ko.mapping.toJS(jenismobil.record)
