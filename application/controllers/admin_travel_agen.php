@@ -11,7 +11,8 @@ class Admin_travel_agen extends CI_Controller {
 
 	public function index()
 	{
-		$data['main_view']='admin/Agen_Travel';
+		$data['main_view']='admin/travel_agen_travel_view';
+		$data['loader'] = 'loader';
 		$this->load->view('admin/_layout',$data);
 	}
 

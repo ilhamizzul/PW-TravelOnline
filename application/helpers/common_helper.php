@@ -60,3 +60,23 @@ if (! function_exists('setResultInfo')) {
 	}
 }
 
+if (! function_exists('SetRealDataTravel')) {
+	function SetRealDataTravel($globaldata,$filterdata,$minimumsheat)
+	{
+		foreach ($globaldata as $global => $value) {
+            foreach ($filterdata as $filter) {
+                if ($value->ID_JADWAL_TRAVEL == $filter->ID_JADWAL_TRAVEL) {
+                    $value->JML_KURSI -= $filter->KURSI_TERBOOKING;
+                }
+            }
+
+            if ($value->JML_KURSI < $minimumsheat) {
+                unset($globaldata[$global]);
+            }
+        }
+
+		return $globaldata;
+	}
+}
+
+

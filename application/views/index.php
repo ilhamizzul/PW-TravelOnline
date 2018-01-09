@@ -14,7 +14,14 @@
       
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/main/css/Pretty-Footer.css">
 
+      <script src="<?php echo base_url(); ?>assets/main/js/jquery.min.js"></script>
+      <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
+      <script src="<?php echo base_url(); ?>assets/dist/js/knockout.min.js"></script>
+      <script src="<?php echo base_url(); ?>assets/dist/js/knockout.mapping-latest.js"></script>
+      <script src="<?php echo base_url(); ?>assets/dist/js/knockout.mapping-latest.debug.js"></script>
+
+      <script src="<?php echo base_url(); ?>assets/dist/js/common.js"></script>
    </head>
    <body>
 
@@ -93,8 +100,7 @@
             </div>
          </div>
       </footer>
-      <script src="<?php echo base_url(); ?>assets/main/js/jquery.min.js"></script>
-      <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+      
       <script>
          $(document).ready(function(){
              $('#note').click(function(){
@@ -116,7 +122,7 @@
 
 
 
-
+          ko.applyBindings()
         </script>
       
    </body>

@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/home_landingpage.js"></script>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
    <div class="container-fluid">
       <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
@@ -155,9 +157,9 @@
             <b>
               Rp.'.$data->TARIF.',-
             </b>
-          </p>
-          <a href="'.base_url().'index.php/home/showDetail/'.$data->ID_JADWAL_TRAVEL.'/'.$data->KOTAT_ASAL.'/'.$data->KOTA_TUJUAN.'" data-toggle="modal" data-target="#chooseTujuan"  class="btn btn-choose btn-sm">Choose</a>
-        </div>
+          </p>';
+          echo "<a href='' data-toggle='modal' data-target='#chooseTujuan'  class='btn btn-choose btn-sm' onclick=\"landingpage.showDetail('$data->ID_TRAVEL','$data->KOTAT_ASAL','$data->KOTA_TUJUAN',$data->TARIF)\">Choose</a>";
+        echo '</div>
 
         <div class="col-md-12 col-sm-12 see">
           <button type="button" class="see" data-toggle="collapse" data-target="#demo'.$data->ID_JADWAL_TRAVEL.'">See Detail>></button>
@@ -251,16 +253,6 @@
 
     <?php 
       if ($this->session->logged_in == true) {
-        $asaltext = "";
-        foreach ($desaasal as $data) {
-          $asaltext .= '<option value="'.$data->ID_DESA.'">'.$data->NAMA_DESA.'</option>';
-        }
-
-
-        $tujuantext = "";
-        foreach ($desatujuan as $data) {
-          $tujuantext .= '<option value="'.$data->ID_DESA.'">'.$data->NAMA_DESA.'</option>';
-        }
         echo '
         <div id="chooseTujuan" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -278,25 +270,26 @@
                <div class="col-md-7 col-sm-7">
                   <div class="form-group">
                      <label>Desa Penjemputan</label>
-                     <select class="form-control" name="desa_asal">
-                      '.$asaltext.'
+                     <select class="form-control" name="desa_asal" id="desaAsal" data-bind="value: landingpage.recordTransaksi.ALAMAT_PENJEMPUTAN">
+                      <option value="" >-- Pilih Desa Penjemputan --</option>
                      </select>
                   </div>
                   <div class="form-group">
                      <label>Desa Tujuan</label>
-                     <select class="form-control" name="desa_tujuan" >
-                      '.$tujuantext.'
+                     <select class="form-control" name="desa_tujuan" id="desaTujuan" data-bind="value: landingpage.recordTransaksi.ALAMAT_PENURUNAN">
+                      <option value="" >-- Pilih Desa Tujuan --</option>
                      </select>
                   </div>
                   <div class="form-group">
                      <label>Jumlah</label>
-                     <input type="number" class="form-control" value="1" name="">   
+                     <input type="number" class="form-control" value="1" name="" data-bind="value: landingpage.recordTransaksi.JUMLAH_KURSI">   
                   </div>
                   <div class="col-md-12 col-sm-12">
                      <center>
                         <p class="price2">
                            <b>
-                           Rp.125.000.00,-
+                           Rp <span data-bind="text: landingpage.recordTransaksi.TOTAL_BAYAR"></span>,-
+                           <!-- Rp.125.000.00,- -->
                            </b>
                         </p>
                      </center>

@@ -8,8 +8,8 @@ class Search_model extends CI_Model {
 		$departure = $this->input->post('depart');
         $arrival = $this->input->post('to');
         
-		$this->db->select('*')->from('jadwal_trevel')
-							->join('kendaraan_travel', 'kendaraan_travel.ID_JENIS_KENDARAAN=jadwal_trevel.ID_JENIS_KENDARAAN')
+		$this->db->select('*')->from('jadwal_travel')
+							->join('kendaraan_travel', 'kendaraan_travel.ID_JENIS_KENDARAAN=jadwal_travel.ID_JENIS_KENDARAAN')
 							->join('travel', 'travel.ID_TRAVEL=kendaraan_travel.ID_TRAVEL')
 							->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN=kendaraan_travel.ID_JENIS_KENDARAAN')
 							->where('KOTAT_ASAL', $departure)

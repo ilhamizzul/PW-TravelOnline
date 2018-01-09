@@ -7,6 +7,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model('home_model');
         $this->load->model('search_model');
+        $this->load->helper('common_helper');
 	}
 
 
@@ -39,11 +40,13 @@ class Home extends CI_Controller {
     	$config['last_tag_close']= "</li>";
     	$this->pagination->initialize($config);
 
-		$data['data_trevel'] = $this->home_model->get_data_travel($limit,$offset);
+        $globaldata = $this->home_model->get_data_travel($limit,$offset);
+		$filterdata = $this->home_model->getSisaKursi("","","");
 		$data['main_view']='home-page_view';
         $data['pagination'] = $this->pagination->create_links();
+        
+        $data['data_trevel'] = SetRealDataTravel($globaldata,$filterdata,1);
 
-		
 		$data['detail_desa_travel'] = $this->home_model->get_id_detail_desa_travel();
 		$this->load->view('index',$data);
 
@@ -110,6 +113,13 @@ class Home extends CI_Controller {
 
         $data['main_view']='home-page_view';
         $this->load->view('index', $data);
+    }
+
+    public function GetDataKota()
+    {
+        $result = $this->home_model->GetAllKotaDesa();
+
+        echo json_encode($result);
     }
 
 }

@@ -123,7 +123,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Travel<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Agen Travel</a>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_travel_agen">Agen Travel</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Mobile Travel</a>
