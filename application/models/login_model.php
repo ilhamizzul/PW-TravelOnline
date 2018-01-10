@@ -15,7 +15,7 @@ class Login_model extends CI_Model {
 		$password = $this->input->post('password');
 
 		$query = $this->db->where('USERNAME', $username)
-							->where('PASSWORD', $password)
+							->where('PASSWORD', md5($password))
 							->get('member');
 
 		if ($query->num_rows() > 0) {

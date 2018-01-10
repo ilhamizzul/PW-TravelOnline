@@ -20,14 +20,14 @@
 
 <div class="container regist">
          <div class="col-md-8">
-            <?php 
+<!--             <?php 
                         $notif = $this->session->flashdata('notif');
                         if (!empty($notif)) {
                             echo ' <div style="margin-top:75px;" class="alert alert-success"> ';
                             echo $notif;
                             echo '</div>';
                         }
-                        ?>
+                        ?> -->
             <div class="col-md-12 jumbotron">
               <h2 style="text-align: center;">A greatest way to find your comfortable travel</h2>
               <div class="col-md-4">
@@ -62,7 +62,7 @@
          <div class="col-md-4 register">
             <h3 class="header">Pendaftaran User Baru</h3>
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
-                <input type="text" hidden="true" name="id_member" value="5435326">
+                <input type="text" hidden="true" name="id_member" value="543526">
               <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control form-control-sm" name="name">

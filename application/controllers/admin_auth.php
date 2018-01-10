@@ -12,7 +12,7 @@ class Admin_auth extends CI_Controller {
 	public function login_admin_submit()
 	{
 		if($this->auth_model->login() == TRUE){
-			redirect(base_url('index.php/admin_dashboard'));
+			redirect('admin_dashboard');
 		} else {
 			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
 			redirect('admin_auth/login_admin');
