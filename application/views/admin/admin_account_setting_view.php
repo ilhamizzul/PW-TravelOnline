@@ -14,34 +14,47 @@
           <fieldset>
             <div class="form-group">
               <label>Nama User</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" value="<?php echo $profil->NAMA_USER ?>">
             </div>
             <div class="form-group">
               <label>Username Akun</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" value="<?php echo $profil->USERNAME_ADMIN ?>">
             </div>
             <div class="form-group">
               <label>Password Akun</label>
-              <input type="password" class="form-control">
-              <div class="spacing pull-right"><a href="#" data-toggle="modal" data-target="#forget"><small> Forgot Password?</small></a><br/></div>
+              <input type="password" id="password" class="form-control" value="<?php echo $profil->PASSWORD_ADMIN ?>">
             </div>
             <div class="form-group">
+              <input type="checkbox" onclick="showHide()" />
+              <label for="show-hide">Show password</label>
+            </div>
+            <script>
+              function showHide() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                  x.type = "text";
+                } else {
+                  x.type = "password";
+                }
+              }
+            </script>
+            <div class="form-group">
               <label>Kota</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" value="<?php echo $profil->KOTA ?>">
             </div>
             <div class="form-group">
               <label>Alamat</label>
-              <textarea class="form-control" name="alamat" rows="3"></textarea>
+              <textarea class="form-control" name="alamat" rows="3" ><?php echo $profil->ALAMAT_USER ?></textarea>
             </div>
             <div class="form-group">
               <label>Nomor Rekening</label>
-              <input type="number" class="form-control">
+              <input type="number" class="form-control" value="<?php echo $profil->NOMOR_REKENING ?>">
             </div>
             <hr>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Password Baru</label>
               <input type="password" class="form-control">
-            </div>
+            </div> -->
             <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Update" name="submit">
           </fieldset>
         </form>
@@ -50,25 +63,4 @@
 
   </div>
 </div>
-
-<div class="modal fade" id="forget">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Forget Password</h4>
-               </div>
-               <div class="modal-body">
-                  <div class="container">
-                     <h3 style="font-weight: 600; color: red;">Please Contact Your Administrator !</h3>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-               </div>
-            </div>
-            <!-- /.modal-content -->
-         </div>
-         <!-- /.modal-dialog -->
-      </div>  
+ 
