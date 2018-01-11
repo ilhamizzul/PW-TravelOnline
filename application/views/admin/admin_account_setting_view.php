@@ -7,22 +7,43 @@
     </div>
 </div>
 
+
+
 <!-- grid -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form>
+      <?php
+      $failed = $this->session->flashdata('failed');
+        if(!empty($failed)){
+          echo '<div class="alert alert-danger alert-dismissable" style="margin-top: 10px">';
+          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+          echo '<i class="icon fa fa-warning"></i>';
+          echo $failed;
+          echo '</div>';
+        }
+
+      $success = $this->session->flashdata('success');
+      if(!empty($success)){
+          echo '<div class="alert alert-success alert-dismissable" style="margin-top: 10px">';
+          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+          echo '<i class="icon fa fa-check"></i>';
+          echo $success;
+          echo '</div>';
+      }
+    ?>
+        <form method="post" action="<?php echo base_url(); ?>index.php/account_setting/edit_account_submit">
           <fieldset>
             <div class="form-group">
               <label>Nama User</label>
-              <input type="text" class="form-control" value="<?php echo $profil->NAMA_USER ?>">
+              <input type="text" class="form-control" name="nama_user" value="<?php echo $profil->NAMA_USER ?>">
             </div>
             <div class="form-group">
               <label>Username Akun</label>
-              <input type="text" class="form-control" value="<?php echo $profil->USERNAME_ADMIN ?>">
+              <input type="text" class="form-control" name="username" value="<?php echo $profil->USERNAME_ADMIN ?>">
             </div>
             <div class="form-group">
               <label>Password Akun</label>
-              <input type="password" id="password" class="form-control" value="<?php echo $profil->PASSWORD_ADMIN ?>">
+              <input type="password" id="password" name="password" class="form-control" value="<?php echo $profil->PASSWORD_ADMIN ?>">
             </div>
             <div class="form-group">
               <input type="checkbox" onclick="showHide()" />
@@ -40,15 +61,15 @@
             </script>
             <div class="form-group">
               <label>Kota</label>
-              <input type="text" class="form-control" value="<?php echo $profil->KOTA ?>">
+              <input type="text" class="form-control" name="kota" value="<?php echo $profil->KOTA ?>">
             </div>
             <div class="form-group">
               <label>Alamat</label>
-              <textarea class="form-control" name="alamat" rows="3" ><?php echo $profil->ALAMAT_USER ?></textarea>
+              <textarea class="form-control" name="alamat_user" rows="3" ><?php echo $profil->ALAMAT_USER ?></textarea>
             </div>
             <div class="form-group">
-              <label>Nomor Rekening</label>
-              <input type="number" class="form-control" value="<?php echo $profil->NOMOR_REKENING ?>">
+              <label>Nomor Rekening BCA</label>
+              <input type="number" class="form-control" name="nomor_rekening" value="<?php echo $profil->NOMOR_REKENING ?>">
             </div>
             <hr>
             <!-- <div class="form-group">

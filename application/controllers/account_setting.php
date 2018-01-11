@@ -17,6 +17,18 @@ class Account_setting extends CI_Controller {
 		$this->load->view('admin/_layout', $data);
 	}
 
+	public function edit_account_submit()
+	{
+		$id = $this->session->userdata('ID_USER');
+		if($this->account_setting_model->edit_account($id) == TRUE){
+			$this->session->set_flashdata('success', 'Edit data berhasil');
+			redirect('account_setting');
+		} else {
+			$this->session->set_flashdata('success', 'Edit data berhasil');
+		    redirect('account_setting');
+		}
+	}
+
 }
 
 /* End of file account_setting.php */

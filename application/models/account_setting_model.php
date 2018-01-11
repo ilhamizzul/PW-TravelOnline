@@ -10,6 +10,28 @@ class Account_setting_model extends CI_Model {
 					->where('ID_USER', $id);
 
 			return $this->db->get()->row();
+		}
+
+	public function edit_account($id)
+		{
+			$data = array('NAMA_USER' => $this->input->post('nama_user'),
+						'USERNAME_ADMIN' 		=> $this->input->post('username'),
+						'PASSWORD_ADMIN' 		=> $this->input->post('password'),
+						'KOTA'	=> $this->input->post('kota'),
+						'ALAMAT_USER' => $this->input->post('alamat_user'),
+						'NOMOR_REKENING' => $this->input->post('nomor_rekening')
+						);
+
+			$this->db->select('*')
+					->from('user')
+					->where('ID_USER', $id)
+					->update('user', $data);
+
+			if ($this->db->affected_rows() > 0) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
 		}	
 
 }
