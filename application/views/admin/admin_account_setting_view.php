@@ -23,6 +23,7 @@
             <div class="form-group">
               <label>Password Akun</label>
               <input type="password" class="form-control">
+              <div class="spacing pull-right"><a href="#" data-toggle="modal" data-target="#forget"><small> Forgot Password?</small></a><br/></div>
             </div>
             <div class="form-group">
               <label>Kota</label>
@@ -49,3 +50,25 @@
 
   </div>
 </div>
+
+<div class="modal fade" id="forget">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Forget Password</h4>
+               </div>
+               <div class="modal-body">
+                  <div class="container">
+                     <h3 style="font-weight: 600; color: red;">Please Contact Your Administrator !</h3>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>  
