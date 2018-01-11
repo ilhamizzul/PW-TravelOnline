@@ -88,9 +88,16 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php 
+                            if ($this->session->userdata('logged_in') == TRUE){
+                                echo '
+                                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Welcome,'.$this->session->userdata('USERNAME_ADMIN').'</a>
+                                    </li> 
+                                ';
+                            }; 
+                        ?>
+                            
+                        
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url(); ?>index.php/admin_auth/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -143,13 +150,13 @@
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="panels-wells.html">Data Pemilik</a>
+                                                <a href="'.base_url().'index.php/admin_data_pemilik">Data Pemilik</a>
                                             </li>
                                             <li>
-                                                <a href="buttons.html">Data Operator</a>
+                                                <a href="'.base_url().'index.php/admin_data_operator">Data Operator</a>
                                             </li>
                                             <li>
-                                                <a href="notifications.html">Account Setting</a>
+                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -193,10 +200,10 @@
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="buttons.html">Data Operator</a>
+                                                <a href="'.base_url().'index.php/admin_data_operator">Data Operator</a>
                                             </li>
                                             <li>
-                                                <a href="notifications.html">Account Setting</a>
+                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -240,7 +247,7 @@
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="notifications.html">Account Setting</a>
+                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
                                             </li>
                                         </ul>
                                     </li>
