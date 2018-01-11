@@ -144,7 +144,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
+                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
@@ -194,7 +194,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
+                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
@@ -241,7 +241,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
+                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
