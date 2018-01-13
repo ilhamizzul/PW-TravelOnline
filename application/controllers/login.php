@@ -24,7 +24,8 @@ class Login extends CI_Controller {
 	{
 		$data = array(
 			'USERNAME' => '', 
-			'logged_in' => FALSE
+			'logged_in' => FALSE,
+			'ID_MEMBER' => '',
 		);
 		
 		$this->session->sess_destroy();

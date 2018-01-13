@@ -79,4 +79,30 @@ if (! function_exists('SetRealDataTravel')) {
 	}
 }
 
+if (! function_exists('SetDateTomorrow')) {
+	function SetDateTomorrow()
+	{
+		$date = date_create();
+		date_add($date, date_interval_create_from_date_string('1 days'));
+		
+
+		return date_format($date, 'Y-m-d');
+	}
+}
+
+if (! function_exists('getDifferentTime')) {
+	function getDifferentTime($date, $time)
+	{
+		//Our dates and times.
+		$then = $date." ".$time;
+		$now = time();
+		 
+		//convert $then into a timestamp.
+		$thenTimestamp = strtotime($then);
+		 
+		//Get the difference in seconds.
+		return $difference = $now - $thenTimestamp;
+	}
+}
+
 

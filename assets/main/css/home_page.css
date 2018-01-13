@@ -140,8 +140,11 @@ label{
 }
 
 .modal-seat{
-	height: 355px;
+	height: 300px;
+}
 
+.modal-seat2{
+	height: 600px;
 }
 
 

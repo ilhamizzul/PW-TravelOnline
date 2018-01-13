@@ -21,11 +21,46 @@
       <script src="<?php echo base_url(); ?>assets/dist/js/knockout.mapping-latest.js"></script>
       <script src="<?php echo base_url(); ?>assets/dist/js/knockout.mapping-latest.debug.js"></script>
 
+
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/kendo-ui/styles/kendo.common.min.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/kendo-ui/styles/kendo.rtl.min.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/kendo-ui/styles/kendo.default.min.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/kendo-ui/styles/kendo.default.mobile.min.css">
+      <script src="<?php echo base_url(); ?>assets/vendor/kendo-ui/js/kendo.all.min.js"></script>
+
+      <!-- KO Kendo -->
+      <script src="<?php echo base_url(); ?>assets/dist/js/knockout-kendo.min.js"></script>
+
+      <!-- SWAL -->
+      <script src="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+      <script src="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.css">
+
+      <!-- MOMENT -->
+      <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.js"></script>
+      <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.min.js"></script>
+
+      <!-- LODASH -->
+      <script src="<?php echo base_url(); ?>assets/dist/js/lodash.js"></script>
+
+      <!-- inputmask -->
+      <script src="<?php echo base_url(); ?>assets/vendor/inputmask/inputmask.js"></script>
+      <script src="<?php echo base_url(); ?>assets/vendor/inputmask/inputmask.regex.extensions.js"></script>
+      <script src="<?php echo base_url(); ?>assets/vendor/inputmask/jquery.inputmask.js"></script>
+      
       <script src="<?php echo base_url(); ?>assets/dist/js/common.js"></script>
+      <script>var base_url = '<?php echo base_url() ?>';</script>
    </head>
    <body>
 
-
+      <!-- <script type="text/javascript">
+        $(document).ready(function(){
+              Date.prototype.addHours = function(h){
+                  this.setHours(this.getHours()+h);
+                  return this;
+              }
+          });
+      </script> -->
       <!-- MODAL LOGIN -->
       <div id="login" class="modal fade" role="dialog">
          <div class="modal-dialog">
@@ -119,8 +154,6 @@
                   $('#choose').modal('hide');
               });
           });
-
-
 
           ko.applyBindings()
         </script>
