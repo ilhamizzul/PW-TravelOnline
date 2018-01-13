@@ -19,12 +19,19 @@ class Register extends CI_Controller {
 	{
 		if ($this->input->post('submit')) {
 			
-			$nama_kolom = 'Pelanggan';
-			$bulan = date('m');
-			$tahun = date('Y');
-			$digit = 4;
+			$this->form_validation->set_rules('name', 'Nama Member', 'trim|required|min_length[5]|max_length[12]');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|max_length[12]');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+			$this->form_validation->set_rules('no_identitas', 'Nomor Identitas', 'trim|required');
+			if ($this->form_validation->run() == TRUE) {
+				$nama_kolom = 'Pelanggan';
+				$bulan = date('m');
+				$tahun = date('Y');
+				$digit = 4;
 
 				$id = setSquenceAndGenerateID($nama_kolom,$bulan, $tahun, $digit);
+
 				if ($this->register_model->insert($id)==TRUE) {
 					$this->session->set_flashdata('notif', 'success');
 					redirect('register');
@@ -32,6 +39,10 @@ class Register extends CI_Controller {
 					$this->session->set_flashdata('notif', 'failed');
 					redirect('register');
 				}
+			} else {
+				$this->session->set_flashdata('notif', validation_errors());
+			}
+				
 			
 		}
 		

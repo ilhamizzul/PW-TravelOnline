@@ -8,7 +8,11 @@ class Admin_transaksi_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('riwayat_transaksi');
 		$this->db->join('member', 'member.ID_MEMBER = riwayat_transaksi.ID_MEMBER');
+		$this->db->join('jadwal_travel', 'jadwal_travel.ID_JADWAL_TRAVEL = riwayat_transaksi.ID_JADWAL_TRAVEL');
+		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL');
+		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL');
 		$this->db->order_by('riwayat_transaksi.ID_RIWAYAT_TRANSAKSI', 'ASC');
+		$this->db->where('travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
 
 		return $this->db->get()->result();
 	}

@@ -16,6 +16,7 @@ class Admin_jadwal_travel extends CI_Controller {
 		$data['kendaraan'] = $this->admin_jadwal_travel_model->get_kendaraan_travel();
 		$data['kota'] = $this->admin_jadwal_travel_model->get_kota();
 		$this->load->view('admin/_layout', $data);
+
 	}
 
 	public function save()

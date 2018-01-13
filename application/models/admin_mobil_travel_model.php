@@ -18,7 +18,7 @@ class Admin_mobil_travel_model extends CI_Model {
 		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL');
 		$this->db->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN = kendaraan_travel.ID_JENIS_KENDARAAN');
 		$this->db->order_by('ID_KENDARAAN_TRAVEL', 'asc');
-		$this->db->where('ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
+		$this->db->where('travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
 		// if ($this->session->userdata('LEVEL') != 'ADMIN') {
 		// 	$this->db->where('ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
 		// }
