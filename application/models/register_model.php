@@ -9,10 +9,10 @@ class Register_model extends CI_Model {
 		//Do your magic here
 	}
 	
-	public function insert()
+	public function insert($id)
 	{
 		$data = array(
-			'ID_MEMBER' => $this->input->post('id_member'),
+			'ID_MEMBER' => $id,
 			'NAMA_MEMBER' => $this->input->post('name'),
 			'USERNAME' => $this->input->post('username'),
 			'PASSWORD' => md5($this->input->post('password')),

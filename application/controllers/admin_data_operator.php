@@ -50,6 +50,23 @@ class Admin_data_operator extends CI_Controller {
 		}
 	}
 
+	public function delete($id){
+		
+
+		$id = $this->uri->segment(3);
+
+		if ($this->admin_data_operator_model->hapus($id) == TRUE) {
+			$this->session->set_flashdata('notif', 'Hapus Sukses');
+			redirect('admin_data_operator');
+		} else {
+			$this->session->set_flashdata('notif', 'Hapus Gagal');
+			redirect('admin_data_operator');
+		}
+			
+		
+		
+	}
+
 }
 
 /* End of file admin_data_operator.php */

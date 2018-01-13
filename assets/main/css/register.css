@@ -9,7 +9,7 @@ body{
   background-color: rgba(255, 255, 255, 0.85);
   font-family: helvetica;
   border-radius: 5px;
-  height: 550px;
+  height: 570px;
   margin-bottom: 15px;
   margin-top: 75px;
 }
@@ -25,7 +25,9 @@ body{
 
 .jumbotron {
   margin-top: 75px;
-  padding-top: 15px;
+  margin-bottom: 6px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.85);
 }
 
@@ -40,11 +42,11 @@ body{
 }
 
 .icon {
-  font-size: 55px;
+  font-size: 45px;
   background-color: #29B6F6;
   text-align: center;
   padding: 15px;
-  border-radius: 95px;
+  border-radius: 25px;
   color: white;
 }
 

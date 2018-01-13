@@ -14,12 +14,12 @@ class Account_setting_model extends CI_Model {
 
 	public function edit_account($id)
 		{
-			$data = array('NAMA_USER' => $this->input->post('nama_user'),
-						'USERNAME_ADMIN' 		=> $this->input->post('username'),
-						'PASSWORD_ADMIN' 		=> $this->input->post('password'),
-						'KOTA'	=> $this->input->post('kota'),
-						'ALAMAT_USER' => $this->input->post('alamat_user'),
-						'NOMOR_REKENING' => $this->input->post('nomor_rekening')
+			$data = array('NAMA_USER' 		=> $this->input->post('nama_user'),
+						'USERNAME_ADMIN' 	=> $this->input->post('username'),
+						'PASSWORD_ADMIN' 	=> $this->input->post('password'),
+						'KOTA'				=> $this->input->post('kota'),
+						'ALAMAT_USER' 		=> $this->input->post('alamat_user'),
+						'NOMOR_REKENING' 	=> $this->input->post('nomor_rekening')
 						);
 
 			$this->db->select('*')

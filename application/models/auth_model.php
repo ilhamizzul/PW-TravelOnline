@@ -25,7 +25,8 @@ class Auth_model extends CI_Model {
 			$data = array('USERNAME_ADMIN' => $username,
 						'logged_in' => TRUE,
 						'LEVEL' => $role['LEVEL'],
-						'ID_USER' => $role['ID_USER']
+						'ID_USER' => $role['ID_USER'],
+						'ID_TRAVEL' => $role['ID_TRAVEL']
 					);
 			$this->session->set_userdata($data);
 			return TRUE;

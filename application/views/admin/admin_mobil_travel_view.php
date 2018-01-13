@@ -9,14 +9,24 @@
     </div>
 </div>
 
+<?php
+  if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
+     # code...
+    
+    echo '
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 pull-right">
+            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    ';
+  }
+?>
+
 <!-- header button and filter -->
-<div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4 pull-right">
-			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-		</div>
-	</div>
-</div>
+    
 
 <?php
  $notif = $this->session->flashdata('failed');
@@ -51,7 +61,14 @@
                  <th>Warna Kendaraan</th>
                  <th>Foto Kendaraan</th>
                  <th>Jumlah Kursi</th>
-                 <th>Aksi</th>
+                 <?php 
+                  if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
+                    echo '
+                      <th>Aksi</th>
+                    ';
+                  }
+                 ?>
+                 
                  
               </tr>
            </thead>
@@ -66,11 +83,18 @@
                                  <td>'.$data->NO_POL_KENDARAAN.'</td>
                                  <td>'.$data->WARNA_KENDARAAN.'</td>
                                  <td><img src="'.base_url().'assets/uploads/'.$data->FOTO_KENDARAAN.'" alt=""></td>
-                                 <td>'.$data->JML_KURSI.'</td>
-                                 <td>
-                                   <a class="btn btn-warning" href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                   <a class="btn btn-danger" href="'.base_url().'index.php/admin_mobil_travel/delete/'.$data->ID_KENDARAAN_TRAVEL.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                 </td>
+                                 <td>'.$data->JML_KURSI.'</td>';
+
+                                 if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
+                                  echo '
+                                    <td>
+                                     <a class="btn btn-warning" href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                     <a class="btn btn-danger" href="'.base_url().'index.php/admin_mobil_travel/delete/'.$data->ID_KENDARAAN_TRAVEL.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                   </td>
+                                  ';
+                                  }
+
+                                 echo'
                               </tr>
                         ';
                     }

@@ -20,14 +20,7 @@
 
 <div class="container regist">
          <div class="col-md-8">
-<!--             <?php 
-                        $notif = $this->session->flashdata('notif');
-                        if (!empty($notif)) {
-                            echo ' <div style="margin-top:75px;" class="alert alert-success"> ';
-                            echo $notif;
-                            echo '</div>';
-                        }
-                        ?> -->
+
             <div class="col-md-12 jumbotron">
               <h2 style="text-align: center;">A greatest way to find your comfortable travel</h2>
               <div class="col-md-4">
@@ -35,8 +28,8 @@
                     <i class="fa fa-car" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
-                     <h3 style="text-align: center;">High Quality Travel</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                     <h3 style="text-align: center;">Terpercaya</h3>
+                    <p>Tempat berkumpulnya para agen travel yang terpercaya.</p>
                  </div>
               </div>
               <div class="col-md-4">
@@ -44,8 +37,8 @@
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
-                     <h3 style="text-align: center;">High Quality Travel</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                     <h3 style="text-align: center;">Mobil Nyaman</h3>
+                    <p>Menyediakan beragam jenis mobil yang dijamin kenyamannya. </p>
                  </div>
               </div>
               <div class="col-md-4">
@@ -53,8 +46,8 @@
                     <i class="fa fa-car" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
-                     <h3 style="text-align: center;">High Quality Travel</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                     <h3 style="text-align: center;">Professional</h3>
+                    <p>Supir yang berpengalaman dan bertanggung jawab.</p>
                  </div>
               </div> 
             </div>
@@ -62,7 +55,6 @@
          <div class="col-md-4 register">
             <h3 class="header">Pendaftaran User Baru</h3>
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
-                <input type="text" hidden="true" name="id_member" value="543526">
               <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control form-control-sm" name="name">
@@ -78,9 +70,9 @@
                <div class="form-group">
                  <label>Jenis Identitas</label>
                   <select class="form-control" name="jenis_identitas">
-                    <option>KTP</option>
-                    <option>SIM</option>
-                    <option>Kartu Pelajar/KTM</option>
+                    <option value="KTP">KTP</option>
+                    <option value="SIM">SIM</option>
+                    <option value="Kartu Pelajar/KTM">Kartu Pelajar/KTM</option>
                   </select>
                </div>
                <div class="form-group">

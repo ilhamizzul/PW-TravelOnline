@@ -37,6 +37,14 @@
                  <th>Alamat</th>
                  <th>Bank</th>
                  <th>Nomor Rekening</th>
+                 <?php 
+                  if ($this->session->userdata('LEVEL') == 'OWNER') {
+                    echo '
+                      <th>Aksi</th>
+                    ';
+                  }
+                 ?>
+                 
               </tr>
            </thead>
            <tbody>
@@ -50,7 +58,17 @@
                                  <td>'.$data->KOTA.'</td>
                                  <td>'.$data->ALAMAT_USER.'</td>
                                  <td>'.$data->BANK.'</td>
-                                 <td>'.$data->NOMOR_REKENING.'</td>
+                                 <td>'.$data->NOMOR_REKENING.'</td>';
+
+                        if ($this->session->userdata('LEVEL') == 'OWNER') {
+                          echo '
+                          <td>
+                                   <a class="btn btn-danger" href="'.base_url().'index.php/admin_data_operator/delete/'.$data->ID_USER.'"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
+                                 </td>
+                          ';
+                        }
+                                 echo'
+                                 
                               </tr>
                         ';
                     }
@@ -68,7 +86,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah User Pemilik</h4>
+        <h4 class="modal-title">Tambah User operator</h4>
       </div>
       <div class="modal-body">
         <form method="post" action="<?php echo base_url();?>/index.php/admin_data_operator/save">
@@ -78,41 +96,29 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Nama User</label>
-                      <input type="text" name="nama_user" class="form-control" placeholder="Masukkan Nama User">
+                      <input type="text" name="nama_user" class="form-control" placeholder="Masukkan Nama User" required>
                     </div>
                     <div class="form-group">
                       <label>Username</label>
-                      <input type="text" name="username" class="form-control" placeholder="Masukkan Username Akun User">
+                      <input type="text" name="username" class="form-control" placeholder="Masukkan Username Akun User" required>
                     </div>
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="password" name="password" class="form-control" placeholder="Masukkan Password Akun User">
+                      <input type="password" name="password" class="form-control" placeholder="Masukkan Password Akun User" required>
                     </div>
                     <div class="form-group">
-                      <label>Nama Travel</label>
-                      <select class="form-control" id="exampleSelect1" name="id_travel">
-                        <?php 
-                            foreach ($travel as $data) {
-                                echo '
-                                    <option value="'.$data->ID_TRAVEL.'">'.$data->NAMA_TRAVEL.'</option>
-                                ';
-                            }
-                        ?>      
-                      </select>
+                      <label>Kota</label>
+                      <input type="text" name="kota" class="form-control" placeholder="Masukkan Kota Asal User" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                      <label>Kota</label>
-                      <input type="text" name="kota" class="form-control" placeholder="Masukkan Kota Asal User">
-                    </div>
-                    <div class="form-group">
                       <label>Alamat</label>
-                      <textarea class="form-control" name="alamat" rows="2" placeholder="Masukkan Alamat Detail User"></textarea>
+                      <textarea class="form-control" name="alamat" rows="2" placeholder="Masukkan Alamat Detail User" required></textarea>
                     </div>
                     <div class="form-group">
                       <label>Nomor Rekening BCA</label>
-                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening BCA (10 Digit)">
+                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening BCA (10 Digit)" required>
                     </div>
                     <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
                 </div>

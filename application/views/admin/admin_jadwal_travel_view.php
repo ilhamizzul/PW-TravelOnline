@@ -9,14 +9,21 @@
     </div>
 </div>
 
-<!-- header button and filter -->
-<div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4 pull-right">
-			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-		</div>
-	</div>
-</div>
+
+<?php 
+  if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
+    echo '
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 pull-right">
+            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    ';
+  }
+?>
+      
 
 <!-- grid -->
 <div class="row">

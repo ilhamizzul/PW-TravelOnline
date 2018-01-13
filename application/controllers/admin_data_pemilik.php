@@ -51,6 +51,23 @@ class Admin_data_pemilik extends CI_Controller {
 			
 		}
 	}
+
+	public function delete($id){
+		
+
+		$id = $this->uri->segment(3);
+
+		if ($this->admin_data_pemilik_model->hapus($id) == TRUE) {
+			$this->session->set_flashdata('notif', 'Hapus Sukses');
+			redirect('admin_data_pemilik');
+		} else {
+			$this->session->set_flashdata('notif', 'Hapus Gagal');
+			redirect('admin_data_pemilik');
+		}
+			
+		
+		
+	}
 		
 }
 

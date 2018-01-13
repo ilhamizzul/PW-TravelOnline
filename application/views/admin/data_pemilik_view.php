@@ -46,11 +46,12 @@
               <tr>
                  <th>Nama User</th>
                  <th>Username</th>
-                 <th>ID TRAVEL</th>
+                 <th>Nama Travel</th>
                  <th>Kota</th>
                  <th>Alamat</th>
                  <th>Bank</th>
                  <th>Nomor Rekening</th>
+                 <th>Aksi</th>
               </tr>
            </thead>
            <tbody>
@@ -60,11 +61,14 @@
                             <tr class="table-active">
                                  <td>'.$data->NAMA_USER.'</td>
                                  <td>'.$data->USERNAME_ADMIN.'</td>
-                                 <td>'.$data->ID_TRAVEL.'</td>
+                                 <td>'.$data->NAMA_TRAVEL.'</td>
                                  <td>'.$data->KOTA.'</td>
                                  <td>'.$data->ALAMAT_USER.'</td>
                                  <td>'.$data->BANK.'</td>
                                  <td>'.$data->NOMOR_REKENING.'</td>
+                                 <td>
+                                   <a class="btn btn-danger" href="'.base_url().'index.php/admin_data_pemilik/delete/'.$data->ID_USER.'"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
+                                 </td>
                               </tr>
                         ';
                     }

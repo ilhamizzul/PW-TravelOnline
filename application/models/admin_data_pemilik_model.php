@@ -11,10 +11,15 @@ class Admin_data_pemilik_model extends CI_Model {
 
 	public function get_data_owner()
 	{
-		return $this->db->order_by('ID_USER', 'ASC')
-						->where('LEVEL' , 'OWNER')
-						->get('user')
-						->result();
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('travel', 'travel.ID_TRAVEL = user.ID_TRAVEL');
+		$this->db->where('LEVEL', 'OWNER');
+		$this->db->order_by('ID_USER', 'ASC');
+		
+
+		return $this->db->get()->result();
+
 	}
 
 	public function get_id_travel()
@@ -43,6 +48,18 @@ class Admin_data_pemilik_model extends CI_Model {
 		$this->db->insert('user', $data);
 
 		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function hapus($id)
+	{
+		$this->db->where('ID_USER', $id)
+				 ->delete('user');
+
+		if($this->db->affected_rows() > 0){
 			return TRUE;
 		} else {
 			return FALSE;
