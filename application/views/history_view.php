@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/home_history.js"></script>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
             <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
@@ -36,7 +38,7 @@
             <div class="col-md-12">
                <center><h2>History Transaksi</h2></center>
             </div>
-            <table class="table table-striped table-hover table-bordered">
+            <!-- <table class="table table-striped table-hover table-bordered">
                <thead class="thead-dark">
                   <tr>
                      <th class="col-md-1 col-sm-1">No</th>
@@ -89,6 +91,11 @@
                   </tr>
                   
                </tbody>
-            </table>
+            </table> -->
+            <dir class="row">
+               <div class="col-md-12">
+                  <div id="gridTransaksi"></div>
+               </div>
+            </dir>
          </div>
       </div>

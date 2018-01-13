@@ -10,20 +10,20 @@ class Home_model extends CI_Model {
 						->count_all_results();
 	}
 
-	public function get_data_travel($limit, $offset)
+	public function get_data_travel($from, $to)
 	{
 		$this->db->select('*')->from('jadwal_travel')
 							  ->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL=jadwal_travel.ID_KENDARAAN_TRAVEL')
 							  ->join('travel', 'travel.ID_TRAVEL=kendaraan_travel.ID_TRAVEL')
-							  // ->join('detail_desa_travel', 'detail_desa_travel.ID_TRAVEL=travel.ID_TRAVEL')
 							  ->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN=kendaraan_travel.ID_JENIS_KENDARAAN')
 							  ;
-
-		// $query = $this->db->get($limit, $offset);
-		// return $query->result();
-
+		if ($from != "default") {
+			$this->db->like('jadwal_travel.KOTAT_ASAL', $from, 'BOTH');
+		}if ($to != "default") {
+			$this->db->like('jadwal_travel.KOTA_TUJUAN', $to, 'BOTH');
+		}
 		$this->db->order_by('ID_JADWAL_TRAVEL','ASC');
-		$this->db->limit($limit, $offset);
+		// $this->db->limit($limit, $offset);
 		$query = $this->db->get()->result();
 		return $query;
 		/*return $this->db->order_by('ID_JADWAL_TRAVEL', 'ASC')
@@ -41,15 +41,15 @@ class Home_model extends CI_Model {
 						SUM(riwayat_transaksi.JUMLAH_KURSI) as KURSI_TERBOOKING');
 
 		$this->db->join('jadwal_travel', 'jadwal_travel.ID_JADWAL_TRAVEL = riwayat_transaksi.ID_JADWAL_TRAVEL');
-		if ($tanggal_berangkat == "") {
-			$this->db->where('TANGGAL_KEBERANGKATAN = DATE( SYSDATE( ) )');
-		}else{
+		// if ($tanggal_berangkat == "default") {
+		// 	$this->db->where('TANGGAL_KEBERANGKATAN = DATE( SYSDATE( ) )');
+		// }else{
 			$this->db->where('TANGGAL_KEBERANGKATAN', $tanggal_berangkat);
-		}
-		if ($tujuan != "") {
+		// }
+		if ($tujuan != "default") {
 			$this->db->where('KOTA_TUJUAN', $tujuan);
 		}
-		if ($asal != "") {
+		if ($asal != "default") {
 			$this->db->where('KOTAT_ASAL', $asal);
 		}
 		$this->db->group_by('riwayat_transaksi.ID_JADWAL_TRAVEL');
@@ -60,10 +60,10 @@ class Home_model extends CI_Model {
 	
 
 
-	public function get_id_detail_desa_travel()
-	{		
+	// public function get_id_detail_desa_travel()
+	// {		
 
-	}
+	// }
 
 	public function get_id_kota_jemput($id)
 	{
@@ -98,6 +98,33 @@ class Home_model extends CI_Model {
 				 ->join('kota', 'kota.ID_KOTA = desa.ID_KOTA');
 
 		return $this->db->get()->result();
+	}
+
+	public function InsertTransaction($id)
+	{
+		$payload = $this->input->post("Data");
+		$data = array(
+			'ID_RIWAYAT_TRANSAKSI' => $id,
+			'ID_MEMBER' => $this->session->userdata('ID_MEMBER'),
+			'ID_JADWAL_TRAVEL'=> $payload['ID_JADWAL_TRAVEL'],
+			'JAM_PESAN' => $payload['JAM_PESAN'],
+			'TANGGAL_PEMESANAN' => $payload['TANGGAL_PEMESANAN'],
+			'TANGGAL_KEBERANGKATAN' => $payload['TANGGAL_KEBERANGKATAN'],
+			'BUKTI_BAYAR' => $payload['BUKTI_BAYAR'],
+			'STATUS' => 'ORDER',
+			'ALAMAT_PENJEMPUTAN' => $payload['DESA_ASAL']." - ".$payload['ALAMAT_PENJEMPUTAN'],
+			'ALAMAT_PENURUNAN' => $payload['DESA_TUJUAN']." - ".$payload['ALAMAT_PENURUNAN'],
+			'JUMLAH_KURSI' => $payload['JUMLAH_KURSI'],
+			'TOTAL_BAYAR' => $payload['TOTAL_BAYAR']
+		);
+
+		$this->db->insert('riwayat_transaksi', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 

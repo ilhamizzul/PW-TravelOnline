@@ -18,9 +18,13 @@ class Login_model extends CI_Model {
 							->where('PASSWORD', md5($password))
 							->get('member');
 
+		$result = $query->result();
+
 		if ($query->num_rows() > 0) {
-			$data = array('USERNAME' => $username
-				, 'logged_in' => TRUE
+			$data = array(
+				'USERNAME' => $username,
+				'logged_in' => TRUE,
+				'ID_MEMBER' => $result[0]->ID_MEMBER
 				 );
 
 			$this->session->set_userdata($data);

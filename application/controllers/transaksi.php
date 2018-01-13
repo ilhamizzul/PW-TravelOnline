@@ -11,8 +11,12 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-		$data['main_view'] = 'transaksi_view';
-		$this->load->view('index', $data);	
+		if ($this->session->userdata('logged_in')) {
+			$data['main_view'] = 'transaksi_view';
+			$this->load->view('index', $data);
+		}else{
+			redirect('home','refresh')
+		}
 	}
 
 

@@ -39,16 +39,17 @@
    </div>
 </nav>
 <!-- MODAL SEARCH -->
-<div id="search" class="modal fade" role="dialog">
+<div id="search" class="modal fade" role="dialog" ">
    <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="modal-content" data-bind="with:landingpage">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Search Travel</h4>
          </div>
-         <div class="modal-body" style="height:255px;">
-            <form method="post" action="<?php echo base_url(); ?>index.php/home/get_data">
+         <div class="modal-body" style="height:255px;" data-bind="with:recordFilter">
+            <!-- <form method="post" action="<?php echo base_url(); ?>index.php/home/get_data"> -->
+            <form method="post" action="">
                <div class="col-md-12 col-sm-12">
                   <div class="form-group col-md-6 col-sm-6">
                      <label class="control-label">From:</label>
@@ -57,16 +58,30 @@
                            <div class="input-group-addon">
                               <img src="<?php echo base_url(); ?>assets/img/car(1).png" alt="">
                            </div>
-                           <input type="text" name="depart" class="form-control">
+                           <input type="text" name="depart" class="form-control" data-bind="value:FROM">
                         </div>
                      </div>
                   </div>
                   <div class="col-md-6 col-sm-6 form-group">
                      <label class="col-form-label col-form-label-sm">To:</label>
-                     <input type="text" class="form-control form-control-sm" name="to">
+                     <input type="text" class="form-control form-control-sm" name="to" data-bind="value:TO">
                   </div>
                </div>
-               <div class="col-md-12 col-sm-7">
+               <div class="col-md-12 col-sm-12">
+                  <div class="form-group col-md-6 col-sm-6">
+                     <label class="control-label">Departure:</label>
+                     <div class="form-group">
+                        <!-- <div class="input-group"> -->
+                           <input style="width: 100%" type="text" name="depart" class="form-control" data-bind="value:DEPARTURE, kendoDatePicker:{value: setDateMin(), min: setDateMin() ,format:'yyyy-MM-dd'}">
+                        <!-- </div> -->
+                     </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 form-group">
+                     <label class="col-form-label col-form-label-sm">Seat:</label>
+                     <input type="text" class="form-control form-control-sm Number" name="minimumseat" data-bind="value:MINIMUMSEAT">
+                  </div>
+               </div>
+               <!-- <div class="col-md-12 col-sm-7">
                   <div class="form-group col-md-12 col-sm-12">
                      <label class="control-label">Departure:</label>
                      <div class="form-group">
@@ -78,9 +93,12 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
                <div class="col-md-12 col-sm-5">
-                  <input type="submit" class="btn btn-block btn-primary" value="Search" name="submit">
+               <!-- <div class="col-md-12 col-sm-5"> -->
+                  <!-- <button class="btn btn-block btn-primary" id="searchButton" type="button" onclick="landingpage.filterData()">Search</button> -->
+                <!-- </div> -->
+                  <input type="button" class="btn btn-block btn-primary" value="Search" onclick="landingpage.filterData()">
                </div>
             </form>
          </div>
@@ -158,7 +176,9 @@
               Rp.'.$data->TARIF.',-
             </b>
           </p>';
-          echo "<a href='' data-toggle='modal' data-target='#chooseTujuan'  class='btn btn-choose btn-sm' onclick=\"landingpage.showDetail('$data->ID_TRAVEL','$data->KOTAT_ASAL','$data->KOTA_TUJUAN',$data->TARIF)\">Choose</a>";
+          echo "<a href='' data-toggle='modal' data-target='#chooseTujuan'  class='btn btn-choose btn-sm' onclick=\"landingpage.showDetail('$data->ID_TRAVEL','$data->ID_KOTA_ASAL','$data->ID_KOTA_TUJUAN',$data->TARIF, $data->JML_KURSI, '$data->NAMA_TRAVEL', '$data->ID_JADWAL_TRAVEL', '$data->KOTAT_ASAL', '$data->KOTA_TUJUAN','";
+          echo $this->session->flashdata('DATEDEPART');
+          echo"')\">Choose</a>";
         echo '</div>
 
         <div class="col-md-12 col-sm-12 see">
@@ -260,45 +280,52 @@
           <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">3Lex Travel</h4>
+            <h4 class="modal-title" data-bind="text: landingpage.namaTravel"></h4>
          </div>
-         <div class="modal-body modal-seat">
-            <form>
+         <div class="modal-body modal-seat2">
+            <!-- <form> -->
                <div class="col-md-5 col-sm-5">
                   <img class="img img-responsive" src="'.base_url().'assets/img/3lex.png" alt="">  
                </div>
                <div class="col-md-7 col-sm-7">
                   <div class="form-group">
                      <label>Desa Penjemputan</label>
-                     <select class="form-control" name="desa_asal" id="desaAsal" data-bind="value: landingpage.recordTransaksi.ALAMAT_PENJEMPUTAN">
+                     <select class="form-control" name="desa_asal" id="desaAsal" data-bind="value: landingpage.recordTransaksi.DESA_ASAL">
                       <option value="" >-- Pilih Desa Penjemputan --</option>
                      </select>
                   </div>
                   <div class="form-group">
+                     <label>Detail Penjemputan</label>
+                     <textarea class="form-control" rows="3" id="alamatpenjemputan" data-bind="text: landingpage.recordTransaksi.ALAMAT_PENJEMPUTAN, value: landingpage.recordTransaksi.ALAMAT_PENJEMPUTAN"></textarea>
+                  </div>
+                  <div class="form-group">
                      <label>Desa Tujuan</label>
-                     <select class="form-control" name="desa_tujuan" id="desaTujuan" data-bind="value: landingpage.recordTransaksi.ALAMAT_PENURUNAN">
+                     <select class="form-control" name="desa_tujuan" id="desaTujuan" data-bind="value: landingpage.recordTransaksi.DESA_TUJUAN">
                       <option value="" >-- Pilih Desa Tujuan --</option>
                      </select>
                   </div>
                   <div class="form-group">
+                     <label>Detail Penjemputan</label>
+                     <textarea class="form-control" rows="3" id="alamatpenurunan" data-bind="text: landingpage.recordTransaksi.ALAMAT_PENURUNAN, value: landingpage.recordTransaksi.ALAMAT_PENURUNAN"></textarea>
+                  </div>
+                  <div class="form-group">
                      <label>Jumlah</label>
-                     <input type="number" class="form-control" value="1" name="" data-bind="value: landingpage.recordTransaksi.JUMLAH_KURSI">   
+                     <input type="text" class="form-control Number" name="" data-bind="value: landingpage.recordTransaksi.JUMLAH_KURSI">   
                   </div>
                   <div class="col-md-12 col-sm-12">
                      <center>
                         <p class="price2">
                            <b>
                            Rp <span data-bind="text: landingpage.recordTransaksi.TOTAL_BAYAR"></span>,-
-                           <!-- Rp.125.000.00,- -->
                            </b>
                         </p>
                      </center>
                   </div>
                   <div class="col-md-12 col-sm-12">
-                     <button class="btn btn-sm btn-primary search">Purchase</button>
+                     <button class="btn btn-sm btn-primary search" onclick="landingpage.saveTransaction()">Purchase</button>
                   </div>
                </div>
-            </form>
+            <!-- </form> -->
          </div>
           </div>
         </div>
@@ -316,7 +343,7 @@
                </div>
                <div class="modal-body modal-seat">
                  <center><h3>Masih Belum Punya Akun?</h3></center>
-                 <a href="" class="btn btn-lg btn-success btn-block" id="BtnLogin" data-toggle="modal" data-target="#login">Login</a>
+                 <a href="" class="btn btn-lg btn-success btn-block" onclick="landingpage.closeModal()" id="BtnLogin" data-toggle="modal" data-target="#login">Login</a>
                  <center><h4>Atau</h4></center>
                  <a href="'.base_url().'index.php/register/" class="btn btn-lg btn-info btn-block">Register</a>
                </div>
