@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Travel Online</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/admin_dashboard">Travel<b>Online</b></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -136,10 +136,10 @@
                                                 <a href="'.base_url().'index.php/admin_travel_agen">Agen Travel</a>
                                             </li>
                                             <li>
-                                                <a href="morris.html">Mobil Travel</a>
+                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
                                             </li>
                                             <li>
-                                                <a href="morris.html">Jadwal Travel</a>
+                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -186,10 +186,10 @@
                                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Travel<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="morris.html">Mobil Travel</a>
+                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
                                             </li>
                                             <li>
-                                                <a href="morris.html">Jadwal Travel</a>
+                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -233,10 +233,10 @@
                                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Travel<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="morris.html">Mobil Travel</a>
+                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
                                             </li>
                                             <li>
-                                                <a href="morris.html">Jadwal Travel</a>
+                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
                                             </li>
                                         </ul>
                                     </li>

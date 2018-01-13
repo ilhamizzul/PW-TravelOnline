@@ -7,14 +7,22 @@
     </div>
 </div>
 
-<!-- header button and filter -->
-<div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4 pull-right">
-			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-		</div>
-	</div>
-</div>
+
+<?php 
+  if ($this->session->userdata('LEVEL') == 'OWNER') {
+    echo '
+      <!-- header button and filter -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 pull-right">
+            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    ';
+  }
+?>
+      
 
 <!-- grid -->
 <div class="row">
@@ -63,30 +71,30 @@
         <h4 class="modal-title">Tambah User Pemilik</h4>
       </div>
       <div class="modal-body">
-        <form method="post">
+        <form method="post" action="<?php echo base_url();?>/index.php/admin_data_operator/save">
           <fieldset>
                 <input type="text" hidden="true" name="level" value="OPERATOR">
                 <input type="text" hidden="true" name="bank" value="BCA">
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Nama User</label>
-                      <input type="text" name="nama_user" class="form-control">
+                      <input type="text" name="nama_user" class="form-control" placeholder="Masukkan Nama User">
                     </div>
                     <div class="form-group">
                       <label>Username</label>
-                      <input type="text" name="username" class="form-control">
+                      <input type="text" name="username" class="form-control" placeholder="Masukkan Username Akun User">
                     </div>
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="password" name="password" class="form-control">
+                      <input type="password" name="password" class="form-control" placeholder="Masukkan Password Akun User">
                     </div>
                     <div class="form-group">
                       <label>Nama Travel</label>
-                      <select class="form-control" id="exampleSelect1">
+                      <select class="form-control" id="exampleSelect1" name="id_travel">
                         <?php 
                             foreach ($travel as $data) {
                                 echo '
-                                    <option>'.$data->NAMA_TRAVEL.'</option>
+                                    <option value="'.$data->ID_TRAVEL.'">'.$data->NAMA_TRAVEL.'</option>
                                 ';
                             }
                         ?>      
@@ -96,15 +104,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Kota</label>
-                      <input type="text" name="kota" class="form-control">
+                      <input type="text" name="kota" class="form-control" placeholder="Masukkan Kota Asal User">
                     </div>
                     <div class="form-group">
                       <label>Alamat</label>
-                      <textarea class="form-control" name="alamat" rows="2"></textarea>
+                      <textarea class="form-control" name="alamat" rows="2" placeholder="Masukkan Alamat Detail User"></textarea>
                     </div>
                     <div class="form-group">
                       <label>Nomor Rekening BCA</label>
-                      <input type="number" name="no_rekening" class="form-control">
+                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening BCA (10 Digit)">
                     </div>
                     <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
                 </div>

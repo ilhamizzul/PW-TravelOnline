@@ -24,14 +24,17 @@ class Admin_data_pemilik_model extends CI_Model {
 						->result();
 	}
 
-	public function insert()
+	public function insert($id)
 	{
+
 		$data = array(
+			'ID_USER'		 => $id,
 			'NAMA_USER'		 => $this->input->post('nama_user'),
 			'USERNAME_ADMIN' => $this->input->post('username'),
 			'PASSWORD_ADMIN' => $this->input->post('password'),
 			'KOTA' 			 => $this->input->post('kota'),
 			'ALAMAT_USER' 	 => $this->input->post('alamat'),
+			'ID_TRAVEL'		 => $this->input->post('id_travel'),
 			'BANK' 			 => $this->input->post('bank'),
 			'NOMOR_REKENING' => $this->input->post('no_rekening'),
 			'LEVEL' 		 => $this->input->post('level')

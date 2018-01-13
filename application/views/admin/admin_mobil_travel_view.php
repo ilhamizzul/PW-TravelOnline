@@ -1,0 +1,155 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/admin_master_daerah.css">
+
+<!-- Header -->
+<div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        Mobil Travel
+      </h1>
+    </div>
+</div>
+
+<!-- header button and filter -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-4 pull-right">
+			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
+		</div>
+	</div>
+</div>
+
+<?php
+ $notif = $this->session->flashdata('failed');
+   if(!empty($notif)){
+     echo '<div class="alert alert-danger alert-dismissable">';
+     echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+     echo '<i class="icon fa fa-warning"></i>';
+     echo $notif;
+     echo '</div>';
+   }
+ 
+ $notif = $this->session->flashdata('success');
+ if(!empty($notif)){
+     echo '<div class="alert alert-success alert-dismissable">';
+     echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+     echo '<i class="icon fa fa-check"></i>';
+     echo $notif;
+     echo '</div>';
+ }
+?>
+
+<!-- grid -->
+<div class="row">
+    <div class="col-md-12">
+        <table  class="table table-hover table-striped table-bordered col-md-12" style="margin-top: 12px; overflow-x: auto;">
+           <thead>
+              <tr>
+                 <th>ID Kendaraan Travel</th>
+                 <th>Nama Travel</th>
+                 <th>Merk Kendaraan</th>
+                 <th>Plat Nomor Kendaraan</th>
+                 <th>Warna Kendaraan</th>
+                 <th>Foto Kendaraan</th>
+                 <th>Jumlah Kursi</th>
+                 <th>Aksi</th>
+                 
+              </tr>
+           </thead>
+           <tbody>
+                <?php 
+                    foreach ($mobil_travel as $data) {
+                        echo '
+                            <tr class="table-active">
+                                 <td>'.$data->ID_KENDARAAN_TRAVEL.'</td>
+                                 <td>'.$data->NAMA_TRAVEL.'</td>
+                                 <td>'.$data->MERK_KENDARAAN.'</td>
+                                 <td>'.$data->NO_POL_KENDARAAN.'</td>
+                                 <td>'.$data->WARNA_KENDARAAN.'</td>
+                                 <td><img src="'.base_url().'assets/uploads/'.$data->FOTO_KENDARAAN.'" alt=""></td>
+                                 <td>'.$data->JML_KURSI.'</td>
+                                 <td>
+                                   <a class="btn btn-warning" href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                   <a class="btn btn-danger" href="'.base_url().'index.php/admin_mobil_travel/delete/'.$data->ID_KENDARAAN_TRAVEL.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                 </td>
+                              </tr>
+                        ';
+                    }
+                ?>
+           </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="addDaerahModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tambah Jadwal Travel</h4>
+      </div>
+      <div class="modal-body">
+
+        <form method="post" action="<?php echo base_url(); ?>index.php/admin_mobil_travel/save" enctype="multipart/formdata">
+        
+          <fieldset>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nama Travel</label>
+                      <select class="form-control" name="nama_travel">
+                        <?php 
+                            foreach ($travel as $data) {
+                                echo '
+                                    <option value="'.$data->ID_TRAVEL.'">'.$data->NAMA_TRAVEL.'</option>
+                                ';
+                            }
+                        ?>      
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Tipe Kendaraan</label>
+                      <select class="form-control" name="tipe_kendaraan">
+                        <?php 
+                            foreach ($merk as $data) {
+                                echo '
+                                    <option value="'.$data->ID_JENIS_KENDARAAN.'">'.$data->TYPE_KENDARAAN.'</option>
+                                ';
+                            }
+                        ?>      
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Plat Nomor Kendaraan</label>
+                      <input type="text" name="plat_nomor" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  
+                    <div class="form-group">
+                      <label>Warna Kendaraan</label>
+                      <input type="text" name="warna_kendaraan" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Foto Kendaraan</label>
+                      <input type="file" name="foto_kendaraan" id="foto_kendaraan" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Jumlah Kursi</label>
+                      <input type="number" name="jumlah_kursi" class="form-control">
+                    </div>
+                    <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
+                </div>
+                
+            </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>

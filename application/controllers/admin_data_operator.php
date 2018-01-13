@@ -21,24 +21,33 @@ class Admin_data_operator extends CI_Controller {
 
 	public function save()
 	{
+		$nama_kolom = 'Oprator';
+		$bulan = date('m');
+		$tahun = date('Y');
+		$digit = 4;
+
 		if ($this->input->post('submit')) {
 
+			$this->form_validation->set_rules('no_rekening', 'Nomor Rekening', 'trim|required|min_length[10]|max_length[10]');
+
 			if ($this->form_validation->run() == TRUE) {
-				if ($this->admin_data_pemilik_model->insert()==TRUE) {
+				$id = setSquenceAndGenerateID($nama_kolom,$bulan, $tahun, $digit);
+				// print_r($id);
+				// var_dump($this->input->post(''));exit();
+				if ($this->admin_data_operator_model->insert($id)==TRUE) {
 					$this->session->set_flashdata('notif', 'success');
-					redirect('admin_data_pemilik');
+					redirect('admin_data_operator');
 				} else {
 					$this->session->set_flashdata('notif', 'failed');
-					redirect('admin_data_pemilik');
+					redirect('admin_data_operator');
 				}
 				
 			} else {
 				$data['notif'] = validation_errors();
-				redirect('admin_data_pemilik');
+				redirect('admin_data_operator' , $data);
 			}
 			
 		}
-		
 	}
 
 }
