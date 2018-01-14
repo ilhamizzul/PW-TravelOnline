@@ -82,13 +82,13 @@
                                  <td>'.$data->MERK_KENDARAAN.'</td>
                                  <td>'.$data->NO_POL_KENDARAAN.'</td>
                                  <td>'.$data->WARNA_KENDARAAN.'</td>
-                                 <td><img src="'.base_url().'assets/uploads/'.$data->FOTO_KENDARAAN.'" alt=""></td>
+                                 <td><img src="'.base_url().'assets/uploads/'.$data->FOTO_KENDARAAN.'" class="img img-responsive" style="max-width:150px;height:auto;" alt=""></td>
                                  <td>'.$data->JML_KURSI.'</td>';
 
                                  if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
                                   echo '
                                     <td>
-                                     <a class="btn btn-warning" href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                     <a class="btn btn-warning" href="" data-toggle="modal" data-target="#edit'.$data->ID_KENDARAAN_TRAVEL.'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                      <a class="btn btn-danger" href="'.base_url().'index.php/admin_mobil_travel/delete/'.$data->ID_KENDARAAN_TRAVEL.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                    </td>
                                   ';
@@ -117,22 +117,10 @@
       </div>
       <div class="modal-body">
 
-        <form method="post" action="<?php echo base_url(); ?>index.php/admin_mobil_travel/save" enctype="multipart/formdata">
+        <form method="post" action="<?php echo base_url(); ?>index.php/admin_mobil_travel/save" enctype="multipart/form-data">
         
           <fieldset>
                 <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Nama Travel</label>
-                      <select class="form-control" name="nama_travel">
-                        <?php 
-                            foreach ($travel as $data) {
-                                echo '
-                                    <option value="'.$data->ID_TRAVEL.'">'.$data->NAMA_TRAVEL.'</option>
-                                ';
-                            }
-                        ?>      
-                      </select>
-                    </div>
                     <div class="form-group">
                       <label>Tipe Kendaraan</label>
                       <select class="form-control" name="tipe_kendaraan">
@@ -177,3 +165,70 @@
 
   </div>
 </div>
+
+<?php 
+  foreach ($mobil_travel as $data) {
+    echo '
+      <div id="edit'.$data->ID_KENDARAAN_TRAVEL.'" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Edit Jadwal Travel</h4>
+            </div>
+            <div class="modal-body">
+
+              <form method="post" action="<?php echo base_url(); ?>index.php/admin_mobil_travel/save" enctype="multipart/form-data">
+              
+                <fieldset>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Tipe Kendaraan</label>
+                            <select class="form-control" name="tipe_kendaraan">';
+                              
+                                  foreach ($merk as $data) {
+                                      echo '
+                                          <option value="'.$data->ID_JENIS_KENDARAAN.'">'.$data->TYPE_KENDARAAN.'</option>
+                                      ';
+                                  }
+                                   
+                            echo'</select>
+                          </div>
+                          <div class="form-group">
+                            <label>Plat Nomor Kendaraan</label>
+                            <input type="text" name="plat_nomor" class="form-control">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        
+                          <div class="form-group">
+                            <label>Warna Kendaraan</label>
+                            <input type="text" name="warna_kendaraan" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Foto Kendaraan</label>
+                            <input type="file" name="foto_kendaraan" id="foto_kendaraan" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Jumlah Kursi</label>
+                            <input type="number" name="jumlah_kursi" class="form-control">
+                          </div>
+                          <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
+                      </div>
+                      
+                  </fieldset>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    ';
+  }
+?>
+      

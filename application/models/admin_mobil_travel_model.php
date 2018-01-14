@@ -45,7 +45,7 @@ class Admin_mobil_travel_model extends CI_Model {
 		$data = array(
 			'ID_KENDARAAN_TRAVEL'		=> $id,
 			'ID_JENIS_KENDARAAN'		=> $this->input->post('tipe_kendaraan'),
-			'ID_TRAVEL' 				=> $this->input->post('nama_travel'),
+			'ID_TRAVEL' 				=> $this->session->userdata('ID_TRAVEL'),
 			'NO_POL_KENDARAAN' 			=> $this->input->post('plat_nomor'),
 			'WARNA_KENDARAAN' 			=> $this->input->post('warna_kendaraan'),
 			'FOTO_KENDARAAN' 	 		=> $foto_kendaraan['file_name'],

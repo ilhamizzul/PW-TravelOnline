@@ -25,7 +25,7 @@
               <h2 style="text-align: center;">A greatest way to find your comfortable travel</h2>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Terpercaya</h3>
@@ -34,7 +34,7 @@
               </div>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <i class="fa fa-car" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Mobil Nyaman</h3>
@@ -43,13 +43,46 @@
               </div>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <i class="fa fa-user" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Professional</h3>
                     <p>Supir yang berpengalaman dan bertanggung jawab.</p>
                  </div>
               </div> 
+            </div>
+
+            <div class="col-md-12 step">
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/register&login.png" class="img img-responsive img-step" alt="">
+                  <h5>Login & Register</h5>
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/rute.png" class="img img-responsive img-step" alt="">
+                  <h5>Pilih Rute</h5>  
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/transfer.png" class="img img-responsive img-step" alt="">
+                  <h5>Transfer Biaya Travel</h5>  
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/tiket.png" class="img img-responsive img-step" alt="">
+                  <h5>Dapatkan Tiket Anda!</h5>  
+                </center>
+              </div>
+              <div class="col-md-12">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/arrow.png" class="img img-responsive arrow" alt="">  
+                </center>
+                
+              </div>
             </div>
          </div>
          <div class="col-md-4 register">
