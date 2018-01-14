@@ -28,26 +28,6 @@
 <!-- header button and filter -->
     
 
-<?php
- $notif = $this->session->flashdata('failed');
-   if(!empty($notif)){
-     echo '<div class="alert alert-danger alert-dismissable">';
-     echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-     echo '<i class="icon fa fa-warning"></i>';
-     echo $notif;
-     echo '</div>';
-   }
- 
- $notif = $this->session->flashdata('success');
- if(!empty($notif)){
-     echo '<div class="alert alert-success alert-dismissable">';
-     echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-     echo '<i class="icon fa fa-check"></i>';
-     echo $notif;
-     echo '</div>';
- }
-?>
-
 <!-- grid -->
 <div class="row">
     <div class="col-md-12">
@@ -180,7 +160,7 @@
             </div>
             <div class="modal-body">
 
-              <form method="post" action="<?php echo base_url(); ?>index.php/admin_mobil_travel/save" enctype="multipart/form-data">
+              <form method="post" action="'.base_url().'index.php/edit/'.$data->ID_KENDARAAN_TRAVEL.'" enctype="multipart/form-data">
               
                 <fieldset>
                       <div class="col-md-6">
@@ -190,22 +170,26 @@
                               
                                   foreach ($merk as $data) {
                                       echo '
-                                          <option value="'.$data->ID_JENIS_KENDARAAN.'">'.$data->TYPE_KENDARAAN.'</option>
+                                          <option value="'.$data->ID_JENIS_KENDARAAN.'">'.$data->TYPE_KENDARAAN.'</option> 
                                       ';
                                   }
-                                   
-                            echo'</select>
-                          </div>
+                                  echo '</select> </div>';
+                              }
+
+                            foreach ($mobil_travel as $data) {
+
+                            echo '
+                          
                           <div class="form-group">
                             <label>Plat Nomor Kendaraan</label>
-                            <input type="text" name="plat_nomor" class="form-control">
+                            <input type="text" name="plat_nomor" class="form-control" value="'.$data->NO_POL_KENDARAAN.'">
                           </div>
                       </div>
                       <div class="col-md-6">
                         
                           <div class="form-group">
                             <label>Warna Kendaraan</label>
-                            <input type="text" name="warna_kendaraan" class="form-control">
+                            <input type="text" name="warna_kendaraan" class="form-control" value="'.$data->WARNA_KENDARAAN.'">
                           </div>
                           <div class="form-group">
                             <label>Foto Kendaraan</label>
@@ -213,7 +197,7 @@
                           </div>
                           <div class="form-group">
                             <label>Jumlah Kursi</label>
-                            <input type="number" name="jumlah_kursi" class="form-control">
+                            <input type="number" name="jumlah_kursi" class="form-control" value="'.$data->JML_KURSI.'">
                           </div>
                           <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
                       </div>
@@ -231,4 +215,56 @@
     ';
   }
 ?>
+
+<?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Mobil Travel Berhasil!",
+                      "Data Mobil Travel Berhasil ditambah!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Mobil Travel Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $delsuccess = $this->session->flashdata('delsuccess');
+         if ($delsuccess == 'delsuccess') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Hapus Berhasil!",
+                      "Data Mobil Travel Berhasil dihapus!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+
+
+
+       ?> 
       

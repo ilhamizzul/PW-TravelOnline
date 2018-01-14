@@ -90,15 +90,15 @@
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
               <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control form-control-sm" name="name">
+                  <input type="text" class="form-control form-control-sm" name="name" placeholder="Masukkan Nama Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                   <label>Username</label>
-                  <input type="text" class="form-control form-control-sm" name="username">
+                  <input type="text" class="form-control form-control-sm" name="username" placeholder="Masukkan Username Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                   <label>Password</label>
-                  <input type="Password" class="form-control form-control-sm" name="password">
+                  <input type="Password" class="form-control form-control-sm" name="password" placeholder="Masukkan Password Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                  <label>Jenis Identitas</label>
@@ -120,3 +120,42 @@
             </form>
          </div>
       </div>
+
+       <?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Registrasi Berhasil!",
+                      "Silahkan Login",
+                      "success"
+                    ).then((x)=>{
+                      $("#login").modal("show");
+                    })
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Registrasi Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+
+       ?> 
+
+              

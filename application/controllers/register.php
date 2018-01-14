@@ -33,14 +33,15 @@ class Register extends CI_Controller {
 				$id = setSquenceAndGenerateID($nama_kolom,$bulan, $tahun, $digit);
 
 				if ($this->register_model->insert($id)==TRUE) {
-					$this->session->set_flashdata('notif', 'success');
+					$this->session->set_flashdata('success', 'success');
 					redirect('register');
 				} else {
-					$this->session->set_flashdata('notif', 'failed');
+					$this->session->set_flashdata('failed', 'failed');
 					redirect('register');
 				}
 			} else {
-				$this->session->set_flashdata('notif', validation_errors());
+				$this->session->set_flashdata('failed', 'failed');
+					redirect('register');
 			}
 				
 			

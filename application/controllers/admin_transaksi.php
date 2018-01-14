@@ -17,6 +17,18 @@ class Admin_transaksi extends CI_Controller {
 		$this->load->view('admin/_layout', $data);
 	}
 
+	public function edit()
+	{
+		$id = $this->session->userdata('ID_RIWAYAT_TRANSAKSI');
+		if($this->admin_transaksi_model->ubah_status($id) == TRUE){
+			$this->session->set_flashdata('success', 'success');
+			redirect('admin_transaksi');
+		} else {
+			$this->session->set_flashdata('failed', 'failed');
+		    redirect('admin_transaksi');
+		}
+	}
+
 }
 
 /* End of file admin_transaksi.php */

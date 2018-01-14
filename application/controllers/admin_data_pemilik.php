@@ -30,24 +30,18 @@ class Admin_data_pemilik extends CI_Controller {
 
 		if ($this->input->post('submit')) {
 
-			$this->form_validation->set_rules('no_rekening', 'Nomor Rekening', 'trim|required|min_length[10]|max_length[10]');
 
-			if ($this->form_validation->run() == TRUE) {
 				$id = setSquenceAndGenerateID($nama_kolom,$bulan, $tahun, $digit);
 				// print_r($id);
 				// var_dump($this->input->post(''));exit();
 				if ($this->admin_data_pemilik_model->insert($id)==TRUE) {
-					$this->session->set_flashdata('notif', 'success');
+					$this->session->set_flashdata('success', 'success');
 					redirect('admin_data_pemilik');
 				} else {
-					$this->session->set_flashdata('notif', 'failed');
+					$this->session->set_flashdata('failed', 'failed');
 					redirect('admin_data_pemilik');
 				}
 				
-			} else {
-				$data['notif'] = validation_errors();
-				redirect('admin_data_pemilik' , $data);
-			}
 			
 		}
 	}
@@ -58,10 +52,10 @@ class Admin_data_pemilik extends CI_Controller {
 		$id = $this->uri->segment(3);
 
 		if ($this->admin_data_pemilik_model->hapus($id) == TRUE) {
-			$this->session->set_flashdata('notif', 'Hapus Sukses');
+			$this->session->set_flashdata('delsuccess', 'delsuccess');
 			redirect('admin_data_pemilik');
 		} else {
-			$this->session->set_flashdata('notif', 'Hapus Gagal');
+			$this->session->set_flashdata('delfailed', 'delfailed');
 			redirect('admin_data_pemilik');
 		}
 			

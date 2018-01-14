@@ -71,16 +71,6 @@
                   <h4 class="modal-title">Login</h4>
                </div>
                <div class="modal-body">
-                  <?php 
-                    $failed = $this->session->flashdata('failed');
-                    if(!empty($failed)){
-                      echo '<div class="alert alert-danger alert-dismissable">';
-                      echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-                      echo '<i class="icon fa fa-warning"></i>';
-                      echo $failed;
-                      echo '</div>';
-                    }
-                  ?>
                   <form action="<?php echo base_url(); ?>index.php/login/masuk" method="post">
                      <div class="form-group">
                         <label>Username</label>

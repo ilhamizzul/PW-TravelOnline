@@ -355,6 +355,43 @@
       
     ?>
 
+    <?php
+      if ($this->session->userdata('logged_in') == TRUE) {
+      $success = $this->session->flashdata('success');
+       if ($success == 'success') {
+         echo '
+          <script types="text/javascript\">
+              $(document).ready(function(){
+                  swal(
+                    "Login Berhasil!",
+                    "Selamat Datang '.$this->session->userdata('USERNAME').'!",
+                    "success"
+                  )
+              });
+            </script>
+         ';
+       } 
+      } else {
+        $failed = $this->session->flashdata('failed');
+       if ($failed == 'failed') {
+         echo '
+          <script types="text/javascript\">
+              $(document).ready(function(){
+                  swal(
+                    "Login Gagal!",
+                    "Silahkan Cek Lagi Input Form Anda!",
+                    "error"
+                  )
+              });
+            </script>
+         ';
+       } 
+      }
+
+
+
+   ?> 
+
 
    <div>
       <center>

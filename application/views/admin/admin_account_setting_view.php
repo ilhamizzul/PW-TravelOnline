@@ -12,25 +12,6 @@
 <!-- grid -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <?php
-      $failed = $this->session->flashdata('failed');
-        if(!empty($failed)){
-          echo '<div class="alert alert-danger alert-dismissable" style="margin-top: 10px">';
-          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-          echo '<i class="icon fa fa-warning"></i>';
-          echo $failed;
-          echo '</div>';
-        }
-
-      $success = $this->session->flashdata('success');
-      if(!empty($success)){
-          echo '<div class="alert alert-success alert-dismissable" style="margin-top: 10px">';
-          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-          echo '<i class="icon fa fa-check"></i>';
-          echo $success;
-          echo '</div>';
-      }
-    ?>
         <form method="post" action="<?php echo base_url(); ?>index.php/account_setting/edit_account_submit">
           <fieldset>
             <div class="form-group">
@@ -84,4 +65,39 @@
 
   </div>
 </div>
+
+<?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Update Berhasil!",
+                      "Data Anda Berhasil di Update",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Update Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+
+       ?> 
  
