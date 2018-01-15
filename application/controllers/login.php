@@ -12,9 +12,10 @@ class Login extends CI_Controller {
 	public function masuk()
 	{
 		if ($this->login_model->cek_user() == TRUE) {
+			$this->session->set_flashdata('success', 'success');
 			redirect('home');
 		} else {
-			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
+			$this->session->set_flashdata('failed', 'failed');
 			redirect('home');
 		}
 		

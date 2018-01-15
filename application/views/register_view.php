@@ -25,7 +25,7 @@
               <h2 style="text-align: center;">A greatest way to find your comfortable travel</h2>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Terpercaya</h3>
@@ -34,7 +34,7 @@
               </div>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <i class="fa fa-car" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Mobil Nyaman</h3>
@@ -43,7 +43,7 @@
               </div>
               <div class="col-md-4">
                  <div class="col-md-12 icon">
-                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <i class="fa fa-user" aria-hidden="true"></i>
                  </div>
                  <div class="text col-md-12">
                      <h3 style="text-align: center;">Professional</h3>
@@ -51,21 +51,54 @@
                  </div>
               </div> 
             </div>
+
+            <div class="col-md-12 step">
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/register&login.png" class="img img-responsive img-step" alt="">
+                  <h5>Login & Register</h5>
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/rute.png" class="img img-responsive img-step" alt="">
+                  <h5>Pilih Rute</h5>  
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/transfer.png" class="img img-responsive img-step" alt="">
+                  <h5>Transfer Biaya Travel</h5>  
+                </center>
+              </div>
+              <div class="col-md-3">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/tiket.png" class="img img-responsive img-step" alt="">
+                  <h5>Dapatkan Tiket Anda!</h5>  
+                </center>
+              </div>
+              <div class="col-md-12">
+                <center>
+                  <img src="<?php echo base_url(); ?>assets/img/arrow.png" class="img img-responsive arrow" alt="">  
+                </center>
+                
+              </div>
+            </div>
          </div>
          <div class="col-md-4 register">
             <h3 class="header">Pendaftaran User Baru</h3>
             <form method="post" id="form-pendaftaran" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/register/simpan">
               <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control form-control-sm" name="name">
+                  <input type="text" class="form-control form-control-sm" name="name" placeholder="Masukkan Nama Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                   <label>Username</label>
-                  <input type="text" class="form-control form-control-sm" name="username">
+                  <input type="text" class="form-control form-control-sm" name="username" placeholder="Masukkan Username Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                   <label>Password</label>
-                  <input type="Password" class="form-control form-control-sm" name="password">
+                  <input type="Password" class="form-control form-control-sm" name="password" placeholder="Masukkan Password Akun Anda(Minimal 5 digit)">
                </div>
                <div class="form-group">
                  <label>Jenis Identitas</label>
@@ -77,7 +110,11 @@
                </div>
                <div class="form-group">
                   <label>Nomor Identitas</label>
-                  <input type="number" value="Submit" class="form-control form-control-sm" name="no_identitas">
+                  <input type="number" class="form-control form-control-sm" name="no_identitas">
+               </div>
+               <div class="form-group">
+                  <label>Nomor Telepon</label>
+                  <input type="number" class="form-control form-control-sm" name="telepon">
                </div>
                <div class="form-group">
                   <label>Alamat</label>
@@ -88,10 +125,39 @@
          </div>
       </div>
 
-      <?php 
-          echo "<script type=\"text/javascript\">
-            $(document).ready(function(){
-              swal(\"ERROR\",  , \"error\")
-            })
-          </script>";
-      ?>
+       <?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Registrasi Berhasil!",
+                      "Silahkan Login",
+                      "success"
+                    ).then((x)=>{
+                      $("#login").modal("show");
+                    })
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Registrasi Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+
+       ?>

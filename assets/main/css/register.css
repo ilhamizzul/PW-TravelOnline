@@ -1,6 +1,6 @@
 body{
   font-family:Helvetica, Arial, sans-serif;
-
+  padding-right: 0;
   background-color: #4FC3F7;
   
 }
@@ -9,7 +9,7 @@ body{
   background-color: rgba(255, 255, 255, 0.85);
   font-family: helvetica;
   border-radius: 5px;
-  height: 570px;
+  height: 640px;
   margin-bottom: 15px;
   margin-top: 75px;
 }
@@ -23,11 +23,29 @@ body{
     background-attachment: fixed;
 }
 
+.step{
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+}
+
+.img-step{
+  max-width: 120px;
+  height: auto;
+  padding-top: 17px;
+}
+
+.arrow{
+  width: 785px;
+  height: 40px;
+  padding-top: 3px;
+  padding-bottom: 9px;
+}
+
 .jumbotron {
   margin-top: 75px;
-  margin-bottom: 6px;
+  margin-bottom: 16px;
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 14px;
   background-color: rgba(255, 255, 255, 0.85);
 }
 

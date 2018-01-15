@@ -18,6 +18,7 @@ class Register_model extends CI_Model {
 			'PASSWORD' => md5($this->input->post('password')),
 			'ALAMAT_MEMBER' => $this->input->post('alamat'),
 			'NO_IDENTITAS' => $this->input->post('no_identitas'),
+			'NOMOR_TELEPON' => $this->input->post('telepon'),
 			'JENIS_IDENTITAS' => $this->input->post('jenis_identitas')
 		);
 

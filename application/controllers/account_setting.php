@@ -21,10 +21,10 @@ class Account_setting extends CI_Controller {
 	{
 		$id = $this->session->userdata('ID_USER');
 		if($this->account_setting_model->edit_account($id) == TRUE){
-			$this->session->set_flashdata('success', 'Edit data berhasil');
+			$this->session->set_flashdata('success', 'success');
 			redirect('account_setting');
 		} else {
-			$this->session->set_flashdata('success', 'Edit data berhasil');
+			$this->session->set_flashdata('failed', 'failed');
 		    redirect('account_setting');
 		}
 	}

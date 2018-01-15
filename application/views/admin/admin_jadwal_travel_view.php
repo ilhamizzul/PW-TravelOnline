@@ -141,3 +141,37 @@
 
   </div>
 </div>
+
+<?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Jadwal Berhasil!",
+                      "Data Jadwal Travel Berhasil ditambah!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Jadwal Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+       ?> 

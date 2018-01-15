@@ -70,6 +70,13 @@ body{
 	padding-left: 74px;
 }
 
+.merk b {
+	color:  #29B6F6;
+	font-family: caviar dreams;
+	font-size: 65px;
+	padding-left: 34px;
+}
+
 .btn-choose{
 	background-color: #29B6F6;
 	color: white;

@@ -105,24 +105,7 @@
       </div>
    </div>
 </div>
-<!-- LOGIN NOTIFICATION -->
-<?php 
-   if ($this->session->userdata('logged_in') == TRUE) {
-                     echo '
-                       <div id="note" class="alert alert-info">
-                       <button type="button" class="close" data-dismiss="alert">&times;</button>
-                       Welcome, '.$this->session->userdata('USERNAME').'</div>
-                     ';
-     }
-   
-     $failed = $this->session->flashdata('failed');
-               if(!empty($failed)){
-                 echo '<div id="note" class="alert alert-danger">
-                       <button type="button" class="close" data-dismiss="alert">&times;</button>';
-                 echo $failed;
-                 echo '</div>';
-               }
-   ?>
+
 <div class="row">
    <img class="img img-responsive" src="<?php echo base_url(); ?>/assets/img/pexels-photo-620335-2.jpg" id="wallpaper" alt="">
 </div>
@@ -354,6 +337,43 @@
       }
       
     ?>
+
+    <?php
+      if ($this->session->userdata('logged_in') == TRUE) {
+      $success = $this->session->flashdata('success');
+       if ($success == 'success') {
+         echo '
+          <script types="text/javascript\">
+              $(document).ready(function(){
+                  swal(
+                    "Login Berhasil!",
+                    "Selamat Datang '.$this->session->userdata('USERNAME').'!",
+                    "success"
+                  )
+              });
+            </script>
+         ';
+       } 
+      } else {
+        $failed = $this->session->flashdata('failed');
+       if ($failed == 'failed') {
+         echo '
+          <script types="text/javascript\">
+              $(document).ready(function(){
+                  swal(
+                    "Login Gagal!",
+                    "Silahkan Cek Lagi Input Form Anda!",
+                    "error"
+                  )
+              });
+            </script>
+         ';
+       } 
+      }
+
+
+
+   ?> 
 
 
    <div>

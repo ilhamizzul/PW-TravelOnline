@@ -42,6 +42,7 @@ class Admin_data_operator_model extends CI_Model {
 			'PASSWORD_ADMIN' => $this->input->post('password'),
 			'KOTA' 			 => $this->input->post('kota'),
 			'ALAMAT_USER' 	 => $this->input->post('alamat'),
+			'NOMOR_TELEPON'  => $this->input->post('telepon'),
 			'ID_TRAVEL'		 => $this->session->userdata('ID_TRAVEL'),
 			'BANK' 			 => $this->input->post('bank'),
 			'NOMOR_REKENING' => $this->input->post('no_rekening'),

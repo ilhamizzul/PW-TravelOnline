@@ -18,6 +18,8 @@ class Account_setting_model extends CI_Model {
 						'USERNAME_ADMIN' 	=> $this->input->post('username'),
 						'PASSWORD_ADMIN' 	=> $this->input->post('password'),
 						'KOTA'				=> $this->input->post('kota'),
+						'NOMOR_TELEPON'		=> $this->input->post('telepon'),
+						'BANK'				=> $this->input->post('bank'),
 						'ALAMAT_USER' 		=> $this->input->post('alamat_user'),
 						'NOMOR_REKENING' 	=> $this->input->post('nomor_rekening')
 						);
