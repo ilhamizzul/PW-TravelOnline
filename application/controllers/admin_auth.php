@@ -9,12 +9,18 @@ class Admin_auth extends CI_Controller {
 		$this->load->model('auth_model');
 	}
 
+	public function index()
+	{
+		redirect('admin_auth/login_admin');
+	}
+
 	public function login_admin_submit()
 	{
 		if($this->auth_model->login() == TRUE){
+			$this->session->set_flashdata('success', 'success');
 			redirect('admin_dashboard');
 		} else {
-			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
+			$this->session->set_flashdata('failed', 'failed');
 			redirect('admin_auth/login_admin');
 		}
 	}

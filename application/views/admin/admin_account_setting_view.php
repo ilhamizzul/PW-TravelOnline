@@ -41,6 +41,10 @@
               }
             </script>
             <div class="form-group">
+              <label>Nomor Telepon</label>
+              <input type="number" class="form-control" name="telepon" value="<?php echo $profil->NOMOR_TELEPON ?>">
+            </div>
+            <div class="form-group">
               <label>Kota</label>
               <input type="text" class="form-control" name="kota" value="<?php echo $profil->KOTA ?>">
             </div>
@@ -49,7 +53,11 @@
               <textarea class="form-control" name="alamat_user" rows="3" ><?php echo $profil->ALAMAT_USER ?></textarea>
             </div>
             <div class="form-group">
-              <label>Nomor Rekening BCA</label>
+              <label>Bank</label>
+              <input type="text" class="form-control" name="bank" value="<?php echo $profil->BANK ?>">
+            </div>
+            <div class="form-group">
+              <label>Nomor Rekening</label>
               <input type="number" class="form-control" name="nomor_rekening" value="<?php echo $profil->NOMOR_REKENING ?>">
             </div>
             <hr>

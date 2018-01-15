@@ -95,3 +95,22 @@
         </div>
     </div>
 </div>
+
+      <?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Login Berhasil!",
+                      "Selamat Datang, '.$this->session->userdata('USERNAME_ADMIN').'!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+
+       ?> 

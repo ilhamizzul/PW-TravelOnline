@@ -29,6 +29,7 @@
                  <th>Username</th>
                  <th>Nama Travel</th>
                  <th>Kota</th>
+                 <th>Nomor Telepon</th>
                  <th>Alamat</th>
                  <th>Bank</th>
                  <th>Nomor Rekening</th>
@@ -44,6 +45,7 @@
                                  <td>'.$data->USERNAME_ADMIN.'</td>
                                  <td>'.$data->NAMA_TRAVEL.'</td>
                                  <td>'.$data->KOTA.'</td>
+                                 <td>'.$data->NOMOR_TELEPON.'</td>
                                  <td>'.$data->ALAMAT_USER.'</td>
                                  <td>'.$data->BANK.'</td>
                                  <td>'.$data->NOMOR_REKENING.'</td>
@@ -74,7 +76,6 @@
         <form method="post" action="<?php echo base_url();?>/index.php/admin_data_pemilik/save">
           <fieldset>
                 <input type="text" hidden="true" name="level" value="OWNER">
-                <input type="text" hidden="true" name="bank" value="BCA">
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Nama User</label>
@@ -100,6 +101,10 @@
                         ?>      
                       </select>
                     </div>
+                    <div class="form-group">
+                      <label>Nomor Telepon</label>
+                      <input type="number" name="telepon" class="form-control" placeholder="Masukkan Nomor Telepon User">
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -109,6 +114,10 @@
                     <div class="form-group">
                       <label>Alamat</label>
                       <textarea class="form-control" name="alamat" rows="2" placeholder="Masukkan Alamat Detail User"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Jenis Bank</label>
+                      <input type="text" name="bank" class="form-control" placeholder="Masukkan Jenis Bank yang Dipakai">
                     </div>
                     <div class="form-group">
                       <label>Nomor Rekening</label>
@@ -173,9 +182,5 @@
               </script>
            ';
          } 
-
-
-
-
 
        ?> 

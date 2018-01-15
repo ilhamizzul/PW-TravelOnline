@@ -19,9 +19,9 @@ class Register extends CI_Controller {
 	{
 		if ($this->input->post('submit')) {
 			
-			$this->form_validation->set_rules('name', 'Nama Member', 'trim|required|min_length[5]|max_length[12]');
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|max_length[12]');
+			$this->form_validation->set_rules('name', 'Nama Member', 'trim|required|min_length[5]');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]');
 			$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 			$this->form_validation->set_rules('no_identitas', 'Nomor Identitas', 'trim|required');
 			if ($this->form_validation->run() == TRUE) {

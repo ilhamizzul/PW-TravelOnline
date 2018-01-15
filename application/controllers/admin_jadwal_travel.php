@@ -32,10 +32,10 @@ class Admin_jadwal_travel extends CI_Controller {
 				// print_r($id);
 				// var_dump($this->input->post(''));exit();
 				if ($this->admin_jadwal_travel_model->insert($id)==TRUE) {
-					$this->session->set_flashdata('notif', 'success');
+					$this->session->set_flashdata('success', 'success');
 					redirect('admin_jadwal_travel');
 				} else {
-					$this->session->set_flashdata('notif', 'failed');
+					$this->session->set_flashdata('failed', 'failed');
 					redirect('admin_jadwal_travel');
 				}
 				

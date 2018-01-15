@@ -23,25 +23,6 @@
             <div class="page-header">
                   <h1 class="logo" style="color: #1e3948">Teknik Informasi <small>TRAVEL ONLINE</small></h1>
             </div>
-            <?php
-               $failed = $this->session->flashdata('failed');
-                 if(!empty($failed)){
-                   echo '<div class="alert alert-danger alert-dismissable">';
-                   echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-                   echo '<i class="icon fa fa-warning"></i>';
-                   echo $failed;
-                   echo '</div>';
-                 }
-               
-               $success = $this->session->flashdata('success');
-               if(!empty($success)){
-                   echo '<div class="alert alert-success alert-dismissable">';
-                   echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-                   echo '<i class="icon fa fa-check"></i>';
-                   echo $success;
-                   echo '</div>';
-               }
-               ?>
             <div class="panel panel-info">
                <div class="panel-heading">
                   <h3 class="panel-title">Please Sign In</h3>
@@ -76,6 +57,25 @@
             </div>
          </div>
       </div>
+      <?php
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Login Gagal!",
+                      "Silahkan Cek Lagi Username & Password Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+       ?> 
+
       <div class="modal fade" id="forget">
          <div class="modal-dialog">
             <div class="modal-content">

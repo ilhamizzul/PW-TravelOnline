@@ -110,7 +110,11 @@
                </div>
                <div class="form-group">
                   <label>Nomor Identitas</label>
-                  <input type="number" value="Submit" class="form-control form-control-sm" name="no_identitas">
+                  <input type="number" class="form-control form-control-sm" name="no_identitas">
+               </div>
+               <div class="form-group">
+                  <label>Nomor Telepon</label>
+                  <input type="number" class="form-control form-control-sm" name="telepon">
                </div>
                <div class="form-group">
                   <label>Alamat</label>

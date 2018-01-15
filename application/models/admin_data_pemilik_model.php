@@ -38,6 +38,7 @@ class Admin_data_pemilik_model extends CI_Model {
 			'USERNAME_ADMIN' => $this->input->post('username'),
 			'PASSWORD_ADMIN' => $this->input->post('password'),
 			'KOTA' 			 => $this->input->post('kota'),
+			'NOMOR_TELEPON'  => $this->input->post('telepon'),
 			'ALAMAT_USER' 	 => $this->input->post('alamat'),
 			'ID_TRAVEL'		 => $this->input->post('id_travel'),
 			'BANK' 			 => $this->input->post('bank'),

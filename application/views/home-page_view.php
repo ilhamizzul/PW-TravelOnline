@@ -105,24 +105,7 @@
       </div>
    </div>
 </div>
-<!-- LOGIN NOTIFICATION -->
-<?php 
-   if ($this->session->userdata('logged_in') == TRUE) {
-                     echo '
-                       <div id="note" class="alert alert-info">
-                       <button type="button" class="close" data-dismiss="alert">&times;</button>
-                       Welcome, '.$this->session->userdata('USERNAME').'</div>
-                     ';
-     }
-   
-     $failed = $this->session->flashdata('failed');
-               if(!empty($failed)){
-                 echo '<div id="note" class="alert alert-danger">
-                       <button type="button" class="close" data-dismiss="alert">&times;</button>';
-                 echo $failed;
-                 echo '</div>';
-               }
-   ?>
+
 <div class="row">
    <img class="img img-responsive" src="<?php echo base_url(); ?>/assets/img/pexels-photo-620335-2.jpg" id="wallpaper" alt="">
 </div>

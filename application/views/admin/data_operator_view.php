@@ -34,6 +34,7 @@
                  <th>Username</th>
                  <th>ID Travel</th>
                  <th>Kota</th>
+                 <th>Nomor Telepon</th>
                  <th>Alamat</th>
                  <th>Bank</th>
                  <th>Nomor Rekening</th>
@@ -56,6 +57,7 @@
                                  <td>'.$data->USERNAME_ADMIN.'</td>
                                  <td>'.$data->ID_TRAVEL.'</td>
                                  <td>'.$data->KOTA.'</td>
+                                 <td>'.$data->NOMOR_TELEPON.'</td>
                                  <td>'.$data->ALAMAT_USER.'</td>
                                  <td>'.$data->BANK.'</td>
                                  <td>'.$data->NOMOR_REKENING.'</td>';
@@ -92,7 +94,6 @@
         <form method="post" action="<?php echo base_url();?>/index.php/admin_data_operator/save">
           <fieldset>
                 <input type="text" hidden="true" name="level" value="OPERATOR">
-                <input type="text" hidden="true" name="bank" value="BCA">
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Nama User</label>
@@ -107,6 +108,10 @@
                       <input type="password" name="password" class="form-control" placeholder="Masukkan Password Akun User" required>
                     </div>
                     <div class="form-group">
+                      <label>Nomor Telepon</label>
+                      <input type="number" name="telepon" class="form-control" placeholder="Masukkan Nomor Telepon User">
+                    </div>
+                    <div class="form-group">
                       <label>Kota</label>
                       <input type="text" name="kota" class="form-control" placeholder="Masukkan Kota Asal User" required>
                     </div>
@@ -114,11 +119,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Alamat</label>
-                      <textarea class="form-control" name="alamat" rows="2" placeholder="Masukkan Alamat Detail User" required></textarea>
+                      <textarea class="form-control" name="alamat" rows="6" placeholder="Masukkan Alamat Detail User" required></textarea>
                     </div>
                     <div class="form-group">
-                      <label>Nomor Rekening BCA</label>
-                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening BCA (10 Digit)" required>
+                      <label>Jenis Bank</label>
+                      <input type="text" name="bank" class="form-control" placeholder="Masukkan Jenis Bank yang Dipakai">
+                    </div>
+                    <div class="form-group">
+                      <label>Nomor Rekening</label>
+                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening">
                     </div>
                     <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
                 </div>
@@ -132,3 +141,51 @@
 
   </div>
 </div>
+
+<?php
+         $success = $this->session->flashdata('success');
+         if ($success == 'success') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Operator Berhasil!",
+                      "Data Operator Berhasil ditambah!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $failed = $this->session->flashdata('failed');
+         if ($failed == 'failed') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Tambah Operator Gagal!",
+                      "Silahkan Cek Lagi Input Form Anda!",
+                      "error"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+         $delsuccess = $this->session->flashdata('delsuccess');
+         if ($delsuccess == 'delsuccess') {
+           echo '
+            <script types="text/javascript\">
+                $(document).ready(function(){
+                    swal(
+                      "Hapus Berhasil!",
+                      "Data Operator Berhasil dihapus!",
+                      "success"
+                    )
+                });
+              </script>
+           ';
+         } 
+
+       ?> 

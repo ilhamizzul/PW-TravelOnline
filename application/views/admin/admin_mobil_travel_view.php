@@ -93,7 +93,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Jadwal Travel</h4>
+        <h4 class="modal-title">Tambah Mobil Travel</h4>
       </div>
       <div class="modal-body">
 
@@ -117,13 +117,12 @@
                       <label>Plat Nomor Kendaraan</label>
                       <input type="text" name="plat_nomor" class="form-control">
                     </div>
-                </div>
-                <div class="col-md-6">
-                  
                     <div class="form-group">
                       <label>Warna Kendaraan</label>
                       <input type="text" name="warna_kendaraan" class="form-control">
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
                       <label>Foto Kendaraan</label>
                       <input type="file" name="foto_kendaraan" id="foto_kendaraan" class="form-control">
