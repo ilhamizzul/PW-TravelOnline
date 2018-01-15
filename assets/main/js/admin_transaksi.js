@@ -1,5 +1,50 @@
 var transaksi = {}
 transaksi.dataMasterTransaksi = ko.observableArray([])
+transaksi.showButton = ko.observable(false)
+
+transaksi.newRecordTransakai = function() {
+	var data = {
+		ALAMAT_MEMBER:"",
+		ALAMAT_PENJEMPUTAN:"",
+		ALAMAT_PENURUNAN:"",
+		BUKTI_BAYAR:"",
+		FOTO_KENDARAAN:"",
+		ID_JADWAL_TRAVEL:"",
+		ID_JENIS_KENDARAAN:"",
+		ID_KENDARAAN_TRAVEL:"",
+		ID_KOTA_ASAL:"",
+		ID_KOTA_TUJUAN:"",
+		ID_MEMBER:"",
+		ID_RIWAYAT_TRANSAKSI:"",
+		ID_TRAVEL:"",
+		JAM_PESAN:"",
+		JENIS_IDENTITAS:"",
+		JML_KURSI:"",
+		JUMLAH_KURSI:"",
+		KOTAT_ASAL:"",
+		KOTA_TUJUAN:"",
+		LOGO:"",
+		NAMA_MEMBER:"",
+		NAMA_TRAVEL:"",
+		NOMOR_TELEPON:"",
+		NO_IDENTITAS:"",
+		NO_POL_KENDARAAN:"",
+		PASSWORD:"",
+		STATUS:"",
+		TANGGAL_KEBERANGKATAN:"",
+		TANGGAL_PEMESANAN:"",
+		TARIF:0,
+		TOTAL_BAYAR:0,
+		USERNAME:"",
+		WAKTU_BERANGKAT:"",
+		WAKTU_SAMPAI:"",
+		WARNA_KENDARAAN:""
+	}
+
+	return data
+}
+
+transaksi.recordTransaksi = ko.mapping.fromJS(transaksi.newRecordTransakai())
 
 transaksi.getDataTransaksi = function(callback){
 	model.Processing(true)
@@ -74,7 +119,7 @@ transaksi.renderGridTransaksi = function(textSearch) {
         		if (tenggang < 0) {
         			return "----------------------------"
         		}
-        		return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss");;
+        		return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss")
         	}else{
         		return "----------------------------"
         	}
@@ -82,22 +127,13 @@ transaksi.renderGridTransaksi = function(textSearch) {
     }, {
         title: 'Action',
         width: 100,
-        locked: true
-        // template : function (d) {
-        //     var dsb = ""
-        //     var tooltip = ""
-        //     var hrefedit = "href=\"javascript:jenismobil.editJenismobil('"+d.ID_JENIS_KENDARAAN+"')\""
-        //     var hrefdelete = "href=\"javascript:jenismobil.deleteJenismobil('"+d.ID_JENIS_KENDARAAN+"')\""
-        //     // var subdata = _.filter(master_daerah.dataMasterKota(), ['ID_PROVINSI', d.ID_PROVINSI]);
-        //     // if (subdata.length > 0) {
-        //     //     dsb = "disabled = \"disabled\""
-        //     //     hrefedit = ""
-        //     //     hrefdelete = ""
-        //     //     tooltip = "data-toggle=\"tooltip\" title=\"Data ini digunakan oleh data mobil travel\""
-        //     // }
-        //     return "<a "+hrefedit+"class=\"btn btn-xs btn-warning\" "+tooltip+dsb+"><i class=\"fa fa-pencil\"></i></a> &nbsp;"+
-        //            "<a "+hrefdelete+"class=\"btn btn-xs btn-danger\" "+tooltip+dsb+" ><i class=\"fa fa-trash\"></i></a>"
-        // }
+        locked: true,
+        template : function (d) {
+            var dsb = ""
+            var tooltip = ""
+            var hrefdetail = "href=\"javascript:transaksi.showDetailTransaksi('"+d.ID_RIWAYAT_TRANSAKSI+"')\""
+            return "<a "+hrefdetail+"class=\"btn btn-xs btn-primary\" "+tooltip+dsb+">Detail</a>"
+        }
     }]
 
     $('#gridTransaksi').kendoGrid({
@@ -120,12 +156,137 @@ transaksi.renderGridTransaksi = function(textSearch) {
     })
 }
 
+transaksi.blokTransaksi = function() {
+	var data = {}
+	data.ID_RIWAYAT_TRANSAKSI = transaksi.recordTransaksi.ID_RIWAYAT_TRANSAKSI()
+	data.STATUS = 'BLOCKED'
+
+	var url = "admin_transaksi/SetStatusTransaksi"
+    var param ={
+        Data: data
+    }
+
+    swal({
+        title: "Apakah Anda yakin?",
+        text: "Anda akan memblokir transaksi dengan kode " + data.ID_RIWAYAT_TRANSAKSI + "!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, block it!',
+        cancelButtonText: 'No, cancel!',
+        buttonsStyling: true,
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            ajaxFormPost(url, param, function(res){
+                if (res.isError) {
+                    swal("Gagal", res.message, "error")
+                }else{
+                    swal({
+                    title: "Berhasil!",
+                    text: "Transaksi telah terblokir!",
+                    type: "success",
+                    confirmButtonColor: "#3da09a"
+                    }).then(() => {
+                        transaksi.getDataTransaksi(function() {
+							transaksi.renderGridTransaksi("")
+						});
+                    });
+                }
+                model.Processing(false)
+            })
+        } else if (result.dismiss === 'cancel') {
+            swal(
+                'Dibatalkan',
+                '',
+                'info'
+            )
+        }
+    })
+}
+
+transaksi.konfirmasiTransaksi = function() {
+	var data = {}
+	data.ID_RIWAYAT_TRANSAKSI = transaksi.recordTransaksi.ID_RIWAYAT_TRANSAKSI()
+	data.STATUS = 'CONFIRMED'
+
+	var url = "admin_transaksi/SetStatusTransaksi"
+    var param ={
+        Data: data
+    }
+
+    swal({
+        title: "Apakah Anda yakin?",
+        text: "Anda akan mengkonfirmasi transaksi dengan kode " + data.ID_RIWAYAT_TRANSAKSI + "!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: 'rgb(245, 138, 45)',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, confirm it!',
+        cancelButtonText: 'No, cancel!',
+        buttonsStyling: true,
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            ajaxFormPost(url, param, function(res){
+                if (res.isError) {
+                    swal("Gagal", res.message, "error")
+                }else{
+                    swal({
+                    title: "Berhasil!",
+                    text: "Transaksi telah terkonfirmasi!",
+                    type: "success",
+                    confirmButtonColor: "#3da09a"
+                    }).then(() => {
+                        transaksi.getDataTransaksi(function() {
+							transaksi.renderGridTransaksi("")
+						});
+                    });
+                }
+                model.Processing(false)
+            })
+        } else if (result.dismiss === 'cancel') {
+            swal(
+                'Dibatalkan',
+                '',
+                'info'
+            )
+        }
+    })
+}
+
+transaksi.showDetailTransaksi = function(Id) {
+	var dataArr = _.filter(transaksi.dataMasterTransaksi(), {'ID_RIWAYAT_TRANSAKSI': Id});
+
+	ko.mapping.fromJS(dataArr[0], transaksi.recordTransaksi)
+
+	var tarifRupiah = ChangeToRupiah(parseFloat(dataArr[0].TARIF))
+	var totalRupiah = ChangeToRupiah(parseFloat(dataArr[0].TOTAL_BAYAR))
+
+	transaksi.recordTransaksi.TARIF(tarifRupiah)
+	transaksi.recordTransaksi.TOTAL_BAYAR(totalRupiah)
+	
+	$("#imgLocation").removeAttr("src");
+	var src = base_url+"assets/img/default.jpg"
+	if (transaksi.recordTransaksi.BUKTI_BAYAR() != "") {
+		src = base_url+"assets/uploads/"+transaksi.recordTransaksi.BUKTI_BAYAR()
+	}
+
+	$('#detailTansaksiModal').modal('show');
+	$("#imgLocation").attr("src",src);
+	
+}
+
 
 
 transaksi.init = function(){
 	transaksi.getDataTransaksi(function() {
 		transaksi.renderGridTransaksi("")
 	});
+	if (model.Role() != "ADMIN") {
+		transaksi.showButton(true)
+	}
 }
 
 $(function() {

@@ -9,7 +9,7 @@
          <ul class="nav navbar-nav navbar-right">
             <li role="presentation"><a href="" data-toggle="modal" data-target="#search">Search</a></li>
             <?php 
-               if($this->session->userdata('logged_in') == true){
+               if($this->session->userdata('logged_in') == true && !is_null($this->session->userdata('ID_MEMBER'))){
                  echo '
                    <li role="presentation"><a href="'.base_url().'index.php/history/">History </a></li>
                  ';
@@ -19,7 +19,7 @@
                <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account </a>
                <ul class="dropdown-menu">
                   <?php 
-                     if ($this->session->userdata('logged_in') == TRUE) {
+                     if ($this->session->userdata('logged_in') == TRUE && !is_null($this->session->userdata('ID_MEMBER'))) {
                        echo '
                          <li><a href="" disabled>Welcome, '.$this->session->userdata('USERNAME').'</a></li>
                          <li><a href="'.base_url().'index.php/login/logout">Logout</a></li>
@@ -128,7 +128,7 @@
    <?php 
       
 
-  if($this->session->logged_in == true){
+  if($this->session->logged_in == true && !is_null($this->session->userdata('ID_MEMBER'))){
     $no = 1;
     foreach ($data_trevel as $data) {
     echo '
@@ -255,7 +255,7 @@
 
 
     <?php 
-      if ($this->session->logged_in == true) {
+      if ($this->session->logged_in == true && !is_null($this->session->userdata('ID_MEMBER'))) {
         echo '
         <div id="chooseTujuan" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -339,7 +339,7 @@
     ?>
 
     <?php
-      if ($this->session->userdata('logged_in') == TRUE) {
+      if ($this->session->userdata('logged_in') == TRUE && !is_null($this->session->userdata('ID_MEMBER'))) {
       $success = $this->session->flashdata('success');
        if ($success == 'success') {
          echo '

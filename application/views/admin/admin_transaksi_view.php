@@ -30,53 +30,120 @@
          ?>
     </div>
 </div>
-<!-- <div class="row">
-    <div style="overflow-x: auto;">
-        <table class="table table-hover table-striped table-bordered" style="margin-top: 12px;">
-           <thead>
-              <tr>
-                 <th>ID Riwayat Transaksi</th>
-                 <th>ID Jadwal Travel</th>
-                 <th>Nama Member</th>
-                 <th>Jam Pesan</th>
-                 <th>Tanggal Pemesanan</th>
-                 <th>Tanggal Keberangkatan</th>
-                 <th>Alamat Penjemputan</th>
-                 <th>Alamat Penurunan</th>
-                 <th>Jumlah Kursi</th>
-                 <th>Total Biaya</th>
-                 <th>Bukti Bayar</th>
-                 <th>Status</th>
-                 <th>Aksi</th>
-              </tr>
-           </thead>
-           <tbody>
-             <?php 
-                // foreach ($travel as $data) {
-                //     echo '
-                //         <tr class="table-active">
-                //              <td>'.$data->ID_RIWAYAT_TRANSAKSI.'</td>
-                //              <td>'.$data->ID_JADWAL_TRAVEL.'</td>
-                //              <td>'.$data->NAMA_MEMBER.'</td>
-                //              <td>'.$data->JAM_PESAN.'</td>
-                //              <td>'.$data->TANGGAL_PEMESANAN.'</td>
-                //              <td>'.$data->TANGGAL_KEBERANGKATAN.'</td>
-                //              <td>'.$data->ALAMAT_PENJEMPUTAN.'</td>
-                //              <td>'.$data->ALAMAT_PENURUNAN.'</td>
-                //              <td>'.$data->JUMLAH_KURSI.'</td>
-                //              <td>'.$data->TOTAL_BAYAR.'</td>
-                //              <td>'.$data->BUKTI_BAYAR.'</td>
-                //              <td>'.$data->STATUS.'</td>
-                //              <td>
-                //                 <a class="btn btn-warning" href="" data-toggle="modal" data-target="#edit'.$data->ID_RIWAYAT_TRANSAKSI.'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                //              </td>
-                //           </tr>
-                //     ';
-                // }
-            ?>
-           </tbody>
-        </table>
 
+<!-- Modal -->
+<div id="detailTansaksiModal" class="modal fade" role="dialog" data-bind="with:transaksi">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-body" data-bind="with:recordTransaksi">
+            <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class=" panel panel-default col-md-12 col-sm-12">
+                    <!-- FORM -->
+                    <form class="form-horizontal">
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">ID Transaksi :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text:ID_RIWAYAT_TRANSAKSI"></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Tanggal Pemesanan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" id="tanggalPesan" data-bind="text:TANGGAL_PEMESANAN"></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Waktu Pemesanan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" id="jamPesan" data-bind="text:JAM_PESAN"><span> WIB</span></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Tanggal Keberangkatan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" id="tanggalBerangkat" data-bind="text:TANGGAL_KEBERANGKATAN">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Jam Keberangkatan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text:WAKTU_BERANGKAT"><span> WIB</span></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Kota Asal :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text: KOTAT_ASAL">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Alamat Asal :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text: ALAMAT_PENJEMPUTAN">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Kota Tujuan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text: KOTA_TUJUAN">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Alamat Tujuan :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text: ALAMAT_PENURUNAN">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Nama Travel :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text: NAMA_TRAVEL"></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Jumlah Kursi :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static" data-bind="text:JUMLAH_KURSI"></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Harga per Kursi :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static">Rp<span data-bind="text:TARIF"></span></p>
+                            </div>
+                        </div>
+                        <div class="form-group no-buttom-margin">
+                            <label class="control-label col-md-5 col-sm-5" for="email">Total Bayar :</label>
+                            <div class="col-md-7 col-sm-7">
+                                <p class="form-control-static">Rp<span data-bind="text: TOTAL_BAYAR"></span></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class=" panel panel-default col-md-12 col-sm-12">
+                <!-- IMAGE -->
+                    <center>
+                        <img class="img-style" id="imgLocation" />
+                    </center>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default col-sm-2 pull-right" data-dismiss="modal" style="margin-left:5px;">Close</button>
+            <button type="button" class="btn btn-success col-sm-2 pull-right" data-bind="visible: transaksi.showButton" onclick="transaksi.konfirmasiTransaksi()">Konfirmasi</button>
+            <button type="button" class="btn btn-danger col-sm-2 pull-right" data-bind="visible: transaksi.showButton" onclick="transaksi.blokTransaksi()">Blok</button>
+        </div>
     </div>
+
+  </div>
 </div>
--->

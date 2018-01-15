@@ -40,6 +40,10 @@
     <script src="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendor/sweetalert2/sweetalert2.min.css">
 
+    <!-- MOMENT -->
+    <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.min.js"></script>
+
     <script src="<?php echo base_url(); ?>assets/dist/js/common.js"></script>
     
 </head>
@@ -47,10 +51,13 @@
 <body>
 
     <script type="text/javascript">
+        var base_url = '<?php echo base_url(); ?>'
+        var ci_level = '<?php echo $this->session->userdata('LEVEL'); ?>';
+        var ci_travel = '<?php echo $this->session->userdata('ID_TRAVEL'); ?>';
         var model ={
             Processing : ko.observable(false),
-            UserName : ko.observable('ahmad'),
-            Role : ko.observable('')
+            IdTravel : ko.observable(ci_travel),
+            Role : ko.observable(ci_level)
         }
     </script>
 

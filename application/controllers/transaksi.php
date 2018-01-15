@@ -13,7 +13,7 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('logged_in')) {
+		if ($this->session->userdata('logged_in') && !is_null($this->session->userdata('ID_MEMBER'))) {
 			$id = $this->uri->segment(3);
 			$data['data_transaksi'] = $this->transaksi_model->GetTransaksi($id);
 			$data['main_view'] = 'transaksi_view';

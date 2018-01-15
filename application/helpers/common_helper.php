@@ -22,7 +22,7 @@ if ( ! function_exists('squenceSetter'))
 if (! function_exists('idGenerator')) {
 	function idGenerator($nama_kolom,$bulan, $tahun, $digit, $lastNumber)
 	{
-		$KET = strtoupper(substr($nama_kolom, 0, 3));
+		$KET = strtoupper(substr($nama_kolom, 0, 4));
 
 		$ZERO = "";
 		for ($i=0; $i < $digit; $i++) { 
