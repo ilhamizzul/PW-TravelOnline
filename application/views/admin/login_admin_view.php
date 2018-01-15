@@ -23,6 +23,16 @@
             <div class="page-header">
                   <h1 class="logo" style="color: #1e3948">Teknik Informasi <small>TRAVEL ONLINE</small></h1>
             </div>
+            <?php 
+              $failed = $this->session->flashdata('failed');
+                 if(!empty($failed)){
+                   echo '<div class="alert alert-danger alert-dismissable">';
+                   echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                   echo '<i class="icon fa fa-warning"></i>';
+                   echo $failed;
+                   echo '</div>';
+                 }
+            ?>
             <div class="panel panel-info">
                <div class="panel-heading">
                   <h3 class="panel-title">Please Sign In</h3>

@@ -20,7 +20,7 @@ class Admin_auth extends CI_Controller {
 			$this->session->set_flashdata('success', 'success');
 			redirect('admin_dashboard');
 		} else {
-			$this->session->set_flashdata('failed', 'failed');
+			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
 			redirect('admin_auth/login_admin');
 		}
 	}
