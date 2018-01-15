@@ -43,6 +43,8 @@ class Home_model extends CI_Model {
 		$this->db->join('jadwal_travel', 'jadwal_travel.ID_JADWAL_TRAVEL = riwayat_transaksi.ID_JADWAL_TRAVEL');
 		// if ($tanggal_berangkat == "default") {
 		// 	$this->db->where('TANGGAL_KEBERANGKATAN = DATE( SYSDATE( ) )');
+		$where = "STATUS != 'BLOCKED' ";
+		$this->db->where($where);
 		// }else{
 			$this->db->where('TANGGAL_KEBERANGKATAN', $tanggal_berangkat);
 		// }

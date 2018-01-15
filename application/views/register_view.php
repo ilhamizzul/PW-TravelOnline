@@ -87,3 +87,11 @@
             </form>
          </div>
       </div>
+
+      <?php 
+          echo "<script type=\"text/javascript\">
+            $(document).ready(function(){
+              swal(\"ERROR\",  , \"error\")
+            })
+          </script>";
+      ?>

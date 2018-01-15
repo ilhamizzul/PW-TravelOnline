@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/admin_master_daerah.css">
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/admin_transaksi.js"></script>
 
 <!-- Header -->
 <div class="row">
@@ -20,6 +21,16 @@
 
 <!-- grid -->
 <div class="row">
+    <div class="col-md-12">
+    <div class="col-md-12" data-bind="visible: !model.Processing()">
+        <div id="gridTransaksi"></div>
+    </div>
+    <?php 
+        $this->load->view($loader);
+     ?>
+  </div>
+</div>
+<!-- <div class="row">
     <div style="overflow-x: auto;">
         <table class="table table-hover table-striped table-bordered" style="margin-top: 12px;">
            <thead>
@@ -64,4 +75,4 @@
 
     </div>
 </div>
-
+ -->

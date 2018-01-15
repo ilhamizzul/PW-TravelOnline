@@ -41,6 +41,30 @@ function ajaxFormPost(url, data, fnOk, fnNok) {
     });
 }
 
+function ajaxFilePost(url, formData, fnOk, fnNok) {
+    $.ajax({
+        url: url,
+        data: formData,
+        contentType: false,
+        dataType: "json",
+        mimeType: 'multipart/form-data',
+        processData: false,
+        type: 'POST',
+        success: function (data) {
+            if (typeof fnOk == "function") fnOk(data);
+            koResult = "OK";
+        },
+        error: function (error) {
+            if (typeof fnNok == "function") {
+                fnNok(error);
+            }
+            else {
+                alert("There was an error posting the data to the server: " + error.responseText);
+            }
+        }
+    });
+}
+
 function newRecordSquence(){
     var squence = {}
         squence.nama_kolom = ""
@@ -102,14 +126,15 @@ function SetTenggangWaktu(dateorder, datedepart, time) {
     if (diffDays == 2) {
         deadline = 6
     } if (diffDays == 1) {
-        deadline = 1
+        deadline = 2
     }
 
     // var newdate = new Date(dateorder+"  "+time).addHours(deadline);
 
     var newdate = new Date(dateorder+" "+time);
     var nextdate = new Date(newdate.setHours(newdate.getHours()+deadline));
-    return moment(nextdate).format("YYYY-MM-DD hh:mm:ss");
+    // return moment(nextdate).format("YYYY-MM-DD hh:mm:ss");
+    return nextdate
 }
 
 function setDateMin() {
@@ -119,29 +144,32 @@ function setDateMin() {
     return date
 }
 
-// function countDownTime(dateToCount) {
-//     var DateToCount = new Date(dateToCount)
-//     var x = setInterval(function() {
-//         // Get todays date and time
-//         var now = new Date().getTime();
+function countDownTime(dateToCount, id) {
+    // console.log(dateToCount)
+    var DateToCount = new Date(dateToCount)
+    var x = setInterval(function() {
+        // Get todays date and time
+        var now = new Date().getTime();
 
-//         // Find the distance between now an the count down date
-//         var distance = DateToCount - now;
+        // Find the distance between now an the count down date
+        var distance = DateToCount - now;
 
-//         // Time calculations for days, hours, minutes and seconds
-//         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Time calculations for days, hours, minutes and seconds
+        // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-//         // Display the result in the element with id="demo"
-//         return days + "d " + hours + "h "
-//         + minutes + "m " + seconds + "s ";
+        // Display the result in the element with id="demo"
+        document.getElementById(id).innerHTML = hours + "jam "+ minutes + "menit " + seconds+"detik";
 
-//         // If the count down is finished, write some text 
-//         if (distance < 0) {
-//         clearInterval(x);
-//                 return "EXPIRED";
-//         }
-//     }, 1000);
-// }
+        // If the count down is finished, write some text 
+        if (distance < 0) {
+        clearInterval(x);
+            window.location.assign(base_url+"index.php/history")
+            // document.getElementById(id).innerHTML = "EXPIRED";
+        }
+    }, 1000);
+}
+
+

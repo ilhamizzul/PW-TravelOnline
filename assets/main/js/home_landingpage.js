@@ -11,7 +11,7 @@ landingpage.newRecordFilter = function() {
 	var data = {
 		FROM : "",
 		TO : "",
-		DEPARTURE : moment(Date()).format('YYYY-MM-DD'),
+		DEPARTURE : moment(setDateMin()).format('YYYY-MM-DD'),
 		MINIMUMSEAT : 1
 	}
 	return data
@@ -147,7 +147,7 @@ landingpage.saveTransaction = function () {
                     type: "success",
                     confirmButtonColor: "#3da09a"
                     }).then(() => {
-                    	// location.href = base_url+'index.php/transaksi/'+res.Data
+                    	location.href = base_url+'index.php/transaksi/index/'+res.data
                     });
                 }
                 // model.Processing(false)

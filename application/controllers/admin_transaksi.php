@@ -7,14 +7,21 @@ class Admin_transaksi extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin_transaksi_model');
+		$this->load->helper('common_helper');
 	}
 
 	public function index()
 	{
 		$data['main_view'] = 'admin/admin_transaksi_view';
-		$data['travel'] = $this->admin_transaksi_model->get_riwayat_transaksi();
+		$data['loader'] = 'loader';
+		$this->load->view('admin/_layout',$data);
+	}
 
-		$this->load->view('admin/_layout', $data);
+	public function GetDataTransaksi()
+	{
+		$data = $this->admin_transaksi_model->get_riwayat_transaksi();
+		$result = setResultInfo(false,"OK", $data);
+		echo json_encode($result);
 	}
 
 }

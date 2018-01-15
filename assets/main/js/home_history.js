@@ -1,18 +1,20 @@
 var history = {}
-history.dataMasterHistory = ko.observable()
+history.dataMasterHistory = ko.observableArray([])
+history.dataMasterOperatorTravel = ko.observableArray([])
 history.invalidData = ko.observableArray([])
+history.namaTravel = ko.observable()
 
-// history.getDataTravel = function() {
-// 	var url = base_url+"index.php/history/GetDataTravel"
-// 	ajaxFormPost(url, {}, function(res) {
-//         // var result = JSON.parse(res)
-//         history.dataMasterHistory(res)
-//         callback()
-//         // model.Processing(false)
-//     })
-// }
+history.getDataOperatorTravel = function() {
+	var url = base_url+"index.php/history/GetDataOperatorTravel"
+	ajaxFormPost(url, {}, function(res) {
+        // var result = JSON.parse(res)
+        history.dataMasterOperatorTravel(res)
+        // model.Processing(false)
+    })
+}
 
 history.getDataHistory = function(callback) {
+	history.invalidData([])
 	var url = base_url+"index.php/history/GetDataHistory"
 	ajaxFormPost(url, {}, function(res) {
         history.dataMasterHistory(res)
@@ -28,13 +30,14 @@ history.pushInvalidData = function() {
 		}
 		ajaxFormPost(url, param , function(res) {
 			console.log("success");
+		}, function(err) {
+			console.log(err)
+			window.location.assign(base_url+"index.php/history")
 		})
 	}
-	console.log("MASUK TJOY")
 }
 
 history.renderGridHistory = function(textSearch, callback) {
-	history.invalidData([]);
 	var data = history.dataMasterHistory()
 
     // if (textSearch != "") {
@@ -62,8 +65,8 @@ history.renderGridHistory = function(textSearch, callback) {
         width: 150,
     }, {
         field: 'TANGGAL_PEMESANAN',
-        title: 'Tanggal Pemesanan',
-        width: 150
+        title: 'Tanggal Pesan',
+        width: 120
     }, {
         // field: 'TYPE_KENDARAAN',
         title: 'Deadline Pembayaran',
@@ -74,18 +77,19 @@ history.renderGridHistory = function(textSearch, callback) {
         	var time = d.JAM_PESAN;
         	if (d.STATUS == "ORDER") {
         		var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
-        		if (new Date(tenggangWaktu).getTime() - new Date().getTime()<=0) {
+        		var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
+        		if (tenggang < 0) {
         			return "----------------------------"
         		}
-        		return tenggangWaktu;
+        		return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss");;
         	}else{
         		return "----------------------------"
         	}
         }
     }, {
         field: 'TANGGAL_KEBERANGKATAN',
-        title: 'Tanggal Keberangkatan',
-        width: 150
+        title: 'Tanggal Berangkat',
+        width: 120
     }, {
         field: 'STATUS',
         title: 'Status',
@@ -96,7 +100,8 @@ history.renderGridHistory = function(textSearch, callback) {
         	var time = d.JAM_PESAN;
         	if (d.STATUS == "ORDER") {
         		var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
-        		if (new Date(tenggangWaktu).getTime() - new Date().getTime()<=0) {
+        		var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
+        		if (tenggang < 0) {
         			history.invalidData.push(d.ID_RIWAYAT_TRANSAKSI);
         			return "BLOCKED"
         		}
@@ -108,22 +113,39 @@ history.renderGridHistory = function(textSearch, callback) {
         }
     }, {
         title: 'Action',
-        width: 75
-        // template : function (d) {
-        //     var dsb = ""
-        //     var tooltip = ""
-        //     var hrefedit = "href=\"javascript:jenismobil.editJenismobil('"+d.ID_JENIS_KENDARAAN+"')\""
-        //     var hrefdelete = "href=\"javascript:jenismobil.deleteJenismobil('"+d.ID_JENIS_KENDARAAN+"')\""
-        //     // var subdata = _.filter(master_daerah.dataMasterKota(), ['ID_PROVINSI', d.ID_PROVINSI]);
-        //     // if (subdata.length > 0) {
-        //     //     dsb = "disabled = \"disabled\""
-        //     //     hrefedit = ""
-        //     //     hrefdelete = ""
-        //     //     tooltip = "data-toggle=\"tooltip\" title=\"Data ini digunakan oleh data mobil travel\""
-        //     // }
-        //     return "<a "+hrefedit+"class=\"btn btn-xs btn-warning\" "+tooltip+dsb+"><i class=\"fa fa-pencil\"></i></a> &nbsp;"+
-        //            "<a "+hrefdelete+"class=\"btn btn-xs btn-danger\" "+tooltip+dsb+" ><i class=\"fa fa-trash\"></i></a>"
-        // }
+        width: 135,
+        template : function (d) {
+        	// var dsb = ""
+        	var btn = ""
+        	var text = ""
+        	var href = ""
+        	if (d.STATUS == 'ORDER') {
+        		btn = "btn-primary"
+        		// dsb = ""
+        		href = "href=\""+base_url+"index.php/transaksi/index/"+d.ID_RIWAYAT_TRANSAKSI+"\""
+        		text = "Kirim Bukti Transfer"
+        	}
+        	if (d.STATUS == 'BLOCKED') {
+        		btn = "btn-danger"
+        		// dsb = "disabled=\"disabled\""
+        		text = "&nbsp;Transaksi terblokir&nbsp;"
+        		href = "href=\"javascript:history.whenTransactionBlocked('"+d.ID_TRAVEL+"','"+d.ID_RIWAYAT_TRANSAKSI+"')\""
+        	}
+        	if (d.STATUS == 'WAITING') {
+        		btn = 'btn-warning'
+        		href = "href=\""+base_url+"index.php/transaksi/index/"+d.ID_RIWAYAT_TRANSAKSI+"\""
+        		text = "&nbsp;Proses Konfirmasi&nbsp;"
+        		// dsb = ""
+        	}
+        	if (d.STATUS == 'CONFIRMED') {
+        		btn = "btn-success"
+        		// dsb = ""
+        		href = ""
+        		text = "&emsp;&nbsp;Terkonfirmasi&nbsp;&emsp;"
+        	}
+
+            return "<a class=\" btn btn-sm "+btn+"\""+href+">"+text+"</a>"
+        }
     }]
 
     $('#gridTransaksi').kendoGrid({
@@ -148,23 +170,49 @@ history.renderGridHistory = function(textSearch, callback) {
     callback()
 }
 
+history.whenTransactionBlocked = function(id_travel, id_transaksi) {
+	// for (var i = history.dataMasterOperatorTravel().length - 1; i >= 0; i--) {
+	// 	history.dataMasterOperatorTravel()[i]
+	// }
+	operatorText = ""
+	for (var i = 0; i < history.dataMasterOperatorTravel().length; i++) {
+		if (history.dataMasterOperatorTravel()[i].ID_TRAVEL == id_travel) {
+		operatorText += history.dataMasterOperatorTravel()[i].NAMA_USER+
+						"/"+history.dataMasterOperatorTravel()[i].NOMOR_TELEPON+
+						"/"+history.dataMasterOperatorTravel()[i].KOTA+"</br>"
+		}
+	}
+	
+
+	swal({
+		title: 'Transaksi</br>('+id_transaksi+') terblokir',
+		type: 'warning',
+		html:
+		  '<b>Hubungi operator dibawah</b></br> '+
+		  operatorText,
+		showCloseButton: true,
+		// showConfrimButton: true,
+		// showCancelButton: true,
+		// focusConfirm: false,
+		// confirmButtonText:
+		//   '<i class="fa fa-thumbs-up"></i> Great!',
+		// confirmButtonAriaLabel: 'Thumbs up, great!',
+		// cancelButtonText:
+		// '<i class="fa fa-thumbs-down"></i>',
+		// cancelButtonAriaLabel: 'Thumbs down',
+	})
+	// $('#historyModal').modal('show');
+}
+
 
 
 history.init = function () {
-	// $.when(
-		history.getDataHistory(function() {
-			history.renderGridHistory("", function() {
-				history.pushInvalidData();
-			})
+	history.getDataOperatorTravel()
+	history.getDataHistory(function() {
+		history.renderGridHistory("", function() {
+			history.pushInvalidData();
 		})
-	// ).done(
-		// function() {
-			
-	// 	}
-	// );
-	// history.getDataHistory(function() {
-	// 	history.renderGridHistory("")
-	// });
+	})
 }
 
 $(function() {

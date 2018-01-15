@@ -19,8 +19,23 @@ class History_model extends CI_Model {
 		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL', 'left');
 
 		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL', 'left');
+		$this->db->order_by('ID_RIWAYAT_TRANSAKSI', 'desc');
 		$this->db->where('ID_MEMBER', $id_user);
 		return $this->db->get()->result();
+	}
+
+	public function GetOperatorTravel()
+	{
+		$this->db->select('ID_TRAVEL, NAMA_USER, NOMOR_TELEPON, KOTA');
+		$this->db->where('LEVEL', "OPERATOR");
+		return $this->db->get('user')->result();
+	}
+
+	public function BlockInvalidData($id)
+	{
+		$set = array('STATUS' => 'BLOCKED');
+		$this->db->where('ID_RIWAYAT_TRANSAKSI', $id);
+		$this->db->update('riwayat_transaksi', $set);
 	}
 
 }

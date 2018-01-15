@@ -173,7 +173,7 @@
         <div class="col-md-3 col-sm-3 pull-right">
           <p class="price">
             <b>
-              Rp.'.$data->TARIF.',-
+              Rp'.number_format($data->TARIF, 0 , '' , ',' ).',-
             </b>
           </p>';
           echo "<a href='' data-toggle='modal' data-target='#chooseTujuan'  class='btn btn-choose btn-sm' onclick=\"landingpage.showDetail('$data->ID_TRAVEL','$data->ID_KOTA_ASAL','$data->ID_KOTA_TUJUAN',$data->TARIF, $data->JML_KURSI, '$data->NAMA_TRAVEL', '$data->ID_JADWAL_TRAVEL', '$data->KOTAT_ASAL', '$data->KOTA_TUJUAN','";

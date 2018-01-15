@@ -12,7 +12,9 @@ class Admin_transaksi_model extends CI_Model {
 		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL');
 		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL');
 		$this->db->order_by('riwayat_transaksi.ID_RIWAYAT_TRANSAKSI', 'ASC');
-		$this->db->where('travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
+		if ($this->session->userdata('LEVEL') != "ADMIN") {
+			$this->db->where('travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
+		}
 
 		return $this->db->get()->result();
 	}

@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/home_history.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/history_page.css">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
@@ -38,64 +39,29 @@
             <div class="col-md-12">
                <center><h2>History Transaksi</h2></center>
             </div>
-            <!-- <table class="table table-striped table-hover table-bordered">
-               <thead class="thead-dark">
-                  <tr>
-                     <th class="col-md-1 col-sm-1">No</th>
-                     <th class="col-md-3 col-sm-3">Nama Travel</th>
-                     <th class="col-md-3 col-sm-3">Tanggal Pesan</th>
-                     <th class="col-md-3 col-sm-3">Jadwal Keberangkatan</th>
-                     <th class="col-md-2 col-sm-2">Status</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>1</td>
-                     <td>
-                        <a href="transaction.html" class="travel-link">
-                           <div class="col-md-3 col-sm-3">
-                              <img src="<?php echo base_url(); ?>/assets/img/andro2.png" alt="">   
-                           </div>
-                           <div class="col-md-9 col-sm-9">
-                              <p class="travel-agent">3Lex Travel</p>   
-                           </div>
-                        </a>
-                     </td>
-                     <td>18-september-2017</td>
-                     <td>25-september-2017</td>
-                     <td>
-                        <a class="col-md-12 btn btn-md btn-warning" href="<?php echo base_url(); ?>index.php/transaksi">
-                           Menunggu Konfirmasi
-                        </a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>2</td>
-                     <td>
-                        <a href="transaction.html" class="travel-link">
-                           <div class="col-md-3">
-                              <img src="<?php echo base_url(); ?>/assets/img/andro2.png" alt="">   
-                           </div>
-                           <div class="col-md-9">
-                              <p class="travel-agent">3Lex Travel</p>   
-                           </div>
-                        </a>
-                     </td>
-                     <td>18-september-2017</td>
-                     <td>25-september-2017</td>
-                     <td>
-                        <a class="col-md-12 btn btn-md btn-success" href="transaction.html">
-                           Telah Konfirmasi
-                        </a>
-                     </td>
-                  </tr>
-                  
-               </tbody>
-            </table> -->
             <dir class="row">
                <div class="col-md-12">
                   <div id="gridTransaksi"></div>
                </div>
             </dir>
+         </div>
+      </div>
+
+      <div id="historyModal" class="modal fade">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                     <h4 class="modal-title">Transaksi (<span data-bind="text:history.namaTravel"></span>) terblokkir</h4>
+                 </div>
+                 <div class="modal-body">
+                     <p>Transaksi yang Anda lakukan telah terblokir oleh sistem kami dikarenakan Anda tidak megirim bukti pembayaran sesuai ketentuan</p>
+                     <p>Untuk lebih detail mohon menghubungi narahubung dibawah</p>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                 </div>
+             </div>
          </div>
       </div>

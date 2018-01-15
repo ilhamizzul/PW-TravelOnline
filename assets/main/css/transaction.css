@@ -22,6 +22,18 @@ body{
 	text-align: center;
 }
 
+.DeadlinePembayaran{
+	color: white;
+	background-color: #29B6F6;
+	font-size: 25px;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	font-family: arial black;
+	text-align: center;
+}
+
 .detail {
 	color: #757575;
 	font-size: 15px;

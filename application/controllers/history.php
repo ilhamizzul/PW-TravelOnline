@@ -25,11 +25,18 @@ class History extends CI_Controller {
 		echo json_encode($datahistory);
 	}
 
+	public function GetDataOperatorTravel()
+	{
+		$data = $this->history_model->GetOperatorTravel();
+
+		echo json_encode($data);
+	}
+
 	public function PushBlockedData()
 	{
 		$data = $this->input->post("Data");
 		foreach ($data as $id) {
-			echo json_encode($id);
+			$this->history_model->BlockInvalidData($id);
 		}
 	}
 
