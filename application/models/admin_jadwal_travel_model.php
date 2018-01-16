@@ -8,7 +8,6 @@ class Admin_jadwal_travel_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('jadwal_travel');
 		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL');
-		$this->db->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN = kendaraan_travel.ID_JENIS_KENDARAAN');
 		$this->db->order_by('jadwal_travel.ID_JADWAL_TRAVEL', 'ASC');
 
 		return $this->db->get()->result();

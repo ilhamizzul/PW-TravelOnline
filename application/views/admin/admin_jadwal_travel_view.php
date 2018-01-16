@@ -32,7 +32,7 @@
            <thead>
               <tr>
                  <th>ID Jadwal Travel</th>
-                 <th>Kendaraan Travel</th>
+                 <th>Nomor Polisi Kendaraan Travel</th>
                  <th>Kota Asal</th>
                  <th>Kota Tujuan</th>
                  <th>Waktu Berangkat</th>
@@ -46,7 +46,7 @@
                         echo '
                             <tr class="table-active">
                                  <td>'.$data->ID_JADWAL_TRAVEL.'</td>
-                                 <td>'.$data->TYPE_KENDARAAN.'</td>
+                                 <td>'.$data->NO_POL_KENDARAAN.'</td>
                                  <td>'.$data->KOTAT_ASAL.'</td>
                                  <td>'.$data->KOTA_TUJUAN.'</td>
                                  <td>'.$data->WAKTU_BERANGKAT.'</td>
@@ -77,12 +77,12 @@
           <fieldset>
                 <div class="col-md-6">
                     <div class="form-group">
-                      <label>Kendaraan Travel</label>
+                      <label>Nomor Polisi Kendaraan Travel</label>
                       <select class="form-control" name="kendaraan_travel">
                         <?php 
                             foreach ($kendaraan as $data) {
                                 echo '
-                                    <option value="'.$data->ID_KENDARAAN_TRAVEL.'">'.$data->TYPE_KENDARAAN.'</option>
+                                    <option value="'.$data->ID_KENDARAAN_TRAVEL.'">'.$data->NO_POL_KENDARAAN.'</option>
                                 ';
                             }
                         ?>      
