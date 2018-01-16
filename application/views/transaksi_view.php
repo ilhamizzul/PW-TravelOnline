@@ -115,7 +115,7 @@
             </div>
             <div class="col-md-12 col-sm-12">
                <h5>Bukti Pembayaran</h5>
-               <?php if ($data_transaksi[0]->STATUS == "ORDE") {
+               <?php if ($data_transaksi[0]->STATUS == "ORDER") {
                   echo "<input  type=\"file\" id=\"inputImage\" name=\"img\" onchange=\"transaksi.readURL(this)\">";
                } ?>
                <!-- <form> -->
@@ -126,7 +126,7 @@
                         <img style="width: 95%; height: auto;" class="img img-responsive" src="<?php echo base_url(); ?>assets/uploads/<?php echo($data_transaksi[0]->BUKTI_BAYAR); ?>" alt="">
                      <?php } ?>
                   </div>
-                  <?php if ($data_transaksi[0]->STATUS == "ORDE") { ?>
+                  <?php if ($data_transaksi[0]->STATUS == "ORDER") { ?>
                      <button style="margin-bottom: 8px;" class="btn btn-primary col-md-12 col-sm-12" onclick="transaksi.uploadBuktiPembayaran('<?php echo $data_transaksi[0]->ID_RIWAYAT_TRANSAKSI; ?>')">Submit</button>
                   <?php } ?>
             </div>

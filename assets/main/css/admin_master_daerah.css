@@ -5,3 +5,13 @@
 .tab-pane-content{
 	margin-top: 10px;
 }
+
+.no-buttom-margin{
+	margin-bottom: auto;
+}
+
+.img-style{
+	max-width: 300px;
+	max-height: 500px;
+	padding: 8px 8px;
+}

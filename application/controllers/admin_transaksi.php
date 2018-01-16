@@ -24,16 +24,18 @@ class Admin_transaksi extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function edit()
+	public function SetStatusTransaksi()
 	{
-		$id = $this->session->userdata('ID_RIWAYAT_TRANSAKSI');
-		if($this->admin_transaksi_model->ubah_status($id) == TRUE){
-			$this->session->set_flashdata('success', 'success');
-			redirect('admin_transaksi');
-		} else {
-			$this->session->set_flashdata('failed', 'failed');
-		    redirect('admin_transaksi');
+		$payload = $this->input->post("Data");
+		$result;
+		if ($this->session->userdata('LEVEL') != 'OPERATOR') {
+			$err = $this->admin_transaksi_model->ubah_status($payload['ID_RIWAYAT_TRANSAKSI'], $payload['STATUS']);
+			$result = setResultInfo(!$err,"OK", []);
+		}else{
+			$result = setResultInfo(true,"Anda Tidak Memiliki hak untuk kegiatan ini", []);
 		}
+
+		echo json_encode($result);
 	}
 
 }
