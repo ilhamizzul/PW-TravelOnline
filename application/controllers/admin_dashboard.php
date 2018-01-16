@@ -5,8 +5,22 @@ class Admin_dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$data['main_view']='admin/dashboard_view';
-		$this->load->view('admin/_layout',$data);
+		if ($this->session->userdata('logged_in') && !is_null($this->session->userdata('LEVEL'))) {
+			$data['main_view']='admin/dashboard_view';
+			$data['loader'] = 'loader';
+			$this->load->view('admin/_layout',$data);
+		}
+		
+	}
+
+	public function GetJumlahMobil($value='')
+	{
+		# code...
+	}
+
+	public function FunctionName($value='')
+	{
+		# code...
 	}
 
 }

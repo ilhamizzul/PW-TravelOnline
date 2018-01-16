@@ -121,9 +121,9 @@
                <!-- <form> -->
                   <div class="thumbnail col-md-6 col-md-offset-3" style="margin-top: 12px;">
                      <?php if ($data_transaksi[0]->BUKTI_BAYAR == "") { ?>
-                       <img style="width: 95%; height: auto;" class="img img-responsive" src="<?php echo base_url(); ?>assets/img/default.jpg" alt="">
+                       <img style="width: 95%; height: auto;" id="imgBuktiTransfer" class="img img-responsive" src="<?php echo base_url(); ?>assets/img/default.jpg" alt="">
                      <?php } else { ?>
-                        <img style="width: 95%; height: auto;" class="img img-responsive" src="<?php echo base_url(); ?>assets/uploads/<?php echo($data_transaksi[0]->BUKTI_BAYAR); ?>" alt="">
+                        <img style="width: 95%; height: auto;" id="imgBuktiTransfer" class="img img-responsive" src="<?php echo base_url(); ?>assets/uploads/<?php echo($data_transaksi[0]->BUKTI_BAYAR); ?>" alt="">
                      <?php } ?>
                   </div>
                   <?php if ($data_transaksi[0]->STATUS == "ORDER") { ?>

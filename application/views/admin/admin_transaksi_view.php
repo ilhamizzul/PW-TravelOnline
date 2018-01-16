@@ -11,13 +11,19 @@
 </div>
 
 <!-- header button and filter -->
-<!-- <div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4 pull-right">
-			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-		</div>
-	</div>
-</div> -->
+<!-- nav -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3 pull-right">
+            <div class="form-group input-group">
+                <input id="textSearchID" type="text" class="form-control" data-bind="value: transaksi.textSearch">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="transaksi.search()" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- grid -->
 <div class="row">

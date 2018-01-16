@@ -196,6 +196,9 @@
                                                 <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
                                             </li>
                                             <li>
+                                                <a href="'.base_url().'index.php/admin_travel_detail_desa">Detail Desa Travel</a>
+                                            </li>
+                                            <li>
                                                 <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
                                             </li>
                                         </ul>
@@ -241,6 +244,9 @@
                                         <ul class="nav nav-second-level">
                                             <li>
                                                 <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
+                                            </li>
+                                            <li>
+                                                <a href="'.base_url().'index.php/admin_travel_detail_desa">Detail Desa Travel</a>
                                             </li>
                                             <li>
                                                 <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
