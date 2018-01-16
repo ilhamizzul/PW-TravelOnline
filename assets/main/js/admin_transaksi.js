@@ -1,6 +1,7 @@
 var transaksi = {}
 transaksi.dataMasterTransaksi = ko.observableArray([])
 transaksi.showButton = ko.observable(false)
+transaksi.textSearch = ko.observable('')
 
 transaksi.newRecordTransakai = function() {
 	var data = {
@@ -60,25 +61,65 @@ transaksi.getDataTransaksi = function(callback){
 transaksi.renderGridTransaksi = function(textSearch) {
 	var data = transaksi.dataMasterTransaksi()
 
-    // if (textSearch != "") {
-    //     var results = _.filter(data, function (item) {
-    //         return _.includes(item.ID_JENIS_KENDARAAN.toLowerCase(), textSearch.toLowerCase())
-    //              ||_.includes(item.MERK_KENDARAAN.toLowerCase(), textSearch.toLowerCase())
-    //              ||_.includes(item.TYPE_KENDARAAN.toLowerCase(), textSearch.toLowerCase())
-    //     });
-    //     data = results
-    // }
+    if (textSearch != "") {
+        var results = _.filter(data, function (item) {
+            return _.includes(item.ID_RIWAYAT_TRANSAKSI.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.ID_JADWAL_TRAVEL.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.NAMA_MEMBER.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.NOMOR_TELEPON.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.TANGGAL_PEMESANAN.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.TANGGAL_KEBERANGKATAN.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.JUMLAH_KURSI.toLowerCase(), textSearch.toLowerCase())
+                 ||_.includes(item.STATUS.toLowerCase(), textSearch.toLowerCase())
+        });
+        data = results
+    }
 
     var columns = [{
         field: 'ID_RIWAYAT_TRANSAKSI',
         title: 'Id Riwayat Transaksi',
         width: 150,
-        locked: true
+        // locked: true
     }, {
         field: 'ID_JADWAL_TRAVEL',
         title: 'Id Jadwal Travel',
         width: 150,
-        locked: true
+        // locked: true
+    }, {
+        field: 'STATUS',
+        title: 'Status',
+        width: 120,
+        // locked: true,
+    }, {
+        // field: 'STATUS',
+        title: 'Tenggang Bayar',
+        width: 150,
+        // locked: true,
+        template: function(d) {
+            var dateorder = d.TANGGAL_PEMESANAN;
+            var datedepart = d.TANGGAL_KEBERANGKATAN;
+            var time = d.JAM_PESAN;
+            if (d.STATUS == "ORDER") {
+                var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
+                var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
+                if (tenggang < 0) {
+                    return "----------------------------"
+                }
+                return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss")
+            }else{
+                return "----------------------------"
+            }
+        }
+    }, {
+        title: 'Action',
+        width: 100,
+        // locked: true,
+        template : function (d) {
+            var dsb = ""
+            var tooltip = ""
+            var hrefdetail = "href=\"javascript:transaksi.showDetailTransaksi('"+d.ID_RIWAYAT_TRANSAKSI+"')\""
+            return "<a "+hrefdetail+"class=\"btn btn-xs btn-primary\" "+tooltip+dsb+">Detail</a>"
+        }
     }, {
         field: 'NAMA_MEMBER',
         title: 'Nama Member',
@@ -99,41 +140,6 @@ transaksi.renderGridTransaksi = function(textSearch) {
         field: 'JUMLAH_KURSI',
         title: 'Kursi',
         width: 50
-    }, {
-        field: 'STATUS',
-        title: 'Status',
-        width: 120,
-        locked: true,
-    }, {
-        // field: 'STATUS',
-        title: 'Tenggang Bayar',
-        width: 150,
-        locked: true,
-        template: function(d) {
-        	var dateorder = d.TANGGAL_PEMESANAN;
-        	var datedepart = d.TANGGAL_KEBERANGKATAN;
-        	var time = d.JAM_PESAN;
-        	if (d.STATUS == "ORDER") {
-        		var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
-        		var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
-        		if (tenggang < 0) {
-        			return "----------------------------"
-        		}
-        		return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss")
-        	}else{
-        		return "----------------------------"
-        	}
-        }
-    }, {
-        title: 'Action',
-        width: 100,
-        locked: true,
-        template : function (d) {
-            var dsb = ""
-            var tooltip = ""
-            var hrefdetail = "href=\"javascript:transaksi.showDetailTransaksi('"+d.ID_RIWAYAT_TRANSAKSI+"')\""
-            return "<a "+hrefdetail+"class=\"btn btn-xs btn-primary\" "+tooltip+dsb+">Detail</a>"
-        }
     }]
 
     $('#gridTransaksi').kendoGrid({
@@ -142,7 +148,7 @@ transaksi.renderGridTransaksi = function(textSearch) {
             pageSize: 20
         },
         sortable: true,
-        height: 450,
+        height: 400,
         width: 800,
         filterable: false,
         scrollable: true,
@@ -154,6 +160,24 @@ transaksi.renderGridTransaksi = function(textSearch) {
             buttonCount: 5
         }
     })
+}
+
+transaksi.search = function() {
+    transaksi.renderGridTransaksi(transaksi.textSearch())
+}
+
+transaksi.textSearch.subscribe(function(e) {
+    if (e == "") {
+        transaksi.renderGridTransaksi("")
+    }
+})
+
+transaksi.searchWhenEnterPressed = function(){
+    $("#textSearchID").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            transaksi.search()
+        }
+    });
 }
 
 transaksi.blokTransaksi = function() {
@@ -287,6 +311,7 @@ transaksi.init = function(){
 	if (model.Role() != "ADMIN") {
 		transaksi.showButton(true)
 	}
+    transaksi.searchWhenEnterPressed()
 }
 
 $(function() {

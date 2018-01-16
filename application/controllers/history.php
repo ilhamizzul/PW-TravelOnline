@@ -10,7 +10,7 @@ class History extends CI_Controller {
 	}
 	public function index()
 	{
-		if ($this->session->userdata('logged_in' && !is_null($this->session->userdata('ID_MEMBER')))) {
+		if ($this->session->userdata('logged_in') && !is_null($this->session->userdata('ID_MEMBER'))) {
 			$data['main_view']='history_view';
 			$this->load->view('index',$data);
 		}else{
