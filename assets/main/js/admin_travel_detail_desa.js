@@ -1,5 +1,20 @@
 var detaildesa = {}
 detaildesa.dataMasterDetailDesa = ko.observableArray([])
+detaildesa.textSearch = ko.observable()
+detaildesa.dataMasterKota = ko.observableArray([])
+detaildesa.dataMasterDesa = ko.observableArray([])
+
+detaildesa.ID_DETAIL_DESA_TRAVEL = ko.observable()
+
+detaildesa.getDataDropdown = function() {
+	var url = "admin_travel_detail_desa/GetDataDropdown"
+	ajaxPost(url, {}, function(res) {
+        var result = JSON.parse(res)
+        console.log(result)
+    })
+}
+
+
 
 detaildesa.getDataDetailDesa = function(callback) {
 	model.Processing(true)
@@ -81,11 +96,30 @@ detaildesa.renderGridDetailDesa = function(textSearch) {
     })
 }
 
+detaildesa.search = function () {
+	detaildesa.renderGridDetailDesa(detaildesa.textSearch())
+}
+
+detaildesa.searchWhenEnterPressed = function(){
+    $("#textSearchID").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            detaildesa.search()
+        }
+    });
+}
+
+detaildesa.textSearch.subscribe(function(e) {
+	if (e == "") {
+		detaildesa.renderGridDetailDesa("")
+	}
+})
+
 
 detaildesa.init = function() {
 	detaildesa.getDataDetailDesa(function() {
 		detaildesa.renderGridDetailDesa("")
 	})
+	detaildesa.searchWhenEnterPressed()
 }
 
 $(function() {

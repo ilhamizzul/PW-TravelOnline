@@ -29,6 +29,13 @@ class Admin_travel_detail_desa extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function GetDataDropdown()
+	{
+		$dataKota = $this->detaildesamodel->GetKota();
+		$dataDesa = $this->detaildesamodel->GetDesa();
+		$data = array('DATA_KOTA' => $dataKota, 'DATA_DESA'=>$dataDesa);
+		echo json_encode($data);
+	}
 }
 
 /* End of file admin_travel_detail_desa.php */

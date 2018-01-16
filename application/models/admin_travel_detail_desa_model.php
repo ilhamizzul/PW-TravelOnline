@@ -13,6 +13,16 @@ class Admin_travel_detail_desa_model extends CI_Model {
 
 		return $this->db->get()->result();
 	}
+
+	public function GetKota()
+	{
+		return $this->db->get('kota')->result();
+	}
+
+	public function GetDesa()
+	{
+		return $this->db->get('desa')->result();
+	}
 }
 
 /* End of file admin_travel_detail_desa_model.php */
