@@ -98,7 +98,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-4 col-sm-6 footer-navigation">
-                  <h3><a href="#">Travel__</a></h3>
+                  <h3><a href="#">Travel_Online</a></h3>
                   <p class="links"><a href="http://www.smktelkom-mlg.sch.id/" target="_blank">SMK Telkom Malang</a></p>
                   <p class="company-name">Project Work© 2017 </p>
                </div>

@@ -50,8 +50,6 @@ class Home extends CI_Controller {
 
 		// $data['detail_desa_travel'] = $this->home_model->get_id_detail_desa_travel();
 		$this->load->view('index',$data);
-
-        $this->output->enable_profiler(TRUE);
 	}
 
     // public function get_data()
