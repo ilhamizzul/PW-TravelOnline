@@ -9,6 +9,8 @@ class Admin_dashboard extends CI_Controller {
 			$data['main_view']='admin/dashboard_view';
 			$data['loader'] = 'loader';
 			$this->load->view('admin/_layout',$data);
+		}else{
+			redirect('admin_auth','refresh');
 		}
 		
 	}

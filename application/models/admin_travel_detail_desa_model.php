@@ -23,6 +23,37 @@ class Admin_travel_detail_desa_model extends CI_Model {
 	{
 		return $this->db->get('desa')->result();
 	}
+
+	public function chekDataDetailDesa($id_desa, $id_travel)
+	{
+		$this->db->where('ID_DESA', $id_desa);
+		$this->db->where('ID_TRAVEL', $id_travel);
+		$data = $this->db->get('detail_desa_travel')->result();
+
+		if (count($data)>0) {
+			$result = $this->db->where('ID_DESA', $id_desa)->get('desa')->result();
+			return $result[0]->NAMA_DESA;
+		} else {
+			return "";
+		}
+		
+	}
+
+	public function insertDataDetailDesa($id_detail_desa_travel, $id_desa, $id_travel)
+	{
+		$data = array(
+			'ID_DETAIL_DESA_TRAVEL' => $id_detail_desa_travel,
+			'ID_DESA' 				=> $id_desa,
+			'ID_TRAVEL' 			=> $id_travel 
+		);
+
+		$this->db->insert('detail_desa_travel', $data);
+		if ($this->db->affected_rows() >0) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 
 /* End of file admin_travel_detail_desa_model.php */

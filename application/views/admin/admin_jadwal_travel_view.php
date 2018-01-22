@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/admin_master_daerah.css">
+<script src="<?php echo base_url(); ?>assets/main/js/admin_jadwal_travel.js"></script>
 
 <!-- Header -->
 <div class="row">
@@ -10,60 +11,42 @@
 </div>
 
 
-<?php 
-  if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
-    echo '
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4 pull-right">
-            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-          </div>
-        </div>
+<!-- nav -->
+<div class="row">
+  <div class="col-md-12">
+    <?php 
+      if ($this->session->userdata('LEVEL') == 'OPERATOR' || $this->session->userdata('LEVEL') == 'OWNER') {
+     ?>
+    <div class="col-md-2 pull-right">
+      <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addJadwalModal" id="addButton" type="button" onclick="jadwaltravel.addJadwalTravel()">Tambah Jadwal <i class="fa fa-plus"></i></button>
+    </div>
+    <?php } ?>
+    <div class="col-md-3 pull-right">
+      <div class="form-group input-group">
+          <input id="textSearchID" type="text" class="form-control" data-bind="value: jadwaltravel.textSearch">
+          <span class="input-group-btn">
+            <button class="btn btn-default" onclick="jadwaltravel.search()" type="button"><i class="fa fa-search"></i></button>
+          </span>
       </div>
-    ';
-  }
-?>
+    </div>
+  </div>
+</div>
       
 
 <!-- grid -->
 <div class="row">
-    <div class="col-md-12">
-        <table class="table table-hover table-striped table-bordered col-md-12" style="margin-top: 12px;">
-           <thead>
-              <tr>
-                 <th>ID Jadwal Travel</th>
-                 <th>Nomor Polisi Kendaraan Travel</th>
-                 <th>Kota Asal</th>
-                 <th>Kota Tujuan</th>
-                 <th>Waktu Berangkat</th>
-                 <th>Waktu Sampai</th>
-                 <th>Tarif</th>
-              </tr>
-           </thead>
-           <tbody>
-                <?php 
-                    foreach ($jadwal as $data) {
-                        echo '
-                            <tr class="table-active">
-                                 <td>'.$data->ID_JADWAL_TRAVEL.'</td>
-                                 <td>'.$data->NO_POL_KENDARAAN.'</td>
-                                 <td>'.$data->KOTAT_ASAL.'</td>
-                                 <td>'.$data->KOTA_TUJUAN.'</td>
-                                 <td>'.$data->WAKTU_BERANGKAT.'</td>
-                                 <td>'.$data->WAKTU_SAMPAI.'</td>
-                                 <td>'.$data->TARIF.'</td>
-                              </tr>
-                        ';
-                    }
-                ?>
-           </tbody>
-        </table>
-
+  <div class="col-md-12">
+    <div class="col-md-12" data-bind="visible: !model.Processing()">
+        <div id="gridJadwalTravel"></div>
     </div>
+    <?php 
+        $this->load->view($loader);
+     ?>
+  </div>
 </div>
 
 <!-- Modal -->
-<div id="addDaerahModal" class="modal fade" role="dialog">
+<div id="addJadwalModal" class="modal fade" role="dialog" data-bind="with: jadwaltravel">
   <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
@@ -72,106 +55,46 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tambah Jadwal Travel</h4>
       </div>
-      <div class="modal-body">
-        <form method="post" action="<?php echo base_url(); ?>index.php/admin_jadwal_travel/save">
+      <div class="modal-body" data-bind="with: recordJadwalTravel">
+        <!-- <form method="post" action="<?php echo base_url(); ?>index.php/admin_jadwal_travel/save"> -->
           <fieldset>
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>Nomor Polisi Kendaraan Travel</label>
-                      <select class="form-control" name="kendaraan_travel">
-                        <?php 
-                            foreach ($kendaraan as $data) {
-                                echo '
-                                    <option value="'.$data->ID_KENDARAAN_TRAVEL.'">'.$data->NO_POL_KENDARAAN.'</option>
-                                ';
-                            }
-                        ?>      
-                      </select>
+                      <input  class="form-control kendoDropdown" id="kendaraan_travel" data-bind="value: ID_KENDARAAN_TRAVEL">
                     </div>
                     <div class="form-group">
                       <label>Kota Asal</label>
-                      <select class="form-control" name="asal">
-                        <?php 
-                            foreach ($kota as $data) {
-                                echo '
-                                    <option value="'.$data->NAMA_KOTA.'">'.$data->NAMA_KOTA.'</option>
-                                ';
-                            }
-                        ?>      
-                      </select>
+                      <input class="form-control kendoDropdown" id="asal" data-bind="value: ID_KOTA_ASAL">     
                     </div>
                     <div class="form-group">
                       <label>Kota Tujuan</label>
-                      <select class="form-control" name="tujuan">
-                        <?php 
-                            foreach ($kota as $data) {
-                                echo '
-                                    <option value="'.$data->NAMA_KOTA.'">'.$data->NAMA_KOTA.'</option>
-                                ';
-                            }
-                        ?>      
-                      </select>
+                      <input class="form-control kendoDropdown" id="tujuan" data-bind="value: ID_KOTA_TUJUAN">     
                     </div>
-                    
-                    
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                       <label>Waktu Berangkat</label>
-                      <input type="time" name="berangkat" class="form-control">
+                      <input type="time" name="berangkat" class="form-control input-form" data-bind="value: WAKTU_BERANGKAT">
                     </div>
                     <div class="form-group">
                       <label>Waktu Sampai</label>
-                      <input type="time" name="sampai" class="form-control">
+                      <input type="time" name="sampai" class="form-control input-form" data-bind="value: WAKTU_SAMPAI">
                     </div>
                     <div class="form-group">
                       <label>Tarif</label>
-                      <input type="number" name="tarif" class="form-control">
+                      <input type="text" name="tarif" class="form-control input-form currency" data-bind="value: TARIF">
                     </div>
-                    <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
                 </div>
                 
             </fieldset>
-        </form>
+        <!-- </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-bind="visible: jadwaltravel.showInAdd" onclick="jadwaltravel.saveJadwalTravel()">Sumbmit</button>
+        <button type="button" class="btn btn-warning" data-bind="visible: jadwaltravel.showInEdit" onclick="jadwaltravel.updateJadwalTravel()">Edit</button>
       </div>
     </div>
-
   </div>
-</div>
-
-<?php
-         $success = $this->session->flashdata('success');
-         if ($success == 'success') {
-           echo '
-            <script types="text/javascript\">
-                $(document).ready(function(){
-                    swal(
-                      "Tambah Jadwal Berhasil!",
-                      "Data Jadwal Travel Berhasil ditambah!",
-                      "success"
-                    )
-                });
-              </script>
-           ';
-         } 
-
-         $failed = $this->session->flashdata('failed');
-         if ($failed == 'failed') {
-           echo '
-            <script types="text/javascript\">
-                $(document).ready(function(){
-                    swal(
-                      "Tambah Jadwal Gagal!",
-                      "Silahkan Cek Lagi Input Form Anda!",
-                      "error"
-                    )
-                });
-              </script>
-           ';
-         } 
-
-
-       ?> 
+</div> 

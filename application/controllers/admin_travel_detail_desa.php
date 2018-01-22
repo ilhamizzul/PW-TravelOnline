@@ -7,6 +7,7 @@ class Admin_travel_detail_desa extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('common_helper');
+		$this->load->model('admin_squence_model', 'squencemodel');
 		$this->load->model('admin_travel_detail_desa_model', 'detaildesamodel');
 	}
 
@@ -17,7 +18,7 @@ class Admin_travel_detail_desa extends CI_Controller {
 			$data['loader'] = 'loader';
 			$this->load->view('admin/_layout',$data);
 		}else{
-			redirect('admn_dashboard','refresh');
+			redirect('admin_dashboard','refresh');
 		}
 		
 	}
@@ -35,6 +36,44 @@ class Admin_travel_detail_desa extends CI_Controller {
 		$dataDesa = $this->detaildesamodel->GetDesa();
 		$data = array('DATA_KOTA' => $dataKota, 'DATA_DESA'=>$dataDesa);
 		echo json_encode($data);
+	}
+
+	public function SaveDetailDesa()
+	{
+		$nama_kolom = 'Detail Desa';
+		$bulan = date('m');
+		$tahun = date('Y');
+		$digit = 4;
+
+		$status = false;
+
+		$id_travel = $this->session->userdata('ID_TRAVEL');
+
+		$desa = array();
+
+		$payload = $this->input->post("Data");
+		$squence = GetDefaultSquence($nama_kolom, $bulan, $tahun);
+
+		foreach ($payload as $newData) {
+			$duplicateData = $this->detaildesamodel->chekDataDetailDesa($newData, $id_travel);
+			if ($duplicateData == "") {
+				$status = ($status || true);
+				$id_detail_desa_travel = idGenerator($nama_kolom,$bulan, $tahun, $digit, ++$squence[1]);
+				if (!$this->detaildesamodel->insertDataDetailDesa($id_detail_desa_travel, $newData, $id_travel)) {
+					echo json_encode(setResultInfo(true,"Gagal menyimpan data", null));
+					return;
+				}
+			}else{
+				$status = ($status || false);
+				array_push($desa, $duplicateData);
+			}
+		}
+
+		$this->squencemodel->updateSquence($squence[0], $squence[1]);
+
+		$result = setResultInfo(!$status, "Beberapa data tidak tersimpan", $desa);
+		echo json_encode($result);
+		return;
 	}
 }
 

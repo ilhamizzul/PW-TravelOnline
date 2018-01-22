@@ -19,6 +19,26 @@ if ( ! function_exists('squenceSetter'))
 	}
 }
 
+if ( ! function_exists('GetDefaultSquence'))
+{
+    function GetDefaultSquence($nama_kolom, $bulan, $tahun)
+	{
+		$CI = get_instance();
+		$CI->load->model('admin_squence_model');
+
+		$result = $CI->admin_squence_model->getLastSquence($nama_kolom, $bulan, $tahun);
+			
+		if ($result[1] == 0) {
+			$CI->admin_squence_model->setNewSquence($nama_kolom, $bulan, $tahun, 1);
+			$result = $CI->admin_squence_model->getLastSquence($nama_kolom, $bulan, $tahun);
+		}
+
+		return $result;
+	}
+}
+
+
+
 if (! function_exists('idGenerator')) {
 	function idGenerator($nama_kolom,$bulan, $tahun, $digit, $lastNumber)
 	{

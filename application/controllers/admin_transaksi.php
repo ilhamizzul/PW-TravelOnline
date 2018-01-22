@@ -28,7 +28,7 @@ class Admin_transaksi extends CI_Controller {
 	{
 		$payload = $this->input->post("Data");
 		$result;
-		if ($this->session->userdata('LEVEL') != 'OPERATOR') {
+		if ($this->session->userdata('LEVEL') == 'OPERATOR') {
 			$err = $this->admin_transaksi_model->ubah_status($payload['ID_RIWAYAT_TRANSAKSI'], $payload['STATUS']);
 			$result = setResultInfo(!$err,"OK", []);
 		}else{

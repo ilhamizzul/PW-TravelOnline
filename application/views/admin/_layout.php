@@ -44,6 +44,12 @@
     <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendor/moment/moment.min.js"></script>
 
+    <!-- inputmask -->
+    <script src="<?php echo base_url(); ?>assets/vendor/inputmask/inputmask.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/inputmask/inputmask.regex.extensions.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/inputmask/inputmask.numeric.extensions.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/inputmask/jquery.inputmask.js"></script>
+
     <script src="<?php echo base_url(); ?>assets/dist/js/common.js"></script>
     
 </head>
