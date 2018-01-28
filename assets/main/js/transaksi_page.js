@@ -26,7 +26,7 @@ transaksi.uploadBuktiPembayaran = function(id) {
 	var url = base_url+"index.php/transaksi/UploadBuktiPembayaran"
 	
 	ajaxFilePost(url, formData, function(res) {
-		console.log(res)
+		window.location.assign(base_url+"index.php/history")
 	})
 }
 

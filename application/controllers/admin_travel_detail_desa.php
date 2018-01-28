@@ -75,6 +75,19 @@ class Admin_travel_detail_desa extends CI_Controller {
 		echo json_encode($result);
 		return;
 	}
+
+	public function DeleteDetailDesa()
+	{
+		$id = $this->input->post("Id");
+		$result;
+		if ($this->detaildesamodel->DeleteDetailDesa($id)) {
+			$result = setResultInfo(false, "OK", null);
+		}else{
+			$result = setResultInfo(true, "Gagal delete data", null);
+		}
+
+		echo json_encode($result);
+	}
 }
 
 /* End of file admin_travel_detail_desa.php */

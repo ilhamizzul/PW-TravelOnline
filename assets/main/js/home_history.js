@@ -29,9 +29,9 @@ history.pushInvalidData = function() {
 			Data : history.invalidData()
 		}
 		ajaxFormPost(url, param , function(res) {
-			console.log("success");
+			// console.log("success");
 		}, function(err) {
-			console.log(err)
+			// console.log(err)
 			window.location.assign(base_url+"index.php/history")
 		})
 	}

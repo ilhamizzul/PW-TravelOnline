@@ -322,10 +322,10 @@
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">3Lex Travel</h4>
+                  <h4 class="modal-title">Travel Online</h4>
                </div>
                <div class="modal-body modal-seat">
-                 <center><h3>Masih Belum Punya Akun?</h3></center>
+                 <center><h3>Sudah Punya Akun?</h3></center>
                  <a href="" class="btn btn-lg btn-success btn-block" onclick="landingpage.closeModal()" id="BtnLogin" data-toggle="modal" data-target="#login">Login</a>
                  <center><h4>Atau</h4></center>
                  <a href="'.base_url().'index.php/register/" class="btn btn-lg btn-info btn-block">Register</a>

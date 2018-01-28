@@ -32,21 +32,45 @@ class Admin_data_operator_model extends CI_Model {
 		return $this->db->get('user')->result();
 	}
 
-	public function insert($id)
+	public function CheckDataOperator()
 	{
+		$payload = $this->input->post("Data");
+
+		$USERNAME_ADMIN = $payload["USERNAME_ADMIN"];
+
+		$this->db->where('USERNAME_ADMIN', $USERNAME_ADMIN);
+		$data = $this->db->get('user')->result();
+
+		if (count($data)>0) {
+			return "Username ".$USERNAME_ADMIN." telah digunakan";
+		}else{
+			return "";
+		}
+	}
+
+	public function IsertDataOperator($id)
+	{
+		$payload = $this->input->post("Data");
+
+		$NAMA_USER = $payload["NAMA_USER"];
+		$USERNAME_ADMIN = $payload["USERNAME_ADMIN"];
+		$PASSWORD_ADMIN = md5($payload["PASSWORD_ADMIN"]);
+		$KOTA = $payload["KOTA"];
+		$ALAMAT_USER = $payload["ALAMAT_USER"];
+		$NOMOR_TELEPON = $payload["NOMOR_TELEPON"];
+		$ID_TRAVEL = $this->session->userdata('ID_TRAVEL');
+		$LEVEL = "OPERATOR";
 
 		$data = array(
 			'ID_USER'		 => $id,
-			'NAMA_USER'		 => $this->input->post('nama_user'),
-			'USERNAME_ADMIN' => $this->input->post('username'),
-			'PASSWORD_ADMIN' => $this->input->post('password'),
-			'KOTA' 			 => $this->input->post('kota'),
-			'ALAMAT_USER' 	 => $this->input->post('alamat'),
-			'NOMOR_TELEPON'  => $this->input->post('telepon'),
-			'ID_TRAVEL'		 => $this->session->userdata('ID_TRAVEL'),
-			'BANK' 			 => $this->input->post('bank'),
-			'NOMOR_REKENING' => $this->input->post('no_rekening'),
-			'LEVEL' 		 => $this->input->post('level')
+			'NAMA_USER'		 => $NAMA_USER,
+			'USERNAME_ADMIN' => $USERNAME_ADMIN,
+			'PASSWORD_ADMIN' => $PASSWORD_ADMIN,
+			'KOTA' 			 => $KOTA,
+			'ALAMAT_USER' 	 => $ALAMAT_USER,
+			'NOMOR_TELEPON'  => $NOMOR_TELEPON,
+			'ID_TRAVEL'		 => $ID_TRAVEL,
+			'LEVEL' 		 => $LEVEL
 		);
 
 		$this->db->insert('user', $data);
@@ -57,6 +81,7 @@ class Admin_data_operator_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
 
 	public function hapus($id)
 	{

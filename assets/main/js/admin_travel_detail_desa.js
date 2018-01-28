@@ -231,6 +231,50 @@ detaildesa.textSearch.subscribe(function(e) {
 	}
 })
 
+detaildesa.deleteDetailDesa = function(id) {
+    var url = "admin_travel_detail_desa/DeleteDetailDesa"
+    var param = {
+        Id : id
+    }
+    swal({
+        title: "Apakah Anda yakin?",
+        text: "Anda akan menghapus detail desa dengan kode "+id+"!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Delete it!',
+        cancelButtonText: 'No, cancel!',
+        buttonsStyling: true,
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            ajaxFormPost(url, param, function(res){
+                if (res.isError) {
+                    swal("Gagal", res.message, "error")
+                }else{
+                    swal({
+                    title: "Berhasil!",
+                    text: "Data berhasil dihapus!",
+                    type: "success",
+                    confirmButtonColor: "#3da09a"
+                    }).then(() => {
+                        detaildesa.getDataDetailDesa(function() {
+                            detaildesa.renderGridDetailDesa("")
+                        })
+                    });
+                }
+                model.Processing(false)
+            })
+        } else if (result.dismiss === 'cancel') {
+            swal(
+                'Dibatalkan',
+                '',
+                'info'
+            )
+        }
+    })}
+
 
 detaildesa.init = function() {
 	detaildesa.getDataDetailDesa(function() {

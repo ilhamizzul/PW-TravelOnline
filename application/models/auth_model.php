@@ -12,7 +12,7 @@ class Auth_model extends CI_Model {
 	public function login()
 	{
 		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$password = md5($this->input->post('password'));
 
 		$query = $this->db->where('USERNAME_ADMIN', $username)
 					      ->where('PASSWORD_ADMIN', $password)

@@ -54,6 +54,17 @@ class Admin_travel_detail_desa_model extends CI_Model {
 			return false;
 		}
 	}
+
+	public function DeleteDetailDesa($id)
+	{
+		$this->db->where('ID_DETAIL_DESA_TRAVEL', $id);
+		$this->db->delete('detail_desa_travel');
+		if ($this->db->affected_rows() >0) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 
 /* End of file admin_travel_detail_desa_model.php */

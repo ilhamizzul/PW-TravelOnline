@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/main/css/admin_master_daerah.css">
+<script src="<?php echo base_url(); ?>assets/main/js/admin_data_operator.js"></script>
 
 <!-- Header -->
 <div class="row">
@@ -7,185 +8,88 @@
     </div>
 </div>
 
-
-<?php 
-  if ($this->session->userdata('LEVEL') == 'OWNER') {
-    echo '
-      <!-- header button and filter -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4 pull-right">
-            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="">Tambah <i class="fa fa-plus"></i></button>
-          </div>
-        </div>
-      </div>
-    ';
-  }
-?>
-      
-
-<!-- grid -->
+<!-- nav -->
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-hover table-striped table-bordered col-md-12" style="margin-top: 12px;">
-           <thead>
-              <tr>
-                 <th>Nama User</th>
-                 <th>Username</th>
-                 <th>ID Travel</th>
-                 <th>Kota</th>
-                 <th>Nomor Telepon</th>
-                 <th>Alamat</th>
-                 <th>Bank</th>
-                 <th>Nomor Rekening</th>
-                 <?php 
-                  if ($this->session->userdata('LEVEL') == 'OWNER') {
-                    echo '
-                      <th>Aksi</th>
-                    ';
-                  }
-                 ?>
-                 
-              </tr>
-           </thead>
-           <tbody>
-                <?php 
-                    foreach ($operator as $data) {
-                        echo '
-                            <tr class="table-active">
-                                 <td>'.$data->NAMA_USER.'</td>
-                                 <td>'.$data->USERNAME_ADMIN.'</td>
-                                 <td>'.$data->ID_TRAVEL.'</td>
-                                 <td>'.$data->KOTA.'</td>
-                                 <td>'.$data->NOMOR_TELEPON.'</td>
-                                 <td>'.$data->ALAMAT_USER.'</td>
-                                 <td>'.$data->BANK.'</td>
-                                 <td>'.$data->NOMOR_REKENING.'</td>';
-
-                        if ($this->session->userdata('LEVEL') == 'OWNER') {
-                          echo '
-                          <td>
-                                   <a class="btn btn-danger" href="'.base_url().'index.php/admin_data_operator/delete/'.$data->ID_USER.'"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
-                                 </td>
-                          ';
-                        }
-                                 echo'
-                                 
-                              </tr>
-                        ';
-                    }
-                ?>
-           </tbody>
-        </table>
+        <?php 
+            if ($this->session->userdata('LEVEL') == 'OWNER') {
+        ?>
+            <div class="col-md-2 pull-right">
+                <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addOperator" id="addButton" type="button" onclick="">Tambah Operator <i class="fa fa-plus"></i></button>
+            </div>
+        <?php 
+            } 
+        ?>
+        <div class="col-md-3 pull-right">
+            <div class="form-group input-group">
+                <input id="textSearchID" type="text" class="form-control" data-bind="value: dataoperator.textSearch">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="dataoperator.search()" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div id="addDaerahModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah User operator</h4>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="<?php echo base_url();?>/index.php/admin_data_operator/save">
-          <fieldset>
-                <input type="text" hidden="true" name="level" value="OPERATOR">
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Nama User</label>
-                      <input type="text" name="nama_user" class="form-control" placeholder="Masukkan Nama User" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Username</label>
-                      <input type="text" name="username" class="form-control" placeholder="Masukkan Username Akun User" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Password</label>
-                      <input type="password" name="password" class="form-control" placeholder="Masukkan Password Akun User" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Nomor Telepon</label>
-                      <input type="number" name="telepon" class="form-control" placeholder="Masukkan Nomor Telepon User">
-                    </div>
-                    <div class="form-group">
-                      <label>Kota</label>
-                      <input type="text" name="kota" class="form-control" placeholder="Masukkan Kota Asal User" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Alamat</label>
-                      <textarea class="form-control" name="alamat" rows="6" placeholder="Masukkan Alamat Detail User" required></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Jenis Bank</label>
-                      <input type="text" name="bank" class="form-control" placeholder="Masukkan Jenis Bank yang Dipakai">
-                    </div>
-                    <div class="form-group">
-                      <label>Nomor Rekening</label>
-                      <input type="number" name="no_rekening" class="form-control" placeholder="Masukkan Nomor Rekening">
-                    </div>
-                    <input type="submit" style="margin-bottom: 12px;" class="btn btn-success btn-block" value="Submit" name="submit">
-                </div>
-            </fieldset>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
+<!-- Grid -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-12" data-bind="visible: !model.Processing()">
+        <div id="gridDataOperator"></div>
     </div>
-
+    <?php 
+        $this->load->view($loader);
+    ?>
   </div>
 </div>
 
-<?php
-         $success = $this->session->flashdata('success');
-         if ($success == 'success') {
-           echo '
-            <script types="text/javascript\">
-                $(document).ready(function(){
-                    swal(
-                      "Tambah Operator Berhasil!",
-                      "Data Operator Berhasil ditambah!",
-                      "success"
-                    )
-                });
-              </script>
-           ';
-         } 
+<!-- Modal -->
+<div id="addOperator" class="modal fade" role="dialog" data-bind="with: dataoperator">
+    <div class="modal-dialog modal-lg">
 
-         $failed = $this->session->flashdata('failed');
-         if ($failed == 'failed') {
-           echo '
-            <script types="text/javascript\">
-                $(document).ready(function(){
-                    swal(
-                      "Tambah Operator Gagal!",
-                      "Silahkan Cek Lagi Input Form Anda!",
-                      "error"
-                    )
-                });
-              </script>
-           ';
-         } 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tambah Operator</h4>
+            </div>
+            <div class="modal-body" data-bind="with: recordDataOperator">
+                <fieldset>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nama User</label>
+                            <input type="text" class="form-control" placeholder="Masukkan Nama Operator" required data-bind="value: NAMA_USER">
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" placeholder="Masukkan Username Akun Operator" required data-bind="value: USERNAME_ADMIN">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Masukkan Password Akun Operator" required data-bind="value: PASSWORD_ADMIN">
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor Telepon</label>
+                            <input type="number" class="form-control" placeholder="Masukkan Nomor Telepon Operator" data-bind="value: NOMOR_TELEPON">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Kota</label>
+                            <input type="text" class="form-control" placeholder="Masukkan Kota Kerja Operator" required data-bind="value: KOTA">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea class="form-control" rows="8" placeholder="Masukkan Alamat Detail Operator" required data-bind="value: ALAMAT_USER"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="dataoperator.saveDataOperator()">Submit</button>
+            </div>
+        </div>
 
-         $delsuccess = $this->session->flashdata('delsuccess');
-         if ($delsuccess == 'delsuccess') {
-           echo '
-            <script types="text/javascript\">
-                $(document).ready(function(){
-                    swal(
-                      "Hapus Berhasil!",
-                      "Data Operator Berhasil dihapus!",
-                      "success"
-                    )
-                });
-              </script>
-           ';
-         } 
-
-       ?> 
+    </div>
+</div>
