@@ -1,7 +1,5 @@
 var transaksi = {}
 
-// transaksi.dataMasterOperatorTravel = ko.observable()
-
 transaksi.getAdminData = function() {
 	var url = base_url+"index.php/transaksi/GetAdminData"
 	ajaxFormPost(url, {}, function(res) {
@@ -72,31 +70,15 @@ transaksi.readURL = function (input) {
         }
 
         reader.readAsDataURL(input.files[0]);
-
-
     }
 }
 
-// transaksi.GetFileSize = function() {
-//     var fi = document.getElementById('inputImage'); // GET THE FILE INPUT.
-
-//     // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
-//     if (fi.files.length > 0) {
-//         // RUN A LOOP TO CHECK EACH SELECTED FILE.
-//         for (var i = 0; i <= fi.files.length - 1; i++) {
-
-//             var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
-//             swal('YOUR FILE SIZE', fsize, 'info')
-//             // document.getElementById('fp').innerHTML =
-//             //     document.getElementById('fp').innerHTML + '<br /> ' +
-//             //         '<b>' + Math.round((fsize / 1024)) + '</b> KB';
-//         }
-//     }
-//    }
-
 transaksi.init = function() {
-	transaksi.getAdminData()
-	transaksi.CountDownDeadline()
+	if (STATUS == "ORDER") {
+		transaksi.getAdminData()
+		transaksi.CountDownDeadline()
+	}
+	
 }
 
 $(function () {

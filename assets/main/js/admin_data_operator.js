@@ -100,6 +100,10 @@ dataoperator.renderGridDataOperator = function(textSearch) {
         }
     }]
 
+    if (model.Role() == "ADMIN") {
+        columns.splice(-1,1)
+    }
+
     $('#gridDataOperator').kendoGrid({
         dataSource: {
             data: data,

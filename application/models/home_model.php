@@ -31,7 +31,7 @@ class Home_model extends CI_Model {
 						->result();*/
 	}
 
-	public function getSisaKursi($asal,$tujuan,$tanggal_berangkat)
+	public function getKursiTerbooking($asal,$tujuan,$tanggal_berangkat)
 	{
 		$this->db->select('
 						riwayat_transaksi.ID_JADWAL_TRAVEL,
@@ -59,38 +59,30 @@ class Home_model extends CI_Model {
 		return $this->db->get('riwayat_transaksi')->result();
 	}
 
-	
-
-
-	// public function get_id_detail_desa_travel()
-	// {		
-
-	// }
-
 	public function get_id_kota_jemput($id)
 	{
 		return $this->db->select('*')->from('desa')->where('ID_KOTA',$id)->get()->result();
 	}
 
-	public function get_id_kota_tujuan()
-	{
-		$this->db->from('desa NATURAL JOIN detail_desa_travel');
-	}
+	// public function get_id_kota_tujuan()
+	// {
+	// 	$this->db->from('desa NATURAL JOIN detail_desa_travel');
+	// }
 
-	public function getDetailDesa($id, $asal, $tujuan)
-	{
-		$this->db->select('*')
-		->from('detail_desa_travel')
-		->join('desa', 'desa.ID_DESA = detail_desa_travel.ID_DESA')
-		->join('kota', 'kota.ID_KOTA = desa.ID_KOTA')
-		->join('kendaraan_travel', 'kendaraan_travel.ID_TRAVEL ='.$id)
-		->where('ID_TRAVEL', $id);
+	// public function getDetailDesa($id, $asal, $tujuan)
+	// {
+	// 	$this->db->select('*')
+	// 	->from('detail_desa_travel')
+	// 	->join('desa', 'desa.ID_DESA = detail_desa_travel.ID_DESA')
+	// 	->join('kota', 'kota.ID_KOTA = desa.ID_KOTA')
+	// 	->join('kendaraan_travel', 'kendaraan_travel.ID_TRAVEL ='.$id)
+	// 	->where('ID_TRAVEL', $id);
 
-		$desaasal = $this->db->where('ID_KOTA', $asal)->get()->result();
-		$desatujuan = $this->db->where('ID_KOTA', $tujuan)->get()->result();
+	// 	$desaasal = $this->db->where('ID_KOTA', $asal)->get()->result();
+	// 	$desatujuan = $this->db->where('ID_KOTA', $tujuan)->get()->result();
 
-		return [$desaasal, $desatujuan];
-	}
+	// 	return [$desaasal, $desatujuan];
+	// }
 
 	public function GetAllKotaDesa()
 	{
@@ -127,6 +119,17 @@ class Home_model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	public function GetTunggakanUser($id)
+	{
+		$where = array(
+			'ID_MEMBER' => $id,
+			'STATUS' => 'ORDER'
+			);
+		$this->db->where($where);
+		$this->db->select('COUNT(STATUS) AS JUMLAH_TANGGUNGAN');
+		return $this->db->get('riwayat_transaksi')->result();
 	}
 }
 

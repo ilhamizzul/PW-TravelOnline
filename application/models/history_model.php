@@ -21,6 +21,23 @@ class History_model extends CI_Model {
 		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL', 'left');
 		$this->db->order_by('ID_RIWAYAT_TRANSAKSI', 'desc');
 		$this->db->where('ID_MEMBER', $id_user);
+		$this->db->where('STATUS !=', 'ORDER');
+		return $this->db->get()->result();
+	}
+
+	public function GetTransactionCharges()
+	{
+		$id_user = $this->session->userdata('ID_MEMBER');
+
+		$this->db->select('*');
+		$this->db->from('riwayat_transaksi');
+		$this->db->join('jadwal_travel', 'jadwal_travel.ID_JADWAL_TRAVEL = riwayat_transaksi.ID_JADWAL_TRAVEL', 'left');
+		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL', 'left');
+
+		$this->db->join('travel', 'travel.ID_TRAVEL = kendaraan_travel.ID_TRAVEL', 'left');
+		$this->db->order_by('ID_RIWAYAT_TRANSAKSI', 'desc');
+		$this->db->where('ID_MEMBER', $id_user);
+		$this->db->where('STATUS', 'ORDER');
 		return $this->db->get()->result();
 	}
 

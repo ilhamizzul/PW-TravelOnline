@@ -9,6 +9,9 @@ class Admin_jadwal_travel_model extends CI_Model {
 		$this->db->from('jadwal_travel');
 		$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL');
 		$this->db->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN = kendaraan_travel.ID_JENIS_KENDARAAN');
+		if ($this->session->userdata('LEVEL') != 'ADMIN') {
+			$this->db->where('kendaraan_travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
+		}
 		$this->db->order_by('jadwal_travel.ID_JADWAL_TRAVEL', 'ASC');
 
 		return $this->db->get()->result();
@@ -19,6 +22,9 @@ class Admin_jadwal_travel_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('kendaraan_travel');
 		$this->db->join('jenis_kendaraan', 'jenis_kendaraan.ID_JENIS_KENDARAAN = kendaraan_travel.ID_JENIS_KENDARAAN');
+		if ($this->session->userdata('LEVEL') != 'ADMIN') {
+			$this->db->where('kendaraan_travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
+		}
 		$this->db->order_by('ID_KENDARAAN_TRAVEL', 'ASC');
 
 		return $this->db->get()->result();

@@ -1,25 +1,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/main/js/transaksi_page.js"></script>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-   <div class="container-fluid">
-      <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
-         <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      </div>
-      <div class="collapse navbar-collapse" id="navcol-1">
-         <ul class="nav navbar-nav navbar-right">
-            <!-- <li role="presentation"><a href="" data-toggle="modal" data-target="#search">Search</a></li> -->
-            <li role="presentation"><a href="<?php echo base_url(); ?>index.php/history/">History </a></li>
-            <li role="presentation">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account </a>
-               <ul class="dropdown-menu">
-                  <li><a href="" data-toggle="modal" data-target="#login">Login</a></li>
-                  <li><a href="<?php echo base_url(); ?>index.php/register/">Register</a></li>
-               </ul>
-            </li>
-         </ul>
-      </div>
-   </div>
-</nav>
+<script type="text/javascript">
+   var STATUS = '<?php echo($data_transaksi[0]->STATUS); ?>'
+</script>
 
 <div class="container">
     <div class="col-md-12 transaction-box">
@@ -29,10 +11,12 @@
             </center>
         </div>
         <div class="col-md-6">
-            <h5>Nomor Rekening</h5>
+         <?php if ($data_transaksi[0]->STATUS == "ORDER") { ?>
+            <h5>Kirim pembayaran ke nomor rekening dibawah</h5>
             <div class="rekening col-md-12 col-sm-12">
                 <p id="BANK"></p>
             </div>
+         <?php } ?>
             <h5>Detail</h5>
             <div class="col-md-12 col-sm-12 panel panel-default detail">
                <form class="form-horizontal">
@@ -107,11 +91,13 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-12 col-sm-12">
+            <?php if ($data_transaksi[0]->STATUS == "ORDER") { ?>
                <h5>Deadline Pengiriman Bukti Bayar</h5>
                <div class="col-md-12 col-sm-12 DeadlinePembayaran">
                   <p id="STATUS" hidden="hidden"><?php echo $data_transaksi[0]->STATUS; ?></p>
                   <p id="CountDown"></p>
                </div>
+            <?php } ?>
             </div>
             <div class="col-md-12 col-sm-12">
                <h5>Bukti Pembayaran</h5>

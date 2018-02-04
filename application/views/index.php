@@ -87,6 +87,53 @@
          </div>
       </div>
 
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+              <div class="navbar-header"><a class="navbar-brand navbar-link" href="<?php echo base_url(); ?>index.php/home">Travel<strong>Online</strong></a>
+                  <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              </div>
+              <div class="collapse navbar-collapse" id="navcol-1">
+                  <ul class="nav navbar-nav navbar-right">
+                      <?php if ($this->uri->segment(1)=="home") { ?>
+                        <li role="presentation"><a href="" data-toggle="modal" data-target="#search">Search</a></li>
+                      <?php } ?>
+                      <?php 
+                        if($this->session->userdata('logged_in') == true && !is_null($this->session->userdata('ID_MEMBER')))
+                      { ?>
+                        <script type="text/javascript">
+                          $(function() {
+                            getTunggakan()
+                          })
+                        </script>
+                         <li role="presentation"><a href="<?php echo base_url(); ?>index.php/tanggungan">Transaction Charges<span id="Tanggugan" class="badge"></span></a></li>
+                         <li role="presentation"><a href="<?php echo base_url(); ?>index.php/history/">History </a></li>
+                     <?php 
+                        } 
+                     ?>
+                      <li role="presentation">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account </a>
+                          <ul class="dropdown-menu">
+                              <?php 
+                           if ($this->session->userdata('logged_in') == TRUE && !is_null($this->session->userdata('ID_MEMBER'))) {
+                             echo '
+                               <li><a href="" disabled>Welcome, '.$this->session->userdata('USERNAME').'</a></li>
+                               <li><a href="'.base_url().'index.php/login/logout">Logout</a></li>
+                             ';
+                           } else {
+                             echo '
+                             <li><a href="" data-toggle="modal" data-target="#login">Login</a></li>
+                             <li><a href="'.base_url().'index.php/register/">Register</a></li>
+                           ';
+                           }
+                           
+                           ?>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+
       
 
       <!-- CONTENT -->
@@ -127,6 +174,13 @@
       </footer>
       
       <script>
+          getTunggakan = function() {
+            url = base_url+"/index.php/home/GetTunggakan"
+            ajaxPost(url,{},function(res) {
+              result = JSON.parse(res)
+              $("#Tanggugan").text(result[0].JUMLAH_TANGGUNGAN);
+            })
+          }
          $(document).ready(function(){
              $('#note').click(function(){
                  $(this).fadeOut();

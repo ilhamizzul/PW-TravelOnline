@@ -7,23 +7,41 @@ history.namaTravel = ko.observable()
 history.getDataOperatorTravel = function() {
 	var url = base_url+"index.php/history/GetDataOperatorTravel"
 	ajaxFormPost(url, {}, function(res) {
+        // var result = JSON.parse(res)
         history.dataMasterOperatorTravel(res)
+        // model.Processing(false)
     })
 }
 
 history.getDataHistory = function(callback) {
 	history.invalidData([])
-	var url = base_url+"index.php/history/GetDataHistory"
+	var url = base_url+"index.php/history/GetDataTransactionCharges"
 	ajaxFormPost(url, {}, function(res) {
         history.dataMasterHistory(res)
         callback()
     })
 }
 
+history.pushInvalidData = function() {
+	if (history.invalidData().length > 0) {
+		url = base_url+"index.php/history/PushBlockedData"
+		param = {
+			Data : history.invalidData()
+		}
+		ajaxFormPost(url, param , function(res) {
+			// console.log("success");
+		}, function(err) {
+			// console.log(err)
+			window.location.assign(base_url+"index.php/history")
+		})
+	}
+}
+
 history.renderGridHistory = function(textSearch, callback) {
 	var data = history.dataMasterHistory()
 
     var columns = [{
+        // field: 'Kode',
         title: 'Nomor',
         width: 50,
         template : function(dataItem){
@@ -41,40 +59,47 @@ history.renderGridHistory = function(textSearch, callback) {
         title: 'Tanggal Pesan',
         width: 120
     }, {
+        title: 'Deadline Pembayaran',
+        width: 150,
+        template: function(d) {
+        	var dateorder = d.TANGGAL_PEMESANAN;
+        	var datedepart = d.TANGGAL_KEBERANGKATAN;
+        	var time = d.JAM_PESAN;
+    		var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
+    		var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
+    		if (tenggang < 0) {
+    			return "----------------------------"
+    		}
+    		return moment(tenggangWaktu).format("YYYY-MM-DD hh:mm:ss");
+        }
+    }, {
         field: 'TANGGAL_KEBERANGKATAN',
         title: 'Tanggal Berangkat',
         width: 120
     }, {
         field: 'STATUS',
         title: 'Status',
-        width: 75
+        width: 75,
+        template: function(d) {
+        	var dateorder = d.TANGGAL_PEMESANAN;
+        	var datedepart = d.TANGGAL_KEBERANGKATAN;
+        	var time = d.JAM_PESAN;
+    		var tenggangWaktu = SetTenggangWaktu(dateorder, datedepart, time);
+    		var tenggang = new Date(tenggangWaktu).getTime() - new Date().getTime()
+    		if (tenggang < 0) {
+    			history.invalidData.push(d.ID_RIWAYAT_TRANSAKSI);
+    			return "BLOCKED"
+    		}
+    		return "ORDER";
+        	
+        }
     }, {
         title: 'Action',
         width: 135,
         template : function (d) {
-        	// var dsb = ""
-        	var btn = ""
-        	var text = ""
-        	var href = ""
-        	if (d.STATUS == 'BLOCKED') {
-        		btn = "btn-danger"
-        		// dsb = "disabled=\"disabled\""
-        		text = "&nbsp;Transaksi terblokir&nbsp;"
-        		href = "href=\"javascript:history.whenTransactionBlocked('"+d.ID_TRAVEL+"','"+d.ID_RIWAYAT_TRANSAKSI+"')\""
-        	}
-        	if (d.STATUS == 'WAITING') {
-        		btn = 'btn-warning'
-        		href = "href=\""+base_url+"index.php/transaksi/index/"+d.ID_RIWAYAT_TRANSAKSI+"\""
-        		text = "&nbsp;Proses Konfirmasi&nbsp;"
-        		// dsb = ""
-        	}
-        	if (d.STATUS == 'CONFIRMED') {
-        		btn = "btn-success"
-        		// dsb = ""
-        		href = ""
-        		text = "&emsp;&nbsp;Terkonfirmasi&nbsp;&emsp;"
-        	}
-
+    		var btn = "btn-primary"
+    		var href = "href=\""+base_url+"index.php/transaksi/index/"+d.ID_RIWAYAT_TRANSAKSI+"\""
+    		var text = "Kirim Bukti Transfer"
             return "<a class=\" btn btn-sm "+btn+"\""+href+">"+text+"</a>"
         }
     }]
@@ -90,38 +115,11 @@ history.renderGridHistory = function(textSearch, callback) {
         filterable: false,
         scrollable: true,
         columns: columns,
-        mobile : true,
-        pageable: {
-            refresh: true,
-            pageSizes: true,
-            buttonCount: 5
-        }
+        mobile : true
     })
 
     callback()
 }
-
-history.whenTransactionBlocked = function(id_travel, id_transaksi) {
-	operatorText = ""
-	for (var i = 0; i < history.dataMasterOperatorTravel().length; i++) {
-		if (history.dataMasterOperatorTravel()[i].ID_TRAVEL == id_travel) {
-		operatorText += history.dataMasterOperatorTravel()[i].NAMA_USER+
-						"/"+history.dataMasterOperatorTravel()[i].NOMOR_TELEPON+
-						"/"+history.dataMasterOperatorTravel()[i].KOTA+"</br>"
-		}
-	}
-	
-
-	swal({
-		title: 'Transaksi</br>('+id_transaksi+') terblokir',
-		type: 'warning',
-		html:
-		  '<b>Hubungi operator dibawah</b></br> '+
-		  operatorText,
-		showCloseButton: true
-	})
-}
-
 
 
 history.init = function () {

@@ -42,7 +42,7 @@ class Home extends CI_Controller {
 
         $date = SetDateTomorrow();
         $globaldata = $this->home_model->get_data_travel("default","default");
-		$filterdata = $this->home_model->getSisaKursi("default","default",$date);
+		$filterdata = $this->home_model->getKursiTerbooking("default","default",$date);
 		$data['main_view']='home-page_view';
         $data['pagination'] = $this->pagination->create_links();
         
@@ -51,19 +51,6 @@ class Home extends CI_Controller {
 		// $data['detail_desa_travel'] = $this->home_model->get_id_detail_desa_travel();
 		$this->load->view('index',$data);
 	}
-
-    // public function get_data()
-    // {   
-    //     $payload = $this->input->post('Data');
-    //     $from = $payload['FROM'];
-    //     $to = $payload['TO'];
-    //     $date = $payload['DEPARTURE'];
-    //     $minimumseat = $payload['MINIMUMSEAT'];
-
-    //     echo json_encode($payload);
-        
-    //     redirect('home/setFilteredData/'.$from.'/'.$to.'/'.$date.'/'.$minimumseat);
-    // }
 
     public function setFilteredData()
     {
@@ -99,28 +86,13 @@ class Home extends CI_Controller {
         $newdate = new DateTime($date);
         $this->session->set_flashdata('DATEDEPART', $newdate->format('Y-m-d'));
         $globaldata = $this->home_model->get_data_travel($from, $to);
-        $filterdata = $this->home_model->getSisaKursi($from,$to,$date);
+        $filterdata = $this->home_model->getKursiTerbooking($from,$to,$date);
         $data['main_view']='home-page_view';
         $data['pagination'] = $this->pagination->create_links();
         $data['data_trevel'] = SetRealDataTravel($globaldata,$filterdata,$minimumseat);
 
         $this->load->view('index', $data);
     }
-
-
-
-    // public function showDetail()
-    // {
-    //     $id = $this->uri->segment(3);
-    //     $asal = $this->uri->segment(4);
-    //     $tujuan = $this->uri->segment(5);
-
-    //     $data['desaasal'] = $this->home_model->getDetailDesa($id, $asal, $tujuan)[0];
-    //     $data['desatujuan'] = $this->home_model->getDetailDesa($id, $asal, $tujuan)[1];
-
-    //     $data['main_view']='home-page_view';
-    //     $this->load->view('index', $data);
-    // }
 
     public function GetDataKota()
     {
@@ -141,6 +113,21 @@ class Home extends CI_Controller {
         $result = setResultInfo(!$status,"OK", $id);
 
         echo json_encode($result);
+    }
+
+    public function GetTunggakan()
+    {
+        $id = $this->session->userdata('ID_MEMBER');
+
+        $data = $this->home_model->GetTunggakanUser($id);
+
+        $array = array(
+            'TRANSACTION_CHARGES' => $data[0]->JUMLAH_TANGGUNGAN
+        );
+        
+        $this->session->set_userdata($array);
+
+        echo json_encode($data);
     }
 }
 

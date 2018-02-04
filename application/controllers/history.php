@@ -25,6 +25,12 @@ class History extends CI_Controller {
 		echo json_encode($datahistory);
 	}
 
+	public function GetDataTransactionCharges()
+	{
+		$transactioncharges = $this->history_model->GetTransactionCharges();
+		echo json_encode($transactioncharges);
+	}
+
 	public function GetDataOperatorTravel()
 	{
 		$data = $this->history_model->GetOperatorTravel();

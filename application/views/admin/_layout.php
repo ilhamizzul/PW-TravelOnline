@@ -122,158 +122,90 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <?php 
-                            if ($this->session->userdata('LEVEL') == 'ADMIN') {
-                                echo '
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_daerah">Daerah</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_jenis_mobil">Jenis Mobil</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_pelanggan">Pelanggan</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-car fa-fw"></i> Travel<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_travel_agen">Agen Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-usd fa-fw"></i> Transaksi</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-user fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_data_pemilik">Data Pemilik</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_data_operator">Data Operator</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                ';
-                            }
-
-                            if ($this->session->userdata('LEVEL') == 'OWNER') {
-                                echo '
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Master<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_daerah">Daerah</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_jenis_mobil">Jenis Mobil</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_pelanggan">Pelanggan</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Travel<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_travel_detail_desa">Detail Desa Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_data_operator">Data Operator</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                ';
-                            }
-
-                            if ($this->session->userdata('LEVEL') == 'OPERATOR') {
-                                echo '
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Master<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_daerah">Daerah</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_jenis_mobil">Jenis Mobil</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_master_pelanggan">Pelanggan</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Travel<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_mobil_travel">Mobil Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_travel_detail_desa">Detail Desa Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="'.base_url().'index.php/admin_jadwal_travel">Jadwal Travel</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="'.base_url().'index.php/admin_transaksi"><i class="fa fa-edit fa-fw"></i> Transaksi</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="'.base_url().'index.php/account_setting">Account Setting</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                ';
-                            }
-                        ?>
-            
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/admin_dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_master_daerah">Daerah</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_master_jenis_mobil">Jenis Mobil</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_master_pelanggan">Pelanggan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-car fa-fw"></i> Travel<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <?php 
+                                    if ($this->session->userdata('LEVEL') == 'ADMIN') {
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_travel_agen">Agen Travel</a>
+                                </li>
+                                <?php 
+                                    }
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_mobil_travel">Mobil Travel</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_jadwal_travel">Jadwal Travel</a>
+                                </li>
+                                <?php 
+                                    if ($this->session->userdata('LEVEL') == 'OWNER' || $this->session->userdata('LEVEL') == 'OPERATOR') {
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_travel_detail_desa">Detail Desa Travel</a>
+                                </li>
+                                <?php
+                                    } 
+                                 ?>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/admin_transaksi"><i class="fa fa-usd fa-fw"></i> Transaksi</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Administrasi<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <?php 
+                                    if ($this->session->userdata('LEVEL') == 'ADMIN') {
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_data_pemilik">Data Pemilik</a>
+                                </li>
+                                <?php 
+                                    }
+                                 ?>
+                                 <?php 
+                                    if ($this->session->userdata('LEVEL') == 'ADMIN' || $this->session->userdata('LEVEL') == 'OWNER') {
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/admin_data_operator">Data Operator</a>
+                                </li>
+                                <?php 
+                                    }
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/account_setting">Account Setting</a>
+                                </li>
+                                <?php 
+                                    if ($this->session->userdata('LEVEL') == 'OWNER') {
+                                 ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index.php/travel_setting">Travel Setting</a>
+                                </li>
+                                <?php 
+                                    } 
+                                ?>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -72,14 +72,25 @@ landingpage.init = function() {
 	landingpage.getDataKota()
 }
 
-landingpage.showDetail = function(id_travel, asal, tujuan, tarif, kursi, namatravel, id_jadwal_travel, kotaasal, kotatujuan, datedepart) {
+landingpage.showDetail = function(id_travel, asal, tujuan, tarif, kursi, namatravel, id_jadwal_travel, kotaasal, kotatujuan, datedepart, srcLogo) {
+	if ($("#Tanggugan").text() > 5) {
+		return swal('Forbidden!',
+				'Anda masih memiliki 5 tanggungan transaksi, untuk melakukan pemesanan, silakan melakukan pembayaran dan mengirim bukti tranfer',
+				'error').then((result) => {
+					window.location.assign(base_url+"index.php/tanggungan")
+				})
+		
+	}
+	$("#chooseTujuan").modal('show')
+
 	ko.mapping.fromJS(landingpage.newRecordTransaksi(), landingpage.recordTransaksi)
 	landingpage.namaKotaAS(kotaasal)
 	landingpage.namaKotaTJ(kotatujuan)
 	if (datedepart != "") {
 		landingpage.recordFilter.DEPARTURE(datedepart)
 	}
-	// console.log(id, asal, tujuan)
+	// console.log(srcLogo)
+	$("#imageDetail").attr("src", srcLogo)
 
 	tmpKursi = kursi
 	landingpage.namaTravel(namatravel)
@@ -113,10 +124,6 @@ landingpage.saveTransaction = function () {
 	data.JAM_PESAN = moment(new Date()).format('HH:mm:ss')
 	data.TOTAL_BAYAR = FormatCurrency(data.TOTAL_BAYAR)
 
-	// console.log()
-
-	console.log(data)
-
 	var url = base_url+"index.php/home/SaveTransaction"
 	var param = {
 		Data : data
@@ -136,7 +143,6 @@ landingpage.saveTransaction = function () {
     }).then((result) => {
         if (result.value) {
             $('#chooseTujuan').modal('hide');
-            // model.Processing(true)
             ajaxFormPost(url, param, function(res){
                 if (res.isError) {
                     swal("Gagal", res.message, "error")
@@ -147,10 +153,10 @@ landingpage.saveTransaction = function () {
                     type: "success",
                     confirmButtonColor: "#3da09a"
                     }).then(() => {
-                    	location.href = base_url+'index.php/transaksi/index/'+res.data
+                    	window.location.assign(base_url+'index.php/transaksi/index/'+res.data)
+                    	// location.href = base_url+'index.php/transaksi/index/'+res.data
                     });
                 }
-                // model.Processing(false)
             })
         } else if (result.dismiss === 'cancel') {
             $.when(
