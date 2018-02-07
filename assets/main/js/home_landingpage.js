@@ -73,7 +73,7 @@ landingpage.init = function() {
 }
 
 landingpage.showDetail = function(id_travel, asal, tujuan, tarif, kursi, namatravel, id_jadwal_travel, kotaasal, kotatujuan, datedepart, srcLogo) {
-	if ($("#Tanggugan").text() > 5) {
+	if ($("#Tanggugan").text() >= 5) {
 		return swal('Forbidden!',
 				'Anda masih memiliki 5 tanggungan transaksi, untuk melakukan pemesanan, silakan melakukan pembayaran dan mengirim bukti tranfer',
 				'error').then((result) => {

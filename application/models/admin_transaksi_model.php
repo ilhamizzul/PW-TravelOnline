@@ -21,7 +21,10 @@ class Admin_transaksi_model extends CI_Model {
 
 	public function ubah_status($id, $status)
 	{
-		$data = array('STATUS'=> $status);
+		$data = array(
+			'STATUS'=> $status,
+			'APPROVAL' => $this->session->userdata('ID_USER')
+		);
 
 			$this->db->where('ID_RIWAYAT_TRANSAKSI', $id)
 					 ->update('riwayat_transaksi', $data);

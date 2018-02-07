@@ -4,6 +4,27 @@ history.dataMasterOperatorTravel = ko.observableArray([])
 history.invalidData = ko.observableArray([])
 history.namaTravel = ko.observable()
 
+history.newDataTiket = function() {
+    var data = {
+        KOTAT_ASAL              : "",
+        KOTA_TUJUAN             : "",
+        NAMA_TRAVEL             : "",
+        WAKTU_BERANGKAT         : "",
+        WAKTU_SAMPAI            : "",
+        APPROVAL                : "",
+        CONTACT                 : "",
+        FULL                    : "",
+        ALAMAT_PENJEMPUTAN      : "",
+        ALAMAT_PENURUNAN        : "",
+        ID_RIWAYAT_TRANSAKSI    : "",
+        NAMA_OPERATOR           : ""       
+    }
+    return data
+}
+
+history.dataTiket = ko.mapping.fromJS(history.newDataTiket())
+
+
 history.getDataOperatorTravel = function() {
 	var url = base_url+"index.php/history/GetDataOperatorTravel"
 	ajaxFormPost(url, {}, function(res) {
@@ -12,15 +33,15 @@ history.getDataOperatorTravel = function() {
 }
 
 history.getDataHistory = function(callback) {
-	history.invalidData([])
-	var url = base_url+"index.php/history/GetDataHistory"
-	ajaxFormPost(url, {}, function(res) {
+    history.invalidData([])
+    var url = base_url+"index.php/history/GetDataHistory"
+    ajaxFormPost(url, {}, function(res) {
         history.dataMasterHistory(res)
         callback()
     })
 }
 
-history.renderGridHistory = function(textSearch, callback) {
+history.renderGridHistory = function(textSearch) {
 	var data = history.dataMasterHistory()
 
     var columns = [{
@@ -71,8 +92,8 @@ history.renderGridHistory = function(textSearch, callback) {
         	if (d.STATUS == 'CONFIRMED') {
         		btn = "btn-success"
         		// dsb = ""
-        		href = ""
-        		text = "&emsp;&nbsp;Terkonfirmasi&nbsp;&emsp;"
+                href = "href=\"javascript:history.ShowModalTicket('"+d.ID_RIWAYAT_TRANSAKSI+"')\""
+        		text = "&emsp;&nbsp;Terkonfirmasi&nbsp; &emsp;"
         	}
 
             return "<a class=\" btn btn-sm "+btn+"\""+href+">"+text+"</a>"
@@ -97,8 +118,6 @@ history.renderGridHistory = function(textSearch, callback) {
             buttonCount: 5
         }
     })
-
-    callback()
 }
 
 history.whenTransactionBlocked = function(id_travel, id_transaksi) {
@@ -122,14 +141,29 @@ history.whenTransactionBlocked = function(id_travel, id_transaksi) {
 	})
 }
 
+history.ShowModalTicket = function(id_transaksi) {
+    var data = _.filter(history.dataMasterHistory(),{'ID_RIWAYAT_TRANSAKSI':id_transaksi})[0]
+    var operator = _.filter(history.dataMasterOperatorTravel(),{'ID_USER':data.APPROVAL})[0]
+    // console.log(operator)
+    data.FULL = data.JUMLAH_KURSI+" : Rp"+ChangeToRupiah(parseInt(data.TOTAL_BAYAR))
+    data.CONTACT = operator.NOMOR_TELEPON
+    data.NAMA_OPERATOR = operator.NAMA_USER
+    ko.mapping.fromJS(data, history.dataTiket)
+    $("#ModalTiket").modal("show")
+}
+
+history.printTiket = function(selector) {
+    var date = moment(new Date()).format('DD-MMM-YYYY-HH-mm')
+    kendo.drawing.drawDOM($(selector)).then(function(group){
+        kendo.drawing.pdf.saveAs(group, "Transaksi"+date+".pdf");
+    });
+}
 
 
 history.init = function () {
 	history.getDataOperatorTravel()
 	history.getDataHistory(function() {
-		history.renderGridHistory("", function() {
-			history.pushInvalidData();
-		})
+		history.renderGridHistory("")
 	})
 }
 

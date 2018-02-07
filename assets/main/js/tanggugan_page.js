@@ -4,14 +4,14 @@ history.dataMasterOperatorTravel = ko.observableArray([])
 history.invalidData = ko.observableArray([])
 history.namaTravel = ko.observable()
 
-history.getDataOperatorTravel = function() {
-	var url = base_url+"index.php/history/GetDataOperatorTravel"
-	ajaxFormPost(url, {}, function(res) {
-        // var result = JSON.parse(res)
-        history.dataMasterOperatorTravel(res)
-        // model.Processing(false)
-    })
-}
+// history.getDataOperatorTravel = function() {
+// 	var url = base_url+"index.php/history/GetDataOperatorTravel"
+// 	ajaxFormPost(url, {}, function(res) {
+//         // var result = JSON.parse(res)
+//         history.dataMasterOperatorTravel(res)
+//         // model.Processing(false)
+//     })
+// }
 
 history.getDataHistory = function(callback) {
 	history.invalidData([])
@@ -123,7 +123,7 @@ history.renderGridHistory = function(textSearch, callback) {
 
 
 history.init = function () {
-	history.getDataOperatorTravel()
+	// history.getDataOperatorTravel()
 	history.getDataHistory(function() {
 		history.renderGridHistory("", function() {
 			history.pushInvalidData();

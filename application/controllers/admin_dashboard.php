@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin_dashboard extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->load->model('admin_dashboard_model', 'dashboardmodel');
+	}
+
 	public function index()
 	{
 		if ($this->session->userdata('logged_in') && !is_null($this->session->userdata('LEVEL'))) {
@@ -15,14 +22,12 @@ class Admin_dashboard extends CI_Controller {
 		
 	}
 
-	public function GetJumlahMobil($value='')
-	{
-		# code...
-	}
 
-	public function FunctionName($value='')
+	public function GetTransaksi()
 	{
-		# code...
+		$data = $this->dashboardmodel->GetDataTransaksi();
+
+		echo json_encode($data);
 	}
 
 }

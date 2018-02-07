@@ -24,7 +24,8 @@ class Login_model extends CI_Model {
 			$data = array(
 				'USERNAME' => $username,
 				'logged_in' => TRUE,
-				'ID_MEMBER' => $result[0]->ID_MEMBER
+				'ID_MEMBER' => $result[0]->ID_MEMBER,
+				'NAMA_MEMBER' => $result[0]->NAMA_MEMBER
 				 );
 
 			$this->session->set_userdata($data);

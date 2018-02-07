@@ -11,9 +11,8 @@
 <!-- header button and filter -->
 <div class="row">
 	<div class="col-md-12">
-		<div class="col-md-4 pull-right">
+		<div class="col-md-2 pull-right">
 			<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addDaerahModal" id="addButton" type="button" onclick="master_daerah.showAddModal()">Tambah <span data-bind="text: master_daerah.addButtonText"></span> <i class="fa fa-plus"></i></button>
-			<button class="btn btn-success pull-right padding-right" type="button">Import from Excel <i class="fa fa-download"></i></button>
 		</div>
 		<div class="col-md-3 pull-right">
 			<div class="form-group input-group">

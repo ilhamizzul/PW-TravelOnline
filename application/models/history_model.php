@@ -43,7 +43,7 @@ class History_model extends CI_Model {
 
 	public function GetOperatorTravel()
 	{
-		$this->db->select('ID_TRAVEL, NAMA_USER, NOMOR_TELEPON, KOTA');
+		$this->db->select('ID_USER, ID_TRAVEL, NAMA_USER, NOMOR_TELEPON, KOTA');
 		$this->db->where('LEVEL', "OPERATOR");
 		return $this->db->get('user')->result();
 	}
