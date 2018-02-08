@@ -30,6 +30,31 @@ class Admin_dashboard extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function GetRevenue()
+	{
+		$data = $this->dashboardmodel->GetDataRevenue();
+
+		echo json_encode($data);
+	}
+
+	public function GetHeaderData()
+	{
+		$transaksi = $this->dashboardmodel->GetJumlahTransaksi();
+		$mobil = $this->dashboardmodel->GetJumlahMobil();
+		$cakupandaerah = $this->dashboardmodel->GetJumlahCakupanDaerah();
+		$pelanggan = $this->dashboardmodel->GetJumlahPelanggan();
+
+		$result = (object) [
+			'TRANSAKSI' => $transaksi, 
+			'MOBIL' => $mobil, 
+			'CAKUPANDAERAH' => $cakupandaerah, 
+			'PELANGGAN' => $pelanggan
+		];
+
+		echo json_encode($result);
+
+	}
+
 }
 
 /* End of file admin_dasboard.php */

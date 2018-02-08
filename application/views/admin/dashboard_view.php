@@ -7,7 +7,7 @@
 <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="row">
+<div class="row" data-bind="visible: !model.Processing()">
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -16,12 +16,12 @@
                         <i class="fa fa-usd fa-fw fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
+                        <div class="huge"><span id="jumlahTransaksi"></span></div>
                         <div>Transaksi</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo base_url() ?>index.php/admin_transaksi">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -38,12 +38,12 @@
                         <i class="fa fa-car fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge"><span id="jumlahMobil"></span></div>
                         <div>Mobil</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo base_url() ?>index.php/admin_mobil_travel">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,12 +60,12 @@
                         <i class="fa fa-map fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">124   </div>
+                        <div class="huge"><span id="jumlahCakupanDaerah"></span></div>
                         <div>Cakupan Daerah</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo base_url() ?>index.php/admin_travel_detail_desa">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -82,12 +82,12 @@
                         <i class="fa fa-user fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
-                        <div>Operator</div>
+                        <div class="huge"><span id="jumlahPelanggan"></span></div>
+                        <div>Pelanggan</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo base_url() ?>index.php/admin_master_pelanggan">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -97,11 +97,30 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6" id="ChartTransaksi" data-bind="visible: !model.Processing()"></div>
-    <div class="col-md-6" id="ChartRevenew" data-bind="visible: !model.Processing()"></div>
-    <?php $this->load->view($loader); ?>
+<div class="row" data-bind="visible: !model.Processing()">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Chart Transaksi
+            </div>
+            <div class="panel-body">
+                <div id="ChartTransaksi"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Chart Reveneu
+            </div>
+            <div class="panel-body">
+                <div id="ChartRevenew"></div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<?php $this->load->view($loader); ?>
 
 <?php
     $success = $this->session->flashdata('success');
