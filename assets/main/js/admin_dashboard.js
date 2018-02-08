@@ -182,3 +182,8 @@ dashboard.init = function() {
 $(function() {
 	dashboard.init()
 })
+
+$(window).resize(function()
+{
+    kendo.resize($("div.k-chart[data-role='chart']"));
+});

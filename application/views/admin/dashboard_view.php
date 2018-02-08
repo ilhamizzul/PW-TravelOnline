@@ -111,7 +111,7 @@
     <div class="col-md-6" >
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i>Chart Reveneu
+                <i class="fa fa-bar-chart-o fa-fw"></i>Chart Revenue
             </div>
             <div class="panel-body">
                 <div id="ChartRevenew"></div>
