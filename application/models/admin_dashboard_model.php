@@ -96,15 +96,13 @@ class Admin_dashboard_model extends CI_Model {
 
 	public function GetJumlahPelanggan()
 	{
-		$this->db->select('COUNT(*) AS TOTAL, ID_TRAVEL, member.ID_MEMBER');
+		$this->db->select('COUNT(*) AS TOTAL, member.ID_MEMBER');
 		$this->db->from('member');
-		$this->db->group_by('member.ID_MEMBER');
 		if ($this->session->userdata('LEVEL') != 'ADMIN') {
-			// $this->db->from('riwayat_transaksi');
+			$this->db->group_by('member.ID_MEMBER');
 			$this->db->join('riwayat_transaksi', 'riwayat_transaksi.ID_MEMBER = member.ID_MEMBER');
 			$this->db->join('jadwal_travel', 'jadwal_travel.ID_JADWAL_TRAVEL = riwayat_transaksi.ID_JADWAL_TRAVEL');
 			$this->db->join('kendaraan_travel', 'kendaraan_travel.ID_KENDARAAN_TRAVEL = jadwal_travel.ID_KENDARAAN_TRAVEL');
-
 			$this->db->where('kendaraan_travel.ID_TRAVEL', $this->session->userdata('ID_TRAVEL'));
 		}
 		
